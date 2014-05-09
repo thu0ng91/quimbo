@@ -74,6 +74,7 @@ class QC_API extends QC_Controller {
     public function update() {
         if ($this->session->userdata("isLoggedIn")) {
             $stLCommit = shell_exec("git rev-parse HEAD 2>&1");
+            $stLCommit = trim($stLCommit);
 
             $objLCURLSession = curl_init();
             curl_setopt($objLCURLSession, CURLOPT_URL,"https://api.github.com/repos/MGGRoup/quimbo/commits");
@@ -91,14 +92,15 @@ class QC_API extends QC_Controller {
             $arrLContent = reset(json_decode($arrLContent));
             $stLLastCommit = $arrLContent->sha;
 
-            if (!strcmp($stLLastCommit, $stLCommit)) {
-                $stLPull = shell_exec("git pull");
+            if ($stLLastCommit !== $stLCommit) {
+                $stLPull = shell_exec("git pull 2>&1");
 
-                echo "Actualizado!";
+                echo "Actualizado!,<br>".$stLPull;
             }
             else {
                 echo "No hay Actualizaones disponibles!";
             }
+            exit();
         }
 
         redirect("/");
