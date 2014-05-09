@@ -3,7 +3,7 @@
 // Email: arthvrian@yahoo.com
 // Date: 2014-04-23
 $(document).ready(function() {
-    $.getJSON("index.php/api/sync/true", function(arrRData, textStatus, jqXHR) {
+    $.getJSON("index.php/api/sync", function(arrRData, textStatus, jqXHR) {
         if (!arrRData) {
             $(".alert-danger").show();
         }

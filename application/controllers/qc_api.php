@@ -66,4 +66,41 @@ class QC_API extends QC_Controller {
         $this->output->set_content_type("application/json");
         echo json_encode($arrLResponse);
     }
+    /**
+     * Método update
+     *
+     * Método que Actualiza la aplicacion desde Github
+     */
+    public function update() {
+        if ($this->session->userdata("isLoggedIn")) {
+            $stLCommit = shell_exec("git rev-parse HEAD 2>&1");
+
+            $objLCURLSession = curl_init();
+            curl_setopt($objLCURLSession, CURLOPT_URL,"https://api.github.com/repos/MGGRoup/quimbo/commits");
+
+            $arrLHeaders = array(	'Accept: application/json',
+                                    'Content-Type: application/json',
+                                    'User-Agent: QUIMBO');
+            curl_setopt($objLCURLSession, CURLOPT_HTTPHEADER, $arrLHeaders);
+            curl_setopt($objLCURLSession, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($objLCURLSession, CURLOPT_SSL_VERIFYPEER, false);
+
+            $arrLContent = curl_exec($objLCURLSession);
+            curl_close($objLCURLSession);
+
+            $arrLContent = reset(json_decode($arrLContent));
+            $stLLastCommit = $arrLContent->sha;
+
+            if (!strcmp($stLLastCommit, $stLCommit)) {
+                $stLPull = shell_exec("git pull");
+
+                echo "Actualizado!";
+            }
+            else {
+                echo "No hay Actualizaones disponibles!";
+            }
+        }
+
+        redirect("/");
+    }
 }
