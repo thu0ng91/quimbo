@@ -85,6 +85,12 @@ class QM_User extends CI_Model {
 
         foreach ($arrLAnswers as $stLKey => $stLAnswer) {
             switch ($stLKey) {
+                case "a08AP09O01":
+                    $this->db->where("a12Codigo", $stLAnswer);
+                    $SQLResult = $this->db->get("t12web_Paises");
+                    $arrLAnswer = $SQLResult->row_array();
+                    $arrLAnswers[$stLKey] = $arrLAnswer["a12Nombre"];
+                    break;
                 case "a08AP03O01":
                 case "a08AP09O02":
                     $this->db->where("a05Codigo", $stLAnswer);

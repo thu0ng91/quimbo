@@ -84,15 +84,25 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLTableRow = document.createElement("tr");
                 var objLTableData = document.createElement("td");
                 var objLAnchorC = document.createElement("a");
-                var objLAnchorI = document.createElement("a");
-                var objLAnchorU = document.createElement("a");
+                var objLAnchorD = $(objLAnchorC).clone();
+                var objLAnchorU = $(objLAnchorC).clone();
+                var objLAnchorP = $(objLAnchorC).clone();
+                var objLAnchorA = $(objLAnchorC).clone();
+                var objLAnchorE = $(objLAnchorC).clone();
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
-                .html("Completar").addClass("btn btn-success");
-                $(objLAnchorI).attr("href", "index.php/form/view/" + arrRData.a08Formulario)
-                .html("Ver Formulario").addClass("btn btn-info");
+                    .html("Completar").addClass("btn btn-warning");
+                $(objLAnchorD).attr("href", "index.php/form/view/" + arrRData.a08Formulario)
+                    .html("Imagen/PDF").addClass("btn btn-success");
                 $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.a08Formulario)
-                    .html("Subir Imagen").addClass("btn btn-danger");
+                    .html("Terminar").addClass("btn btn-danger");
+                $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario)
+                    .html("Imprimir").addClass("btn btn-info");
+                $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario + "/full")
+                    .html("Ver").addClass("btn btn-warning");
+                $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.a08Formulario)
+                    .html("Editar").addClass("btn btn-success");
+
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
 
@@ -102,7 +112,10 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     $(objLTableData).clone().html(arrRData.a11Apellidos).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
-                    $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+
+                    if (!arrRData.a08AP01) {
+                        $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+                    }
                 }
                 if (arrRData.a08AP01) {
                     $(objLTableData).clone().html(arrRData.a08AP08O02).appendTo(objLTableRow);
@@ -111,12 +124,22 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     $(objLTableData).clone().html(arrRData.a08AP04).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a08AP06).appendTo(objLTableRow);
 
-                    if (!arrRData.a07Imagen) {
-                        $(objLTableData).clone().append(objLAnchorU).appendTo(objLTableRow);
+                    var objLAction = $(objLTableData).clone().appendTo(objLTableRow);
+
+                    if (!arrRData.a07Imagen || !arrRData.a07CodigoBarras) {
+                        $(objLAction).append(" ").append(objLAnchorU);
                     }
                     else {
-                        $(objLTableData).clone().append(objLAnchorI).appendTo(objLTableRow);
+                        $(objLAction).append(" ").append(objLAnchorD);
                     }
+                    if (arrRData.a07Busqueda) {
+                        $(objLAction).append(" ").append(objLAnchorA);
+                    }
+                    if (responseText.TxtIsAdmin) {
+                        $(objLAction).append(" ").append(objLAnchorE);
+                    }
+
+                    $(objLAction).append(" ").append(objLAnchorP);
                 }
             });
         }

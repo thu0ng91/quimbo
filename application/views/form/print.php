@@ -79,25 +79,53 @@
                 </tr>
                 <tr>
                   <th>Vereda</th>
-                  <td colspan="3"><?php echo $arrRAnswers["a08AP05"]; ?></td>
+                  <td colspan="2"><?php echo $arrRAnswers["a08AP05"]; ?></td>
                   <th>Teléfonos</th>
-                  <td colspan="3"><?php echo $arrRAnswers["a08AP06"]; ?> - <?php echo $arrRAnswers["a08AP07"]; ?></td>
-                </tr>
-                <tr>
-                  <th>Lugar de nacimiento</th>
-                  <td colspan="3"><?php echo $arrRAnswers["a08AP09O03"]; ?> ( <?php echo strtoupper($arrRAnswers["a08AP09O02"]); ?> )</td>
-                  <th>Fecha de Nacimiento</th>
-                  <td><?php echo $arrRAnswers["a08AP011O01"]; ?> / <?php echo $arrRAnswers["a08AP011O02"]; ?> / <?php echo $arrRAnswers["a08AP011O03"]; ?></td>
+                  <td colspan="2"><?php echo $arrRAnswers["a08AP06"]; ?> <?php if (!empty($arrRAnswers["a08AP07"])) { ?>
+                    - <?php echo $arrRAnswers["a08AP07"]; ?><?php } ?></td>
                   <th>Sexo</th>
                   <td><?php echo $arrRAnswers["a08AP013"]; ?></td>
                 </tr>
+                <tr>
+                  <th>Lugar de nacimiento</th>
+                  <td colspan="3"><?php echo $arrRAnswers["a08AP09O03"]; ?> <?php if (!empty($arrRAnswers["a08AP09O02"])) { ?>
+                    ( <?php echo strtoupper($arrRAnswers["a08AP09O02"]); ?> ) - <?php } ?>
+                    <?php echo strtoupper($arrRAnswers["a08AP09O01"]); ?></td>
+                  <th>Fecha de Nacimiento</th>
+                  <td><?php echo $arrRAnswers["a08AP011O01"]; ?> / <?php echo $arrRAnswers["a08AP011O02"]; ?> / <?php echo $arrRAnswers["a08AP011O03"]; ?></td>
+                  <th>Jefe del Hogar</th>
+                  <td><?php echo $arrRAnswers["a08AP017"]; ?></td>
+                </tr>
+<?php if (!is_null($stRType)) { ?>
+                <tr>
+                  <th>Estado Civil</th>
+                  <td><?php echo $arrRAnswers["a08AP014O01"]; ?> <?php if (!empty($arrRAnswers["a08AP014O02"])) { ?>
+                    ( <?php echo $arrRAnswers["a08AP014O02"]; ?> )<?php } ?></td>
+                  <th>Nombre del Conyuge</th>
+                  <td colspan="3"><?php echo $arrRAnswers["a08AP015"]; ?></td>
+                  <th>Personas a Cargo</th>
+                  <td><?php echo $arrRAnswers["a08AP016"]; ?></td>
+                </tr>
+                <tr>
+                  <th>Ha recibido alguna medida</th>
+                  <td colspan="4"><?php echo $arrRAnswers["a08AP018O01"]; ?> <?php if (!empty($arrRAnswers["a08AP018O02"])) { ?>
+                    - <?php echo $arrRAnswers["a08AP018O02"]; ?><?php } ?></td>
+                  <th>Tiene una solicitud Adicional</th>
+                  <td colspan="2"><?php echo $arrRAnswers["a08AP019O01"]; ?></td>
+                </tr>
+                <tr>
+                  <th>Cual solicitud</th>
+                  <td colspan="7"><?php echo $arrRAnswers["a08AP019O02"]; ?></td>
+                </tr>
+<?php } ?>
               </table>
 <?php } else { ?>
               <p class="text-danger">SIN Información</p>
 <?php } ?>
             </div>
+<?php if (is_null($stRType)) { ?>
             <div class="panel-body">
-              <p class="hide"><strong>Emgesa</strong> reitera a los accionantes que:</p>
+<!--               <p class="hide"><strong>Emgesa</strong> reitera a los accionantes que:</p>
               <p class="hide">Usted tiene derecho a conocer, actualizar rectificar y suprimir sus datos personales
                 que no deriven de un deber legal o contractual; tener acceso a sus datos, a la prueba
                 y al uso que se les ha dado; y a presentar quejas por violación a los derechos que
@@ -134,7 +162,7 @@
                 en países que no proporcionen niveles adecuados de protección de datos.</p>
               <p class="hide">Duración del Tratamiento de Mis Datos Personales: La Compañía podrá tratar y conservar
                 Mis Datos Personales mientras sea necesario para el cumplimiento de cualquier obligación
-                y/o la atención de cualquier queja o reclamo judicial o extrajudicial.</p>
+                y/o la atención de cualquier queja o reclamo judicial o extrajudicial.</p> -->
               <p>Declaro expresamente que la información consignada en el presente documento y los
                 medios de prueba que aporto, guardan fielmente el deber de veracidad en todas sus
                 partes.</p>
@@ -148,7 +176,8 @@
                 Huella</p>
               </div>
             </div>
-          <div class="pull-left small"><?php echo $arrRForm["a07Codigo"]; ?></div>
+<?php } ?>
+            <div class="pull-left small"><?php echo $arrRForm["a07Codigo"]; ?></div>
           </div>
         </div>
       </div>

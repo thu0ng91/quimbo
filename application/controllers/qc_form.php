@@ -93,7 +93,8 @@ class QC_Form extends QC_Controller {
             $this->load->model("qm_api", "api", true);
             $this->load->model("qm_form", "form", true);
             $arrLPageData = array();
-            $arrLPageData["arrRSearch"] = array();
+            $arrLPageData["arrRSearch"] = $this->form->get_form();
+            $arrLPageData["arrRTowns"] = $this->api->get_towns(13, false);
 
             if (is_null($stRChapter) ||
                     (is_null($inRSearch) && !$this->session->userdata("inRFormID"))) {
@@ -105,6 +106,7 @@ class QC_Form extends QC_Controller {
 
                 if ($arrLSearch) {
                     $arrLPageData["arrRSearch"] = $arrLSearch;
+//                    $arrLPageData["arrRTowns"] = $this->api->get_towns($arrLSearch["a08AP09O02"], false);
                 }
                 else {
                     redirect("form/search");
@@ -113,11 +115,11 @@ class QC_Form extends QC_Controller {
 
             $arrLPageData["arrRCountries"] = $this->api->get_countries();
             $arrLPageData["arrRStates"] = $this->api->get_states();
-            $arrLPageData["arrRTowns"] = $this->api->get_towns(13, false);
             $arrLPageData["arrRChapters"] = $this->form->get_chapters();
             $arrLPageData["arrRChapter"] = $this->form->get_chapters($stRChapter);
             $arrLPageData["stRPageTitle"] = $stRChapter;
             $arrLPageData["inRSearch"] = $inRSearch;
+            $arrLPageData["bolRAdmin"] = $this->session->userdata("bolRUserType");
 
             $this->load->vars($arrLPageData);
             $this->display_page("chapter", "form");
@@ -158,21 +160,27 @@ class QC_Form extends QC_Controller {
      *
      * Método que Muestra la Pagina de Impresion
      */
-    public function print_form() {
-        if ($this->session->userdata("isLoggedIn") && $this->session->userdata("inRFormID")) {
-            $this->load->model("qm_form", "form", true);
-            $this->load->model("qm_user", "user", true);
-            $arrLPageData = array();
+    public function print_form($inRSearch = null, $stRType = null) {
+        if ($this->session->userdata("isLoggedIn")) {
+            if (!is_null($inRSearch)) {
+                $this->session->set_userdata("inRFormID", $inRSearch);
+            }
+            if ($this->session->userdata("inRFormID")) {
+                $this->load->model("qm_form", "form", true);
+                $this->load->model("qm_user", "user", true);
+                $arrLPageData = array();
 
-            $arrLForm = $this->form->get_form();
-            $arrLPageData["arrRForm"] = $arrLForm;
-            $arrLPageData["arrRChapter"] = $this->form->get_chapters("A");
-            $arrLPageData["arrRAnswers"] = $this->user->get_answers();
+                $arrLForm = $this->form->get_form();
+                $arrLPageData["arrRForm"] = $arrLForm;
+                $arrLPageData["arrRChapter"] = $this->form->get_chapters("A");
+                $arrLPageData["arrRAnswers"] = $this->user->get_answers();
+                $arrLPageData["stRType"] = $stRType;
 
-            $this->load->vars($arrLPageData);
-            $this->display_page("print", "form", true);
+                $this->load->vars($arrLPageData);
+                $this->display_page("print", "form", true);
 
-            return;
+                return;
+            }
         }
 
         redirect("/");
@@ -222,10 +230,22 @@ class QC_Form extends QC_Controller {
         $this->load->model("qm_form", "form", true);
 
         $arrLFormData = $this->input->post();
+
+        foreach ($arrLFormData as $stLKey => $stLData) {
+            if (!is_array($arrLFormData[$stLKey])) {
+                $arrLFormData[$stLKey] = trim($stLData);
+
+                if (empty($arrLFormData[$stLKey])) {
+                    $arrLFormData[$stLKey] = null;
+                }
+            }
+        }
+
         $arrLSearch = $this->form->do_search($arrLFormData);
         $this->session->set_userdata("bolRSearch", true);
 
         if ($arrLSearch["found"]) {
+            $arrLResponse["TxtIsAdmin"] = $this->session->userdata("bolRUserType");
             $arrLResponse["TxtSuccessForm"] = true;
             $arrLResponse["TxtTitle"] = "Encontrado!";
             $arrLResponse["TxtSuccess"] = "Mostrando la lista de resultados ...";
@@ -281,7 +301,7 @@ class QC_Form extends QC_Controller {
             if (!is_array($arrLFormData[$stLKey])) {
                 $arrLFormData[$stLKey] = trim($stLData);
 
-                if (empty($arrLFormData[$stLKey])) {
+                if (!is_numeric($arrLFormData[$stLKey]) && empty($arrLFormData[$stLKey])) {
                     $arrLFormData[$stLKey] = null;
                 }
             }

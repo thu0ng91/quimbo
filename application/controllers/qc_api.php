@@ -89,17 +89,23 @@ class QC_API extends QC_Controller {
             $arrLContent = curl_exec($objLCURLSession);
             curl_close($objLCURLSession);
 
-            $arrLContent = reset(json_decode($arrLContent));
-            $stLLastCommit = $arrLContent->sha;
+            if (!empty($arrLContent) || !is_null($arrLContent)) {
+                $arrLContent = reset(json_decode($arrLContent));
+                $stLLastCommit = $arrLContent->sha;
 
-            if ($stLLastCommit !== $stLCommit) {
-                $stLPull = shell_exec("git pull 2>&1");
+                if ($stLLastCommit !== $stLCommit) {
+                    $stLPull = shell_exec("git pull 2>&1");
 
-                echo "Actualizado!,<br>".$stLPull;
+                    echo "Actualizado!,<br>".$stLPull;
+                }
+                else {
+                    echo "No hay Actualizaciones disponibles!";
+                }
             }
             else {
-                echo "No hay Actualizaones disponibles!";
+                echo "Imposible Conectar";
             }
+
             exit();
         }
 

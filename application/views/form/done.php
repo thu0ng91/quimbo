@@ -11,13 +11,13 @@
                   <div class="form-group">
                     <label for="TxtFormID" class="col-sm-3 control-label">Imprimir formulario <span class="text-danger">*</span></label>
                     <div class="col-sm-2">
-                      <a class="btn btn-info" href="<?php echo site_url("form/print_form"); ?>" target="_blank">
+                      <a class="btn btn-warning" href="<?php echo site_url("form/print_form"); ?>" target="_blank">
                         Imprimir formulario para firmar</a>
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>
                   <div class="form-group">
-                    <label for="TxtFormImage" class="col-sm-3 control-label">Imágen del Formulario firmado <span class="text-danger">*</span></label>
+                    <label for="TxtFormImage" class="col-sm-3 control-label">Imágen del Formulario firmado</label>
                     <div class="col-sm-4">
                       <input type="file" class="form-control" id="TxtFormImage" name="TxtFormImage"
                         placeholder="Imágen del Formulario" title="Ingrese la Imágen del Formulario!"
@@ -31,6 +31,14 @@
                       <input type="file" class="form-control" id="TxtFormVideo" name="TxtFormVideo"
                         placeholder="Imágen del Formulario" title="Ingrese el Video del Formulario!"
                         accept="video/*">
+                    </div>
+                    <div class="col-sm-3 pull-right"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="TxtBarCode" class="col-sm-3 control-label">Código de Barras</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="TxtBarCode" name="TxtBarCode"
+                        placeholder="Código de Barras" title="Ingrese el Codigo de Barras">
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>

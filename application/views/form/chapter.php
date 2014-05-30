@@ -26,7 +26,7 @@
                     <div class="col-sm-<?php echo $arrLQuestion["a03Tamanyo"]; ?>">
                       <input type="text" class="form-control" id="<?php echo $arrLQuestion["a03Input"]; ?>"
                         name="<?php echo $arrLQuestion["a03Input"]; ?>" placeholder="<?php echo $arrLQuestion["a03Pregunta"]; ?>"
-                        title="Campo requerido!" required value="<?php echo isset($arrRSearch[$arrLQuestion["a03Input"]]) ? $arrRSearch[$arrLQuestion["a03Input"]] : null; ?>">
+                        title="Campo requerido!" required value="<?php echo isset($arrRSearch[$arrLQuestion["a03Field"]]) ? $arrRSearch[$arrLQuestion["a03Field"]] : null; ?>">
                     </div>
 <?php } else { ?>
                     <label for="<?php echo $arrLQuestion["a03Input"]; ?>" class="col-sm-3 control-label">
@@ -36,7 +36,7 @@
                     <div class="col-sm-9">
                       <textarea class="form-control" id="<?php echo $arrLQuestion["a03Input"]; ?>"
                         name="<?php echo $arrLQuestion["a03Input"]; ?>" placeholder="<?php echo $arrLQuestion["a03Pregunta"]; ?>"
-                        title="Campo requerido!" rows="7" required></textarea>
+                        title="Campo requerido!" rows="7" required><?php echo isset($arrRSearch[$arrLQuestion["a03Field"]]) ? $arrRSearch[$arrLQuestion["a03Field"]] : null; ?></textarea>
                     </div>
 <?php } ?>
                     <div class="col-sm-3 pull-right"></div>
@@ -54,7 +54,7 @@
                         <option value="">Seleccione Uno</option>
 <?php foreach ($arrLQuestion["arrRAnswers"] as $arrLAnswer) { ?>
                         <option value="<?php echo $arrLAnswer["a04Codigo"]; ?>"
-                            <?php if (isset($arrRSearch[$arrLQuestion["a03Input"]]) && $arrRSearch[$arrLQuestion["a03Input"]] == $arrLAnswer["a04Codigo"]) { ?>selected="selected"<?php } ?>>
+                            <?php if (isset($arrRSearch[$arrLQuestion["a03Field"]]) && $arrRSearch[$arrLQuestion["a03Field"]] == $arrLAnswer["a04Codigo"]) { ?>selected="selected"<?php } ?>>
                           <?php echo $arrLAnswer["a04Numero"]; ?> - <?php echo $arrLAnswer["a04Respuesta"]; ?></option>
 <?php } ?>
                       </select>
@@ -86,7 +86,9 @@
                            required>
                         <option value="">Seleccione Uno</option>
 <?php foreach ($arrRTowns as $arrLTown) { ?>
-                        <option value="<?php echo $arrLTown["a06Codigo"]; ?>"><?php echo $arrLTown["a06Nombre"]; ?></option>
+                        <option value="<?php echo $arrLTown["a06Codigo"]; ?>"
+                            <?php if (isset($arrRSearch[$arrLQuestion["a03Field"]]) && $arrRSearch[$arrLQuestion["a03Field"]] == $arrLAnswer["a06Codigo"]) { ?>selected="selected"<?php } ?>>
+                          <?php echo $arrLTown["a06Nombre"]; ?></option>
 <?php } ?>
                       </select>
                     </div>
@@ -104,7 +106,9 @@
                            required>
                         <option value="">Seleccione Uno</option>
 <?php foreach ($arrRStates as $arrLState) { ?>
-                        <option value="<?php echo $arrLState["a05Codigo"]; ?>"><?php echo $arrLState["a05Nombre"]; ?></option>
+                        <option value="<?php echo $arrLState["a05Codigo"]; ?>"
+                            <?php if (isset($arrRSearch[$arrLQuestion["a03Field"]]) && $arrRSearch[$arrLQuestion["a03Field"]] == $arrLAnswer["a05Codigo"]) { ?>selected="selected"<?php } ?>>
+                          <?php echo $arrLState["a05Nombre"]; ?></option>
 <?php } ?>
                       </select>
                     </div>
@@ -138,7 +142,7 @@
                         <div class="col-sm-<?php echo $arrLSubQuestion["a03Tamanyo"]; ?>">
                           <input type="text" class="form-control" id="<?php echo $arrLSubQuestion["a03Input"]; ?>"
                             name="<?php echo $arrLSubQuestion["a03Input"]; ?>" placeholder="<?php echo $arrLSubQuestion["a03Pregunta"]; ?>"
-                            title="Campo requerido!" required value="<?php echo isset($arrRSearch[$arrLSubQuestion["a03Input"]]) ? $arrRSearch[$arrLSubQuestion["a03Input"]] : null; ?>">
+                            title="Campo requerido!" required value="<?php echo isset($arrRSearch[$arrLSubQuestion["a03Field"]]) ? $arrRSearch[$arrLSubQuestion["a03Field"]] : null; ?>">
                         </div>
                         <div class="col-sm-3 pull-right"></div>
 <?php } else { ?>
@@ -148,7 +152,7 @@
                     <div class="col-sm-9">
                       <textarea class="form-control" id="<?php echo $arrLSubQuestion["a03Input"]; ?>"
                         name="<?php echo $arrLSubQuestion["a03Input"]; ?>" placeholder="<?php echo $arrLSubQuestion["a03Pregunta"]; ?>"
-                        title="Campo requerido!" rows="7" required></textarea>
+                        title="Campo requerido!" rows="7" required><?php echo isset($arrRSearch[$arrLSubQuestion["a03Field"]]) ? $arrRSearch[$arrLSubQuestion["a03Field"]] : null; ?></textarea>
                     </div>
 <?php } ?>
                       </div>
@@ -164,7 +168,7 @@
                             <option value="">Seleccione Uno</option>
 <?php foreach ($arrLSubQuestion["arrRAnswers"] as $arrLAnswer) { ?>
                             <option value="<?php echo $arrLAnswer["a04Codigo"]; ?>"
-                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Input"]]) && $arrRSearch[$arrLSubQuestion["a03Input"]] == $arrLAnswer["a04Codigo"]) { ?>selected="selected"<?php } ?>>
+                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLAnswer["a04Codigo"]) { ?>selected="selected"<?php } ?>>
                               <?php echo $arrLAnswer["a04Numero"]; ?> - <?php echo $arrLAnswer["a04Respuesta"]; ?></option>
 <?php } ?>
                           </select>
@@ -200,8 +204,10 @@
                            required>
                         <option value="">Seleccione Uno</option>
 <?php foreach ($arrRStates as $arrLState) { ?>
-                        <option value="<?php echo $arrLState["a05Codigo"]; ?>" <?php if ($arrLState["a05Codigo"] == 13) { ?>selected="selected"<?php } ?>>
-                          <?php echo $arrLState["a05Nombre"]; ?></option>
+                        <option value="<?php echo $arrLState["a05Codigo"]; ?>"
+                            <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLState["a05Codigo"]) { ?>selected="selected"<?php }
+                              if (!isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrLState["a05Codigo"] == 13) { ?>selected="selected"<?php } ?>>
+                          <?php echo $arrLState["a05Nombre"];  ?></option>
 <?php } ?>
                       </select>
                     </div>
@@ -213,7 +219,9 @@
                         <div class="checkbox">
                           <label for="<?php echo $arrLSubQuestion["a03Input"]; ?>" class="control-label">
                             <input type="checkbox" name="<?php echo $arrLSubQuestion["a03Input"]; ?>"
-                                title="Campo requerido!" required>
+                                title="Campo requerido!" required
+                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == "on"
+                                        && strpos($arrLSubQuestion["a03Field"], "O0".$arrLAnswer["a04Numero"])) { ?>checked="checked"<?php } ?>>
                               <?php echo $arrLAnswer["a04Numero"]; ?> - <?php echo $arrLAnswer["a04Respuesta"]; ?>
                             </label>
                           <div class="col-sm-3 pull-right"></div>
@@ -232,13 +240,13 @@
                             <option value="">Seleccione Uno</option>
 <?php foreach ($arrRTowns as $arrLTown) { ?>
 <?php if (strpos($arrLSubQuestion["a03Input"], "BP08O02") !== false ||
-    strpos($arrLSubQuestion["a03Input"], "CP08O02") !== false) { ?>
+    strpos($arrLSubQuestion["a03Input"], "CP08O02") !== false) {  ?>
                             <option value="<?php echo $arrLTown["a06Codigo"]; ?>"
-                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Input"]]) && $arrRSearch[$arrLSubQuestion["a03Input"]] == $arrLTown["a06Codigo"]) { ?>selected="selected"<?php } ?>>
+                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLTown["a06Codigo"]) { ?>selected="selected"<?php } ?>>
                               <?php echo $arrLTown["a06Nombre"]; ?></option>
 <?php } else { ?>
                             <option value="<?php echo $arrLTown["a06Codigo"]; ?>"
-                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Input"]]) && $arrRSearch[$arrLSubQuestion["a03Input"]] == $arrLTown["a06Codigo"]) { ?>selected="selected"<?php } ?>>
+                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLTown["a06Codigo"]) { ?>selected="selected"<?php } ?>>
                               <?php echo $arrLTown["a06Nombre"]; ?></option>
 <?php } ?>
 <?php } ?>
@@ -257,9 +265,9 @@
                 <div class="form-actions clearfix">
                   <div class="pull-right">
                     <input type="hidden" name="TxtChapter" id="TxtChapter" value="<?php echo $arrRChapter["a02Letra"]; ?>">
-                    <input type="hidden" name="TxtAction" id="TxtAction" value="<?php echo is_null($inRSearch) ? "C" : "T"; ?>">
+                    <input type="hidden" name="TxtAction" id="TxtAction" value="<?php echo is_null($inRSearch) || $bolRAdmin ? "C" : "T"; ?>">
                     <input type="hidden" name="TxtSearch" id="TxtSearch" value="<?php echo is_null($inRSearch) ? "N" : "Y"; ?>">
-<?php if (isset($arrRChapter["a02Siguiente"]) && is_null($inRSearch)) { ?>
+<?php if (isset($arrRChapter["a02Siguiente"]) && (is_null($inRSearch) || $bolRAdmin)) { ?>
                     <button type="submit" class="btn btn-primary"><span>Continuar</span> <span class="fa fa-chevron-right"></span></button>
 <?php } else { ?>
                     <button type="submit" class="btn btn-primary">Terminar</button>

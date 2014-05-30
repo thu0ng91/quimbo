@@ -9,10 +9,10 @@
                   <legend>Datos del formulario</legend>
                   <p class="text-info text-right"><span class="text-danger">*</span> Indica un campo requerido</p>
                   <div class="form-group">
-                    <label for="TxtFormNo" class="col-sm-3 control-label">Número de Formulario</label>
-                    <div class="col-sm-2">
+                    <label for="TxtFormNo" class="col-sm-3 control-label">Identificador del Formulario</label>
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="TxtFormNo" name="TxtFormNo"
-                        placeholder="Número de Formulario" title="Ingrese el Número de Formulario!">
+                        placeholder="Identificador del Formulario" title="Ingrese el Identificador del Formulario!">
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>
@@ -26,7 +26,7 @@
                   </div>
                   <div class="form-group">
                     <label for="TxtPersonName" class="col-sm-3 control-label">Nombres y/o apellidos</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                       <input type="text" class="form-control" id="TxtPersonName" name="TxtPersonName"
                         placeholder="Nombres" title="Ingrese el Nombre!">
                     </div>
@@ -53,7 +53,7 @@
                       <th>Apellidos</th>
                       <th>Dirección</th>
                       <th>Teléfono</th>
-                      <th>Ver/Completar</th>
+                      <th>Acción</th>
                     </tr>
                   </thead>
                   <tbody>

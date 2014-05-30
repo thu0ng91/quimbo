@@ -56,8 +56,26 @@ class QM_Form extends CI_Model {
             $this->db->select_sum("a09O02", "a07Folios");
             $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
             $arrLDocs = $SQLResult->row_array();
+
+            if (is_null($arrLDocs["a07Folios"])) {
+                $arrLDocs["a07Folios"] = 0;
+            }
+
             $arrLForms["a07Folios"] = $arrLDocs["a07Folios"];
 
+            $this->db->where("a09Formulario", $inRFormID);
+            $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
+            $arrLAnswersN = $SQLResult->result_array();
+/*
+            foreach ($arrLAnswersN as $inLKey => $arrLAnswerN) {
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O01"] = $arrLAnswerN["a09O01"];
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O02"] = $arrLAnswerN["a09O02"];
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O03"] = $arrLAnswerN["a09O03"];
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O04"] = $arrLAnswerN["a09O04"];
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O05"] = $arrLAnswerN["a09O05"];
+                $arrLForms["a08".$arrLAnswerN["a09Pregunta"]."O06"] = $arrLAnswerN["a09O06"];
+            }
+*/
             return $arrLForms;
         }
 
@@ -121,23 +139,30 @@ class QM_Form extends CI_Model {
     public function get_search() {
         $inRSearch = $this->session->userdata("inRSearch");
 
-        $this->db->where("a11Codigo", $inRSearch);
-        $SQLResult = $this->db->get("t11web_Busqueda");
+        if (is_numeric($inRSearch)) {
+            $this->db->where("a11Codigo", $inRSearch);
+            $SQLResult = $this->db->get("t11web_Busqueda");
 
-        if ($SQLResult->num_rows() == 1) {
-            $arrLSearch = $SQLResult->row_array();
+            if ($SQLResult->num_rows() == 1) {
+                $arrLSearch = $SQLResult->row_array();
 
-            $arrLResult["TxtFormAP01"] = $arrLSearch["a11Nombres"];
-            $arrLResult["TxtFormAP02"] = $arrLSearch["a11Apellidos"];
-            $arrLResult["TxtFormAP03O02"] = $arrLSearch["a11Lugar"];
-            $arrLResult["TxtFormAP04"] = $arrLSearch["a11Direccion"];
-            $arrLResult["TxtFormAP06"] = $arrLSearch["a11Telefono"];
-            $arrLResult["TxtFormAP08O01"] = $arrLSearch["a11TipoDoc"];
-            $arrLResult["TxtFormAP08O02"] = $arrLSearch["a11NoDoc"];
-            $arrLResult["TxtFormAP013"] = $arrLSearch["a11Sexo"];
-            $arrLResult["TxtFormAP014O01"] = $arrLSearch["a11EstadoCivil"];
+                $arrLResult["a08AP01"] = $arrLSearch["a11Nombres"];
+                $arrLResult["a08AP02"] = $arrLSearch["a11Apellidos"];
+                $arrLResult["a08AP03O02"] = $arrLSearch["a11Lugar"];
+                $arrLResult["a08AP04"] = $arrLSearch["a11Direccion"];
+                $arrLResult["a08AP06"] = $arrLSearch["a11Telefono"];
+                $arrLResult["a08AP08O01"] = $arrLSearch["a11TipoDoc"];
+                $arrLResult["a08AP08O02"] = $arrLSearch["a11NoDoc"];
+                $arrLResult["a08AP013"] = $arrLSearch["a11Sexo"];
+                $arrLResult["a08AP014O01"] = $arrLSearch["a11EstadoCivil"];
 
-            return $arrLResult;
+                return $arrLResult;
+            }
+        }
+        else {
+            $this->session->set_userdata("bolRIsNewFormat", true);
+            $this->session->set_userdata("inRFormID", $inRSearch);
+            return $this->get_form($inRSearch);
         }
 
         return false;
@@ -159,7 +184,9 @@ class QM_Form extends CI_Model {
 
         foreach ($arrLAllQuestions as $inLKey => $arrLQuestion) {
             $stLInput = "TxtForm".$stRChapter."P0".$arrLQuestion["a03Numero"];
+            $stLField = "a08".$stRChapter."P0".$arrLQuestion["a03Numero"];
             $arrLQuestion["a03Input"] = $stLInput;
+            $arrLQuestion["a03Field"] = $stLField;
 
             if ($arrLQuestion["a03Tipo"] == "C" || $arrLQuestion["a03Tipo"] == "M") {
                 $this->db->where("a04Pregunta", $arrLQuestion["a03Codigo"]);
@@ -171,6 +198,7 @@ class QM_Form extends CI_Model {
             }
             else {
                 $arrLQuestion["a03Input"] .= "O0".$arrLQuestion["a03Posicion"];
+                $arrLQuestion["a03Field"] .= "O0".$arrLQuestion["a03Posicion"];
                 $arrLQuestions[$arrLQuestion["a03Numero"]][$arrLQuestion["a03Posicion"]] = $arrLQuestion;
             }
 
@@ -231,7 +259,10 @@ class QM_Form extends CI_Model {
             }
         }
         if (!empty($arrRFormData["TxtPersonIdentity"])) {
+            $this->db->select("t11web_Busqueda.*");
             $this->db->where("a11NoDoc", $arrRFormData["TxtPersonIdentity"]);
+            $this->db->join("t08web_Usuario_Respuestas", "a11NoDoc != a08AP08O02");
+            $this->db->group_by("a11Encuesta");
             $SQLResult = $this->db->get("t11web_Busqueda");
 
             if ($SQLResult->num_rows() > 0) {
@@ -248,7 +279,7 @@ class QM_Form extends CI_Model {
         }
         if (!empty($arrRFormData["TxtPersonName"])) {
             $this->db->select("t11web_Busqueda.*");
-            $this->db->join("t08web_Usuario_Respuestas", "a11nodoc != a08ap08o02");
+            $this->db->join("t08web_Usuario_Respuestas", "a11NoDoc != a08AP08O02");
             $this->db->like("a11Nombres", $arrRFormData["TxtPersonName"]);
             $this->db->or_like("a11Apellidos", $arrRFormData["TxtPersonName"]);
             $this->db->group_by("a11NoDoc");
@@ -322,7 +353,8 @@ class QM_Form extends CI_Model {
         $inRFormID = $this->session->userdata("inRFormID");
         $arrLChaptersN = array();
 
-        if ($this->session->userdata("inRSearch")) {
+        if ($this->session->userdata("inRSearch") &&
+                !$this->session->userdata("bolRIsNewFormat")) {
             $arrLFormData = array(	"TxtFormNo" => $this->session->userdata("inRSearch"),
                                     "TxtFormState" => $arrRFormData["TxtFormAP03O01"],
                                     "TxtFormTown" => $arrRFormData["TxtFormAP03O02"],
@@ -333,13 +365,17 @@ class QM_Form extends CI_Model {
         }
 
         if ($arrRFormData["TxtChapter"] == "A") {
-            $stLCode = $this->_get_uuid();
-            $bolLInsert = true;
-
-            $arrLChapter = array(	"a08Codigo" => $stLCode,
-                                    "a08Formulario" => $inRFormID,
-                                    "a08Fecha" => date("Y-m-d H:i:s"),
-                                    "a08Estado" => "P");
+            if (!$this->session->userdata("bolRIsNewFormat")) {
+                $stLCode = $this->_get_uuid();
+                $bolLInsert = true;
+                $arrLChapter = array(	"a08Codigo" => $stLCode,
+                                        "a08Formulario" => $inRFormID,
+                                        "a08Fecha" => date("Y-m-d H:i:s"),
+                                        "a08Estado" => "P");
+            }
+            else {
+                $bolLInsert = false;
+            }
         }
         else {
             $arrLChapter = array();
@@ -389,7 +425,6 @@ class QM_Form extends CI_Model {
                     }
                 }
 
-
                 if (isset($arrLChapterN)) {
                     $arrLChaptersN["CP08"] = $arrLChapterN;
                 }
@@ -429,6 +464,7 @@ class QM_Form extends CI_Model {
                         $arrLChapterN[$inLNKey]["a09Pregunta"] = "CP019";
                     }
                 }
+
                 if (isset($arrLChapterN)) {
                     $arrLChaptersN["CP019"] = $arrLChapterN;
                 }
@@ -466,8 +502,14 @@ class QM_Form extends CI_Model {
      */
     public function do_finish($arrRFormData) {
         $inRFormID = $this->session->userdata("inRFormID");
-        $arrLForm = array(	"a07Video" => $arrRFormData["TxtFormVideo"],
-                            "a07Imagen" => $arrRFormData["TxtFormImage"]);
+        $arrLForm = array(	"a07CodigoBarras" => $arrRFormData["TxtBarCode"]);
+
+        if (!empty($arrRFormData["TxtFormVideo"])) {
+            $arrLForm["a07Video"] = $arrRFormData["TxtFormVideo"];
+        }
+        if (!empty($arrRFormData["TxtFormImage"])) {
+            $arrLForm["a07Imagen"] = $arrRFormData["TxtFormImage"];
+        }
 
         $this->db->trans_start();
         $this->db->where("a07Codigo", $inRFormID);
