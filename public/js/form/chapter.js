@@ -202,10 +202,10 @@ $(document).ready(function() {
     });
 
     // Capitulo C
-    $("#TxtFormCP04O02, #TxtFormCP07O02, #TxtFormCP09O03, #TxtFormCP09O04, #TxtFormCP09O05, input[name=TxtFormCP09O02]").closest(".form-group").hide();
+    $("#TxtFormCP04O02, #TxtFormCP07O02, #TxtFormCP09O03, #TxtFormCP09O04, #TxtFormCP09O05, input[name*=TxtFormCP09O02]").closest(".form-group").hide();
     $("#TxtFormCP010O02, #TxtFormCP011, #TxtFormCP012O02, #TxtFormCP014, #TxtFormCP015O02").closest(".form-group").hide();
     $("#TxtFormCP018O02, #TxtFormCP018O03, #TxtFormCP018O04, #TxtFormCP018O05").closest(".form-group").hide();
-    $("#TxtFormCP07O01, #TxtFormCP08O01, #TxtFormCP014").closest(".panel").hide();
+    $("#TxtFormCP07O01, #TxtFormCP08O01, #TxtFormCP09O01, #TxtFormCP014").closest(".panel").hide();
     $("label[for=TxtFormCP02] span.text-danger").hide();
     $("[id^=TxtFormCP08]").each(function() {
         $(this).attr("name", $(this).attr("name") + "[]");
@@ -261,12 +261,18 @@ $(document).ready(function() {
     $("#TxtFormCP06").change(function() {
         $("#TxtFormCP07O01").closest(".panel").hide();
         $("#TxtFormCP08O01").closest(".panel").hide();
+        $("#TxtFormCP09O01").closest(".panel").hide();
 
         if (this.selectedIndex == 1) {
             $("#TxtFormCP07O01").closest(".panel").show();
+            $("#TxtFormCP09O01").closest(".panel").show();
         }
         else {
             $("#TxtFormCP07O01").val("");
+            $("#TxtFormCP09O01").val("");
+            $("#TxtFormCP09O03, #TxtFormCP09O04, #TxtFormCP09O05, input[name*=TxtFormCP09O02]").closest(".form-group").hide();
+            $("input[name*=TxtFormCP09]").attr("checked", false);
+            $("input[name*=TxtFormCP09]").val("");
        }
     });
     $("#TxtFormCP07O01").change(function() {
@@ -303,10 +309,10 @@ $(document).ready(function() {
         }
     });
     $("#TxtFormCP09O01").change(function() {
-        $("input[name=TxtFormCP09O02]").closest(".form-group").hide();
+        $("input[name*=TxtFormCP09O02]").closest(".form-group").hide();
 
         if (this.selectedIndex == 1) {
-            $("input[name=TxtFormCP09O02]").closest(".form-group").show();
+            $("input[name*=TxtFormCP09O02]").closest(".form-group").show();
         }
         else {
             $("input[name=TxtFormCP09O02]").attr("checked", false);
@@ -315,12 +321,12 @@ $(document).ready(function() {
             $("#TxtFormCP09O05").val("").closest(".form-group").hide();
         }
     });
-    $("input[name=TxtFormCP09O02]").change(function() {
+    $("input[name*=TxtFormCP09O02]").change(function() {
         $("#TxtFormCP09O03").closest(".form-group").hide();
         $("#TxtFormCP09O04").closest(".form-group").hide();
         $("#TxtFormCP09O05").closest(".form-group").hide();
 
-        $("input[name=TxtFormCP09O02]").each(function(inRIndex) {
+        $("input[name*=TxtFormCP09O02]").each(function(inRIndex) {
             if ($(this).is(":checked") && inRIndex == 0) {
                 $("#TxtFormCP09O03").closest(".form-group").show();
             }

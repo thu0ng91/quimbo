@@ -119,7 +119,6 @@ class QC_Form extends QC_Controller {
             $arrLPageData["arrRChapter"] = $this->form->get_chapters($stRChapter);
             $arrLPageData["stRPageTitle"] = $stRChapter;
             $arrLPageData["inRSearch"] = $inRSearch;
-            $arrLPageData["bolRAdmin"] = $this->session->userdata("bolRUserType");
 
             $this->load->vars($arrLPageData);
             $this->display_page("chapter", "form");
@@ -195,7 +194,7 @@ class QC_Form extends QC_Controller {
             $this->load->model("qm_form", "form", true);
             $arrLPageData = array();
 
-            $arrLPageData["arrRForm"] = $this->form->get_form();
+            $arrLPageData["arrRForm"] = $this->form->get_form($stRFormID);
 
             $this->load->vars($arrLPageData);
             $this->display_page("view", "form");
@@ -212,8 +211,24 @@ class QC_Form extends QC_Controller {
      */
     public function sync() {
         if ($this->session->userdata("isLoggedIn")) {
-            $this->load->model("qm_form", "form", true);
             $this->display_page("sync", "form");
+
+            return;
+        }
+
+        redirect("/");
+    }
+    /**
+     * Método upload
+     *
+     * Método que Sube los documentos del Formulario
+     */
+    public function upload($stRFormID = null) {
+        if ($this->session->userdata("isLoggedIn") && $this->session->userdata("inRUserType") == 3) {
+            $arrLPageData["stRFormID"] = $stRFormID;
+            $this->load->vars($arrLPageData);
+
+            $this->display_page("upload", "form");
 
             return;
         }
@@ -245,7 +260,7 @@ class QC_Form extends QC_Controller {
         $this->session->set_userdata("bolRSearch", true);
 
         if ($arrLSearch["found"]) {
-            $arrLResponse["TxtIsAdmin"] = $this->session->userdata("bolRUserType");
+            $arrLResponse["inRUserType"] = $this->session->userdata("inRUserType");
             $arrLResponse["TxtSuccessForm"] = true;
             $arrLResponse["TxtTitle"] = "Encontrado!";
             $arrLResponse["TxtSuccess"] = "Mostrando la lista de resultados ...";
@@ -406,6 +421,63 @@ class QC_Form extends QC_Controller {
             $arrLResponse["TxtError"] = "Error Guardando el formulario";
         }
 
+        echo json_encode($arrLResponse);
+    }
+    /**
+     * Método do_finish
+     *
+     * Método que Guarda la captura del formulario
+     */
+    public function do_uploads() {
+        $this->load->model("qm_form", "form", true);
+
+        $arrLFormData = $this->input->post();
+        $inRFormID = $arrLFormData["TxtFormID"];
+        $arrLResponse = array();
+
+        $this->load->library("upload");
+        $config["upload_path"] = "public/uploads/".$inRFormID;
+        $config["allowed_types"] = "*";
+        $config["overwrite"] = true;
+        $arrLFiles = array();
+        $inLCount = 0;
+
+        $this->upload->initialize($config);
+
+        if (!file_exists(FCPATH."/public/uploads/".$inRFormID)
+                && !is_dir(FCPATH."public/uploads/".$inRFormID)) {
+            mkdir(FCPATH."/public/uploads/".$inRFormID, 0755, true);
+        }
+
+        foreach($_FILES as $stLKey => $arrLFile) {
+            if ($this->upload->do_upload($stLKey)) {
+                $inLKey = str_replace("File", "", $stLKey);
+                $arrLFileData = $this->upload->data();
+                $arrLFileInfo = array( 	"a13Identificador" => $inRFormID,
+                                        "a13Tipo" => ++$inLCount,
+                                        "a13Documento" => utf8_encode($arrLFileData["file_name"]),
+                                        "a13Folios" => $arrLFormData[$inLKey],
+                                        "a13Fecha" => date("Y-m-d H:i:s"),
+                                        "a13Estado" => "P");
+
+                array_push($arrLFiles, $arrLFileInfo);
+            }
+        }
+
+        $bolLDocs = $this->form->do_uploads($arrLFiles);
+
+        if ($bolLDocs) {
+            $arrLResponse["TxtSuccessForm"] = true;
+            $arrLResponse["TxtTitle"] = "Guardado!";
+            $arrLResponse["TxtSuccess"] = "Se han guardado correctamente los documentos ...";
+            $arrLResponse["TxtReload"] = true;
+        }
+        else {
+            $arrLResponse["TxtErrorForm"] = true;
+            $arrLResponse["TxtError"] = "NO se han podido guardar los documentos";
+        }
+
+        $this->output->set_content_type("application/json");
         echo json_encode($arrLResponse);
     }
 }

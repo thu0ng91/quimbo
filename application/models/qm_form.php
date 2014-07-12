@@ -385,12 +385,14 @@ class QM_Form extends CI_Model {
         foreach ($arrRFormData as $stRKey => $stLData) {
             if (strpos($stRKey, "TxtForm") !== false &&
                     strpos($stRKey, "BP08") === false && strpos($stRKey, "CP08") === false &&
-                    strpos($stRKey, "CP018") === false && strpos($stRKey, "CP019") === false) {
+                    strpos($stRKey, "CP018") === false && strpos($stRKey, "CP019") === false &&
+                    strpos($stRKey, "CP09O02") === false && strpos($stRKey, "CP015O01") === false) {
                 $stLKey = str_replace("TxtForm", "a08", $stRKey);
                 $arrLChapter[$stLKey] = trim($stLData);
             }
             else if (strpos($stRKey, "BP08") !== false) {
                 $arrLData = $stLData;
+                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormBP08", "a09", $stRKey);
@@ -411,6 +413,7 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP08") !== false) {
                 $arrLData = $stLData;
+                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP08", "a09", $stRKey);
@@ -435,6 +438,7 @@ class QM_Form extends CI_Model {
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP018", "a09", $stRKey);
                     $stLTrimData = trim($stLNData);
+                    $arrLChapterN = array();
 
                     if (!empty($stLTrimData)) {
                         $arrLChapterN[$inLNKey][$stLBNKey] = trim($stLNData);
@@ -451,6 +455,7 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP019") !== false) {
                 $arrLData = $stLData;
+                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP019", "a09", $stRKey);
@@ -467,6 +472,48 @@ class QM_Form extends CI_Model {
 
                 if (isset($arrLChapterN)) {
                     $arrLChaptersN["CP019"] = $arrLChapterN;
+                }
+            }
+            else if (strpos($stRKey, "CP09O02") !== false) {
+                $arrLData = $stLData;
+                $arrLChapterN = array();
+
+                foreach ($arrLData as $inLNKey => $stLNData) {
+                    $stLBNKey = "a09O0".($inLNKey + 1);
+                    $stLTrimData = trim($stLNData);
+
+                    if (!empty($stLTrimData)) {
+                        $arrLChapterN[0][$stLBNKey] = trim($stLNData);
+                        $arrLChapterN[0]["a09Formulario"] = $inRFormID;
+                        $arrLChapterN[0]["a09Fecha"] = date("Y-m-d H:i:s");
+                        $arrLChapterN[0]["a09Estado"] = "P";
+                        $arrLChapterN[0]["a09Pregunta"] = "CP09";
+                    }
+                }
+
+                if (isset($arrLChapterN)) {
+                    $arrLChaptersN["CP09"] = $arrLChapterN;
+                }
+            }
+            else if (strpos($stRKey, "CP015O01") !== false) {
+                $arrLData = $stLData;
+                $arrLChapterN = array();
+
+                foreach ($arrLData as $inLNKey => $stLNData) {
+                    $stLBNKey = "a09O0".($inLNKey + 1);
+                    $stLTrimData = trim($stLNData);
+
+                    if (!empty($stLTrimData)) {
+                        $arrLChapterN[0][$stLBNKey] = trim($stLNData);
+                        $arrLChapterN[0]["a09Formulario"] = $inRFormID;
+                        $arrLChapterN[0]["a09Fecha"] = date("Y-m-d H:i:s");
+                        $arrLChapterN[0]["a09Estado"] = "P";
+                        $arrLChapterN[0]["a09Pregunta"] = "CP015";
+                    }
+                }
+
+                if (isset($arrLChapterN)) {
+                    $arrLChaptersN["CP015"] = $arrLChapterN;
                 }
             }
         }
@@ -517,6 +564,37 @@ class QM_Form extends CI_Model {
         $this->db->trans_complete();
 
         $this->do_sync();
+
+        return $this->db->trans_status();
+    }
+    /**
+     * Método do_finish
+     *
+     * Método que Guarda los Datos finales del formulario
+     *
+     * @param array $arrRFormData Datos del formulario
+     * @return array
+     */
+    public function do_uploads($arrRFiles) {
+        $this->db->trans_start();
+
+        foreach ($arrRFiles as $arrLFile) {
+            $this->db->where("a13Identificador", $arrLFile["a13Identificador"]);
+            $this->db->where("a13Tipo", $arrLFile["a13Tipo"]);
+            $this->db->from("t13web_Usuario_Docs");
+
+            if ($this->db->count_all_results() >= 1) {
+                $SQLWhere = array(	"a13Identificador" => $arrLFile["a13Identificador"],
+                                    "a13Tipo" => $arrLFile["a13Tipo"]);
+
+                $this->db->update("t13web_Usuario_Docs", $arrLFile, $SQLWhere);
+            }
+            else {
+                $this->db->insert("t13web_Usuario_Docs", $arrLFile);
+            }
+        }
+
+        $this->db->trans_complete();
 
         return $this->db->trans_status();
     }
