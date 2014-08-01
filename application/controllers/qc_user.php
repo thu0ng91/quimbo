@@ -57,7 +57,6 @@ class QC_User extends QC_Controller {
 
             $this->session->set_userdata("isLoggedIn", true);
             $this->session->set_userdata("inRUserID", $arrLUserData["a01Codigo"]);
-            $this->session->set_userdata("inRUserType", $arrLUserData["a01Tipo"]);
             $this->session->set_userdata("stRUsername", $stLFullName);
 
             $arrLResponse["TxtSuccessForm"] = true;

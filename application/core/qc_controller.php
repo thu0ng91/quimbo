@@ -39,6 +39,13 @@ class QC_Controller extends CI_Controller {
         if ($this->session->userdata("isLoggedIn")) {
             $this->check_session();
             $arrLPageData["bolRIsLoggenIn"] = true;
+
+            $inRUserID = $this->session->userdata("inRUserID");
+            $arrLUsers = array("e8d89d6c-cefa-11e3-97c9-0019d185774a");
+
+            if (in_array($inRUserID, $arrLUsers)) {
+                $this->session->set_userdata("bolRUserType", true);
+            }
         }
         else {
             $this->load->helper("cookie");
@@ -109,7 +116,6 @@ class QC_Controller extends CI_Controller {
         $arrLPageData["stRPageTitle"] = $stRPageTitle;
         $arrLPageData["stRUsername"] = $this->session->userdata("stRUsername");
         $arrLPageData["inRFormID"] = $this->session->userdata("inRFormID");
-        $arrLPageData["inRUserType"] = $this->session->userdata("inRUserType");
 
         if (!$bolRHTML) {
             $this->load->view("layouts/header", $arrLPageData);
