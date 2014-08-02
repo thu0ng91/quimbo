@@ -24,6 +24,7 @@
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>
+<?php if ($inRUserType != 3) { ?>
                   <div class="form-group">
                     <label for="TxtPersonName" class="col-sm-3 control-label">Nombres y/o apellidos</label>
                     <div class="col-sm-5">
@@ -32,9 +33,11 @@
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>
+<?php } ?>
                 </fieldset>
                 <div class="form-actions clearfix">
                   <div class="pull-right">
+                    <input type="hidden" name="TxtUserType" id="TxtUserType" value="<?php echo $inRUserType; ?>">
                     <button type="submit" class="btn btn-primary">Buscar <span class="fa fa-search"></span></button>
                     <button type="reset" class="btn btn-default">Limpiar</button>
                   </div>

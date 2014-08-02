@@ -2,7 +2,7 @@
       <nav class="navbar navbar-inverse navbar-menu" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clider-nav">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#quimbo-nav">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -12,7 +12,7 @@
               <img alt="Emgesa" src="public/img/logo.gif" class="img-responsive" width="150">
             </a>
           </div>
-          <div class="collapse navbar-collapse" id="clider-nav">
+          <div class="collapse navbar-collapse" id="quimbo-nav">
             <ul class="nav navbar-nav navbar-right">
               <li<?php if ($stRPage == "home" || $stRPage == "search") { ?> class="active"<?php } ?>>
                 <a href="<?php echo site_url("form/search"); ?>"><?php echo lang("TxtPageHome"); ?></a></li>

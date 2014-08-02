@@ -89,6 +89,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorP = $(objLAnchorC).clone();
                 var objLAnchorA = $(objLAnchorC).clone();
                 var objLAnchorE = $(objLAnchorC).clone();
+                var objLAnchorUD = $(objLAnchorC).clone();
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
@@ -102,6 +103,8 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Ver").addClass("btn btn-warning");
                 $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.a08Formulario)
                     .html("Editar").addClass("btn btn-success");
+                $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.a08Formulario)
+                    .html("Subir Documentos").addClass("btn btn-default");
 
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
@@ -112,7 +115,10 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     $(objLTableData).clone().html(arrRData.a11Apellidos).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
-                    $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+
+                    if (!arrRData.a08AP01) {
+                        $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+                    }
                 }
                 if (arrRData.a08AP01) {
                     $(objLTableData).clone().html(arrRData.a08AP08O02).appendTo(objLTableRow);
@@ -123,20 +129,25 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
 
                     var objLAction = $(objLTableData).clone().appendTo(objLTableRow);
 
-                    if (!arrRData.a07Imagen || !arrRData.a07CodigoBarras) {
-                        $(objLAction).append(" ").append(objLAnchorU);
+                    if (responseText.inRUserType != 3) {
+                        if (!arrRData.a07Imagen || !arrRData.a07CodigoBarras) {
+                            $(objLAction).append(" ").append(objLAnchorU);
+                        }
+                        else {
+                            $(objLAction).append(" ").append(objLAnchorD);
+                        }
+                        if (arrRData.a07Busqueda) {
+                            $(objLAction).append(" ").append(objLAnchorA);
+                        }
+                        if (responseText.inRUserType == 1) {
+                            $(objLAction).append(" ").append(objLAnchorE);
+                        }
+
+                        $(objLAction).append(" ").append(objLAnchorP);
                     }
                     else {
-                        $(objLAction).append(" ").append(objLAnchorD);
+                        $(objLAction).append(" ").append(objLAnchorUD);
                     }
-                    if (arrRData.a07Busqueda) {
-                        $(objLAction).append(" ").append(objLAnchorA);
-                    }
-                    if (responseText.TxtIsAdmin) {
-                        $(objLAction).append(" ").append(objLAnchorE);
-                    }
-
-                    $(objLAction).append(" ").append(objLAnchorP);
                 }
             });
         }
@@ -144,6 +155,9 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
         $("button[type=submit]").button("reset");
         $(".btn-group input, .btn-group-vertical input").find("label")
             .removeClass("btn-success").addClass("btn-default");
-        $("#responseContainer").show();
+
+        if (responseText.inRUserType != 3) {
+            $("#responseContainer").show();
+        }
     }
 }

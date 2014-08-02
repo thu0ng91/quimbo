@@ -5,5 +5,6 @@
     $lang["TxtPageDone"] = "Finalizar formulario";
     $lang["TxtPagePrint"] = "Imprimir formulario";
     $lang["TxtPageSearch"] = "Buscar Persona";
+    $lang["TxtPageUpload"] = "Subir Documentos";
     $lang["TxtPageSync"] = "Sincronizando Formularios";
     $lang["TxtPageView"] = "Ver Formulario";

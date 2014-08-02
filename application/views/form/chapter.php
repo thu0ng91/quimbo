@@ -206,8 +206,8 @@
 <?php foreach ($arrRStates as $arrLState) { ?>
                         <option value="<?php echo $arrLState["a05Codigo"]; ?>"
                             <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLState["a05Codigo"]) { ?>selected="selected"<?php }
-                              elseif ($arrLState["a05Codigo"] == 13) { ?>selected="selected"<?php } ?>>
-                          <?php echo $arrLState["a05Nombre"]; ?></option>
+                              if (!isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrLState["a05Codigo"] == 13) { ?>selected="selected"<?php } ?>>
+                          <?php echo $arrLState["a05Nombre"];  ?></option>
 <?php } ?>
                       </select>
                     </div>
@@ -217,9 +217,11 @@
                       <div class="form-group">
 <?php foreach ($arrLSubQuestion["arrRAnswers"] as $arrLAnswer) { ?>
                         <div class="checkbox">
-                          <label for="<?php echo $arrLSubQuestion["a03Input"]; ?>" class="control-label">
-                            <input type="checkbox" name="<?php echo $arrLSubQuestion["a03Input"]; ?>"
-                                title="Campo requerido!" required>
+                          <label for="<?php echo $arrLSubQuestion["a03Input"]."M0".$arrLAnswer["a04Numero"]; ?>" class="control-label">
+                            <input type="checkbox" name="<?php echo $arrLSubQuestion["a03Input"]; ?>[]"
+                                title="Campo requerido!" required value="<?php echo $arrLAnswer["a04Codigo"]; ?>"
+                                <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == "on"
+                                        && strpos($arrLSubQuestion["a03Field"], "O0".$arrLAnswer["a04Numero"])) { ?>checked="checked"<?php } ?>>
                               <?php echo $arrLAnswer["a04Numero"]; ?> - <?php echo $arrLAnswer["a04Respuesta"]; ?>
                             </label>
                           <div class="col-sm-3 pull-right"></div>
@@ -238,7 +240,7 @@
                             <option value="">Seleccione Uno</option>
 <?php foreach ($arrRTowns as $arrLTown) { ?>
 <?php if (strpos($arrLSubQuestion["a03Input"], "BP08O02") !== false ||
-    strpos($arrLSubQuestion["a03Input"], "CP08O02") !== false) { ?>
+    strpos($arrLSubQuestion["a03Input"], "CP08O02") !== false) {  ?>
                             <option value="<?php echo $arrLTown["a06Codigo"]; ?>"
                                 <?php if (isset($arrRSearch[$arrLSubQuestion["a03Field"]]) && $arrRSearch[$arrLSubQuestion["a03Field"]] == $arrLTown["a06Codigo"]) { ?>selected="selected"<?php } ?>>
                               <?php echo $arrLTown["a06Nombre"]; ?></option>
@@ -263,9 +265,9 @@
                 <div class="form-actions clearfix">
                   <div class="pull-right">
                     <input type="hidden" name="TxtChapter" id="TxtChapter" value="<?php echo $arrRChapter["a02Letra"]; ?>">
-                    <input type="hidden" name="TxtAction" id="TxtAction" value="<?php echo is_null($inRSearch) || $bolRAdmin ? "C" : "T"; ?>">
+                    <input type="hidden" name="TxtAction" id="TxtAction" value="<?php echo is_null($inRSearch) || ($inRUserType == 1) ? "C" : "T"; ?>">
                     <input type="hidden" name="TxtSearch" id="TxtSearch" value="<?php echo is_null($inRSearch) ? "N" : "Y"; ?>">
-<?php if (isset($arrRChapter["a02Siguiente"]) && (is_null($inRSearch) || $bolRAdmin)) { ?>
+<?php if (isset($arrRChapter["a02Siguiente"]) && (is_null($inRSearch) || $inRUserType == 1)) { ?>
                     <button type="submit" class="btn btn-primary"><span>Continuar</span> <span class="fa fa-chevron-right"></span></button>
 <?php } else { ?>
                     <button type="submit" class="btn btn-primary">Terminar</button>
