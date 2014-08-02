@@ -616,78 +616,90 @@ class QM_Form extends CI_Model {
 
             $this->db->where("a07Estado", "P");
             $SQLResult = $this->db->get("t07web_Formularios");
-            $arrLFormsToSync = $SQLResult->result_array();
             $inLForms = 0;
             $inLFiles = 0;
 
-            foreach ($arrLFormsToSync as $arrLFormToSync) {
-                $bolLSyncForm = $objLSync->insert("t07web_Formularios", $arrLFormToSync);
+            if ($SQLResult->num_rows() > 0) {
+                $arrLFormsToSync = $SQLResult->result_array();
 
-                if ($bolLSyncForm) {
-                    $inLForms++;
-                    $arrLUpdateForm = array("a07Estado" => "S");
-                    $this->db->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
-                    $objLSync->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
-                }
-                if ($bolRFiles) {
-                    if ($this->do_upload($arrLFormToSync["a07Imagen"])) {
-                        $inLFiles++;
+                foreach ($arrLFormsToSync as $arrLFormToSync) {
+                    $bolLSyncForm = $objLSync->insert("t07web_Formularios", $arrLFormToSync);
+
+                    if ($bolLSyncForm) {
+                        $inLForms++;
+                        $arrLUpdateForm = array("a07Estado" => "S");
+                        $this->db->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
+                        $objLSync->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
                     }
-                    if (!empty($arrLFormToSync["a07Video"]) && $this->do_upload($arrLFormToSync["a07Video"])) {
-                        $inLFiles++;
+                    if ($bolRFiles) {
+                        if ($this->do_upload($arrLFormToSync["a07Imagen"])) {
+                            $inLFiles++;
+                        }
+                        if (!empty($arrLFormToSync["a07Video"]) && $this->do_upload($arrLFormToSync["a07Video"])) {
+                            $inLFiles++;
+                        }
                     }
                 }
             }
 
             $this->db->where("a08Estado", "P");
             $SQLResult = $this->db->get("t08web_Usuario_Respuestas");
-            $arrLAnswersToSync = $SQLResult->result_array();
             $inLAnswers = 0;
 
-            foreach ($arrLAnswersToSync as $arrLAnswerToSync) {
-                $bolLSyncAnswers = $objLSync->insert("t08web_Usuario_Respuestas", $arrLAnswerToSync);
+            if ($SQLResult->num_rows() > 0) {
+                $arrLAnswersToSync = $SQLResult->result_array();
 
-                if ($bolLSyncAnswers) {
-                    $inLAnswers++;
-                    $arrLUpdateAnswers = array("a08Estado" => "S");
-                    $this->db->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
-                    $objLSync->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
+                foreach ($arrLAnswersToSync as $arrLAnswerToSync) {
+                    $bolLSyncAnswers = $objLSync->insert("t08web_Usuario_Respuestas", $arrLAnswerToSync);
+
+                    if ($bolLSyncAnswers) {
+                        $inLAnswers++;
+                        $arrLUpdateAnswers = array("a08Estado" => "S");
+                        $this->db->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
+                        $objLSync->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
+                    }
                 }
             }
 
             $this->db->where("a09Estado", "P");
             $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
-            $arrLAnswersNToSync = $SQLResult->result_array();
             $inLAnswersN = 0;
 
-            foreach ($arrLAnswersNToSync as $arrLAnswerNToSync) {
-                $bolLSyncAnswersN = $objLSync->insert("t09web_Usuario_RespuestasN", $arrLAnswerNToSync);
+            if ($SQLResult->num_rows() > 0) {
+                $arrLAnswersNToSync = $SQLResult->result_array();
 
-                if ($bolLSyncAnswersN) {
-                    $inLAnswersN++;
-                    $arrLUpdateAnswersN = array("a09Estado" => "S");
-                    $this->db->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
-                    $objLSync->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
+                foreach ($arrLAnswersNToSync as $arrLAnswerNToSync) {
+                    $bolLSyncAnswersN = $objLSync->insert("t09web_Usuario_RespuestasN", $arrLAnswerNToSync);
+
+                    if ($bolLSyncAnswersN) {
+                        $inLAnswersN++;
+                        $arrLUpdateAnswersN = array("a09Estado" => "S");
+                        $this->db->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
+                        $objLSync->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
+                    }
                 }
             }
 
             $objLSync->where("a01Sincro", "P");
             $SQLResult = $objLSync->get("t01web_Usuarios");
-            $arrLUsersToSync = $SQLResult->result_array();
             $inLUsers = 0;
 
-            foreach ($arrLUsersToSync as $arrLUserToSync) {
-                $this->db->where("a01Codigo", $arrLUserToSync["a01Codigo"]);
-                $SQLResult = $this->db->get("t01web_Usuarios");
+            if ($SQLResult->num_rows() > 0) {
+                $arrLUsersToSync = $SQLResult->result_array();
 
-                if ($SQLResult->num_rows() == 0) {
-                    $bolLSyncUsers = $this->db->insert("t01web_Usuarios", $arrLUserToSync);
+                foreach ($arrLUsersToSync as $arrLUserToSync) {
+                    $this->db->where("a01Codigo", $arrLUserToSync["a01Codigo"]);
+                    $SQLResult = $this->db->get("t01web_Usuarios");
 
-                    if ($bolLSyncUsers) {
-                        $inLUsers++;
-                        $arrLUpdateUsers = array("a01Sincro" => "S");
-                        $this->db->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
-                        $objLSync->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
+                    if ($SQLResult->num_rows() == 0) {
+                        $bolLSyncUsers = $this->db->insert("t01web_Usuarios", $arrLUserToSync);
+
+                        if ($bolLSyncUsers) {
+                            $inLUsers++;
+                            $arrLUpdateUsers = array("a01Sincro" => "S");
+                            $this->db->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
+                            $objLSync->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
+                        }
                     }
                 }
             }
