@@ -563,7 +563,7 @@ class QM_Form extends CI_Model {
         $this->db->update("t07web_Formularios", $arrLForm);
         $this->db->trans_complete();
 
-        $this->do_sync();
+        //$this->do_sync();
 
         return $this->db->trans_status();
     }
