@@ -9,7 +9,7 @@
                   <legend>Subir documetos</legend>
                   <p class="text-info text-right"><span class="text-danger">*</span> Indica un campo requerido</p>
                   <div class="form-group">
-                    <label for="TxtFileHabeasData" class="col-sm-3 control-label">Habeas Data</label>
+                    <label for="TxtFileHabeasData" class="col-sm-3 control-label">Formato + Habeas Data</label>
                     <div class="col-sm-4">
                       <input type="file" class="form-control" id="TxtFileHabeasData" name="TxtFileHabeasData"
                         placeholder="Habeas Data" title="Ingrese el Doc de Habeas Data!">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-3 pull-right"></div>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="TxtFileRegister" class="col-sm-3 control-label">Formato de Registro</label>
                     <div class="col-sm-4">
                       <input type="file" class="form-control" id="TxtFileRegister" name="TxtFileRegister"
@@ -33,7 +33,7 @@
                         placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                     </div>
                     <div class="col-sm-3 pull-right"></div>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="TxtFileIdentification" class="col-sm-3 control-label">Documento de Identidad</label>
                     <div class="col-sm-4">
