@@ -352,6 +352,7 @@ class QM_Form extends CI_Model {
     public function do_chapter($arrRFormData) {
         $inRFormID = $this->session->userdata("inRFormID");
         $arrLChaptersN = array();
+        $arrLChapterN = array();
 
         if ($this->session->userdata("inRSearch") &&
                 !$this->session->userdata("bolRIsNewFormat")) {
@@ -391,9 +392,8 @@ class QM_Form extends CI_Model {
                 $arrLChapter[$stLKey] = trim($stLData);
             }
             else if (strpos($stRKey, "BP08") !== false) {
-                $arrLData = $stLData;
-                $arrLChapterN = array();
-
+                $arrLData = $stLData;                
+                
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormBP08", "a09", $stRKey);
                     $stLTrimData = trim($stLNData);
@@ -413,7 +413,6 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP08") !== false) {
                 $arrLData = $stLData;
-                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP08", "a09", $stRKey);
@@ -438,7 +437,6 @@ class QM_Form extends CI_Model {
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP018", "a09", $stRKey);
                     $stLTrimData = trim($stLNData);
-                    $arrLChapterN = array();
 
                     if (!empty($stLTrimData)) {
                         $arrLChapterN[$inLNKey][$stLBNKey] = trim($stLNData);
@@ -455,8 +453,6 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP019") !== false) {
                 $arrLData = $stLData;
-                $arrLChapterN = array();
-
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormCP019", "a09", $stRKey);
                     $stLTrimData = trim($stLNData);
@@ -476,7 +472,6 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP09O02") !== false) {
                 $arrLData = $stLData;
-                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = "a09O0".($inLNKey + 1);
@@ -497,7 +492,6 @@ class QM_Form extends CI_Model {
             }
             else if (strpos($stRKey, "CP015O01") !== false) {
                 $arrLData = $stLData;
-                $arrLChapterN = array();
 
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = "a09O0".($inLNKey + 1);
