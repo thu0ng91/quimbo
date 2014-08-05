@@ -44,6 +44,8 @@ $route['404_override'] = '';
 $route['api/(:any)'] = "qc_api/$1";
 $route['form'] = "qc_form/index";
 $route['form/(:any)'] = "qc_form/$1";
+$route['certifications'] = "qc_certifications/index";
+$route['certifications/(:any)'] = "qc_certifications/$1";
 $route['user/do_(:any)'] = "qc_user/do_$1";
 
 /* End of file routes.php */

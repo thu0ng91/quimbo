@@ -1,0 +1,31 @@
+/* 
+    Document   : form.css
+    Created on : 5/08/2014, 03:45:18 PM
+    Author     : juan.martinez@gmail.com / Juan Camilo Martinez Morales
+*/
+
+    h1{
+        text-align: justify;
+        font-weight: bold;
+    }
+    #txtIdentificador {
+        font-size: 1.2em;
+    }
+    select {
+        display: block;
+    }
+    #controls{
+        width: 80%;
+        margin: 0 auto;
+    }
+    #controls input[type='text'], #controls textarea, #controls select, #controls input[type='date']{
+        width: 100%;
+    }
+    .left{
+        float: left;
+        width: 49.5%;
+    }
+    .right{
+        float: right;
+        width: 49.5%;
+    }
