@@ -1,10 +1,10 @@
 <link href="public/css/certifications/form.css" rel="stylesheet" />
-<script src="public/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script type='text/javascript'>
     var formCode = '<?php echo $_GET["formCode"]; ?>';
-    var code = '<?php if(isset($_GET["Code"])){ echo $_GET["Code"]; } else { echo "0"; } ?>';
+    var code = '<?php if(isset($_GET["code"])){ echo $_GET["code"]; } else { echo "0"; } ?>';
+    var get_csrf_token_name =  '<?php echo $this->security->get_csrf_token_name(); ?>';
+    var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 </script>
-<script src="public/js/certifications/form.js" type="text/javascript"></script>
 <section class="main-content">
     <div class="container">
         <div id='controls'>
@@ -53,7 +53,7 @@
                 <div class='form-group' >
                     <label for='txtPredioCertificacion'>Predio</label>
                     <select class='form-control' id="txtPredioCertificacion" name="txtPredioCertificacion">
-                        <option>Seleccione Predio...</option>
+                        <option value="1">Prueba Predio</option>
                     </select>
                     <div class='form-group' style='display: none;'>
                         <label for='txtOtroPredio'>Cual?</label>
