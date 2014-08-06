@@ -90,6 +90,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorA = $(objLAnchorC).clone();
                 var objLAnchorE = $(objLAnchorC).clone();
                 var objLAnchorUD = $(objLAnchorC).clone();
+                var objLAnchorCERT = $(objLAnchorC).clone();
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
@@ -105,6 +106,8 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Editar").addClass("btn btn-success");
                 $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.a08Formulario)
                     .html("Subir Documentos").addClass("btn btn-default");
+                $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.a08Formulario)
+                    .html("Digitar Certificaciones").addClass("btn btn-success");
 
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
@@ -147,6 +150,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     }
                     else {
                         $(objLAction).append(" ").append(objLAnchorUD);
+                        $(objLAction).append(" ").append(objLAnchorCERT);
                     }
                 }
             });

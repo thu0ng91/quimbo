@@ -50,7 +50,7 @@ class QC_Certifications extends QC_Controller {
      * Show form page
      */
     public function do_saveForm() {
-        $this->load->model("qm_certifications", "certificationsModel", false);
+        $this->load->model("qm_certifications", "certificationsModel", true);
         $arrayData = array();
         if (!empty($_POST["dataForm"])) {
             $arraDataFromView = json_decode($_POST["dataForm"]);
@@ -58,18 +58,51 @@ class QC_Certifications extends QC_Controller {
                 $arrayData[$itemValue->name] = $itemValue->value;
             }
         }
-        $arrayData["txtCodigo"] = $_POST["code"];
+
         $arrayData["txtIdentificador"] = $_POST["formCode"];
-        $this->certificationsModel->do_setProperties($arrayData);
+        $arrayData["txtCodigo"] = $_POST["code"];
+
         if ($arrayData["txtCodigo"] == "0") {
+            $arrayData["txtCodigo"] = null;
+            $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_insert();
         } else {
+            $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_update();
         }
         if ($resultDoInsert)
             echo "ok";
         else
             echo $resultDoInsert;
+    }
+    
+    /*
+     * 
+     * 
+     * 
+     */
+    public function do_deleteCertification($code){
+        $this->load->model("qm_certifications", "certificationsModel", true);
+        echo json_encode($this->certificationsModel->do_delete($code));
+    }
+
+    /*
+     * 
+     * 
+     * 
+     */
+    public function get_DataCertificationByCode($code) {
+        $this->load->model("qm_certifications", "certificationsModel", true);
+        echo json_encode($this->certificationsModel->get_DataTableByCode($code));
+    }
+    /*
+     * 
+     * 
+     * 
+     */
+    public function get_DataCertificationByForm($formCode) {
+        $this->load->model("qm_certifications", "certificationsModel", true);
+        echo json_encode($this->certificationsModel->get_DataTableByForm($formCode));
     }
 
 }

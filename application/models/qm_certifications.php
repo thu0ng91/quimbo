@@ -28,34 +28,37 @@ class QM_Certifications extends CI_Model {
      */
 
     public function do_setProperties($arrayDataFromView) {
+        
         $this->arrayProperties = array(
-            'a14Codigo' => isset($arrayDataFromView['a14Codigo']) ? $arrayDataFromView['txtCodigo'] : null,
-            'a14Identificador' => isset($arrayDataFromView['a14Identificador']) ? $arrayDataFromView['txtIdentificador'] : null,
-            'a14FechaExpedicion' => isset($arrayDataFromView['a14FechaExpedicion']) ? $arrayDataFromView['txtFechaExpedicion'] : null,
-            'a14MunicipioExpedicion' => isset($arrayDataFromView['a14MunicipioExpedicion']) ? $arrayDataFromView['txtMunicipioExpedicion'] : null,
-            'a14VeredaCertificacion' => isset($arrayDataFromView['a14VeredaCertificacion']) ? $arrayDataFromView['txtVeredaCertificacion'] : null,
-            'a14PredioCertificacion' => isset($arrayDataFromView['a14PredioCertificacion']) ? $arrayDataFromView['txtPredioCertificacion'] : null,
-            'a14Cargo' => isset($arrayDataFromView['a14Cargo']) ? $arrayDataFromView['txtCargo'] : null,
-            'a14FechaSuministrada' => isset($arrayDataFromView['a14FechaSuministrada']) ? $arrayDataFromView['txtFechaSuministrada'] : null,
-            'a14FechaInicio' => isset($arrayDataFromView['a14FechaInicio']) ? $arrayDataFromView['txtFechaInicio'] : null,
-            'a14FechaFin' => isset($arrayDataFromView['a14FechaFin']) ? $arrayDataFromView['txtFechaFin'] : null,
-            'a14TipoPersonaJuridica' => isset($arrayDataFromView['a14TipoPersonaJuridica']) ? $arrayDataFromView['txtTipoPersonaJuridica'] : null,
-            'a14NombrePersonaJuridica' => isset($arrayDataFromView['a14NombrePersonaJuridica']) ? $arrayDataFromView['txtNombrePersonaJuridica'] : null,
-            'a14NITPersonaJuridica' => isset($arrayDataFromView['a14NITPersonaJuridica']) ? $arrayDataFromView['txtNITPersonaJuridica'] : null,
-            'a14DocumentoIdentificacion' => isset($arrayDataFromView['a14DocumentoIdentificacion']) ? $arrayDataFromView['txtDocumentoIdentificacion'] : null,
-            'a14NombreEmpresa' => isset($arrayDataFromView['a14NombreEmpresa']) ? $arrayDataFromView['txtNombreEmpresa'] : null,
-            'a14NITEmpresa' => isset($arrayDataFromView['a14NITEmpresa']) ? $arrayDataFromView['txtNITEmpresa'] : null,
-            'a14DescripcionRelacion' => isset($arrayDataFromView['a14DescripcionRelacion']) ? $arrayDataFromView['txtDescripcionRelacion'] : null,
-            'a14ValoresCertificados' => isset($arrayDataFromView['a14ValoresCertificados']) ? $arrayDataFromView['txtValoresCertificados'] : null,
-            'a14Unidades' => isset($arrayDataFromView['a14Unidades']) ? $arrayDataFromView['txtUnidades'] : null,
-            'a14Cantidad' => isset($arrayDataFromView['a14Cantidad']) ? $arrayDataFromView['txtCantidad'] : null,
-            'a14DescripcionUnidades' => isset($arrayDataFromView['a14DescripcionUnidades']) ? $arrayDataFromView['txtDescripcionUnidades'] : null,
-            'a14DireccionCertificacion' => isset($arrayDataFromView['a14DireccionCertificacion']) ? $arrayDataFromView['txtDireccionCertificacion'] : null,
-            'a14Zona' => isset($arrayDataFromView['a14Zona']) ? $arrayDataFromView['txtZona'] : null,
-            'a14Barrio' => isset($arrayDataFromView['a14Barrio']) ? $arrayDataFromView['txtBarrio'] : null,
-            'a14OtroMunicipio' => isset($arrayDataFromView['a14OtroMunicipio']) ? $arrayDataFromView['txtOtroMunicipio'] : null,
-            'a14OtraVereda' => isset($arrayDataFromView['a14OtraVereda']) ? $arrayDataFromView['txtOtraVereda'] : null,
-            'a14OtroPredio' => isset($arrayDataFromView['a14OtroPredio']) ? $arrayDataFromView['txtOtroPredio'] : null
+            'a14Codigo' => (isset($arrayDataFromView['txtCodigo'])) ? $arrayDataFromView['txtCodigo'] : null,
+            'a14Identificador' => (isset($arrayDataFromView['txtIdentificador'])) ? $arrayDataFromView['txtIdentificador'] : null,
+            'a14FechaExpedicion' => (isset($arrayDataFromView['txtFechaExpedicion'])) ? $arrayDataFromView['txtFechaExpedicion'] : null,
+            'a14MunicipioExpedicion' => (isset($arrayDataFromView['txtMunicipioExpedicion'])) ? $arrayDataFromView['txtMunicipioExpedicion'] : null,
+            'a14VeredaCertificacion' => (isset($arrayDataFromView['txtVeredaCertificacion'])) ? $arrayDataFromView['txtVeredaCertificacion'] : null,
+            'a14PredioCertificacion' => (isset($arrayDataFromView['txtPredioCertificacion'])) ? $arrayDataFromView['txtPredioCertificacion'] : null,
+            'a14Cargo' => (isset($arrayDataFromView['txtCargo'])) ? $arrayDataFromView['txtCargo'] : null,
+            'a14FechaSuministrada' => (isset($arrayDataFromView['txtFechaSuministrada'])) ? $arrayDataFromView['txtFechaSuministrada'] : null,
+            'a14FechaInicio' => (isset($arrayDataFromView['txtFechaInicio'])) ? $arrayDataFromView['txtFechaInicio'] : null,
+            'a14FechaFin' => (isset($arrayDataFromView['txtFechaFin'])) ? $arrayDataFromView['txtFechaFin'] : null,
+            'a14TipoPersonaJuridica' => (isset($arrayDataFromView['txtTipoPersonaJuridica'])) ? $arrayDataFromView['txtTipoPersonaJuridica'] : null,
+            'a14NombrePersonaJuridica' => (isset($arrayDataFromView['txtNombrePersonaJuridica'])) ? $arrayDataFromView['txtNombrePersonaJuridica'] : null,
+            'a14NITPersonaJuridica' => (isset($arrayDataFromView['txtNITPersonaJuridica'])) ? $arrayDataFromView['txtNITPersonaJuridica'] : null,
+            'a14DocumentoIdentificacion' => (isset($arrayDataFromView['txtDocumentoIdentificacion'])) ? $arrayDataFromView['txtDocumentoIdentificacion'] : null,
+            'a14NombreEmpresa' => (isset($arrayDataFromView['txtNombreEmpresa'])) ? $arrayDataFromView['txtNombreEmpresa'] : null,
+            'a14NITEmpresa' => (isset($arrayDataFromView['txtNITEmpresa'])) ? $arrayDataFromView['txtNITEmpresa'] : null,
+            'a14DescripcionRelacion' => (isset($arrayDataFromView['txtDescripcionRelacion'])) ? $arrayDataFromView['txtDescripcionRelacion'] : null,
+            'a14ValoresCertificados' => (isset($arrayDataFromView['txtValoresCertificados'])) ? $arrayDataFromView['txtValoresCertificados'] : null,
+            'a14Unidades' => (isset($arrayDataFromView['txtUnidades'])) ? $arrayDataFromView['txtUnidades'] : null,
+            'a14Cantidad' => (isset($arrayDataFromView['txtCantidad'])) ? $arrayDataFromView['txtCantidad'] : null,
+            'a14DescripcionUnidades' => (isset($arrayDataFromView['txtDescripcionUnidades'])) ? $arrayDataFromView['txtDescripcionUnidades'] : null,
+            'a14DireccionCertificacion' => (isset($arrayDataFromView['txtDireccionCertificacion'])) ? $arrayDataFromView['txtDireccionCertificacion'] : null,
+            'a14Zona' => (isset($arrayDataFromView['txtZona'])) ? $arrayDataFromView['txtZona'] : null,
+            'a14Barrio' => (isset($arrayDataFromView['txtBarrio'])) ? $arrayDataFromView['txtBarrio'] : null,
+            'a14OtroMunicipio' => (isset($arrayDataFromView['txtOtroMunicipio'])) ? $arrayDataFromView['txtOtroMunicipio'] : null,
+            'a14OtraVereda' => (isset($arrayDataFromView['txtOtraVereda'])) ? $arrayDataFromView['txtOtraVereda'] : null,
+            'a14OtroPredio' => (isset($arrayDataFromView['txtOtroPredio'])) ? $arrayDataFromView['txtOtroPredio'] : null,
+            'a14TipoCertificacion' => (isset($arrayDataFromView['txtTipoCertificacion'])) ? $arrayDataFromView['txtTipoCertificacion'] : null,
+            'a14OtraDescripcionUnidades' => (isset($arrayDataFromView['txtOtraDescripcionUnidades'])) ? $arrayDataFromView['txtOtraDescripcionUnidades'] : null
         );
     }
 
@@ -65,8 +68,10 @@ class QM_Certifications extends CI_Model {
 
     public function do_insert() {
         try {
+            $this->db->trans_start();
             $this->db->insert('t14web_certificaciones_detalle', $this->arrayProperties);
-            return true;
+            $this->db->trans_complete();
+            return $this->db->trans_status();
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -78,6 +83,7 @@ class QM_Certifications extends CI_Model {
 
     public function do_update() {
         try {
+            $this->arrayProperties["a14FechaUltimaActualizacion"] = date("Y-m-d H:i:s");
             $this->db->where("a14Codigo", $this->arrayProperties["a14Codigo"]);
             $this->db->update('t14web_certificaciones_detalle', $this->arrayProperties);
             return true;
@@ -90,9 +96,9 @@ class QM_Certifications extends CI_Model {
      * Delete information from table t14web_certificaciones_detalle
      */
 
-    public function do_delete() {
+    public function do_delete($code) {
         try {
-            $this->db->where("a14Codigo", $this->arrayProperties["a14Codigo"]);
+            $this->db->where("a14Codigo", $code);
             $this->db->delete('t14web_certificaciones_detalle');
             return true;
         } catch (Exception $exc) {
@@ -104,12 +110,12 @@ class QM_Certifications extends CI_Model {
      * Get information from table t14web_certificaciones_detalle by a14Codigo as Primary Key
      */
 
-    public function get_DataTableByCode() {
+    public function get_DataTableByCode($code) {
         try {
-            $this->db->where("a14Codigo", $this->arrayProperties["a14Codigo"]);
-            $dataTable = $this->db->select('t14web_certificaciones_detalle');
+            $this->db->where("a14Codigo", $code);
+            $dataTable = $this->db->get('t14web_certificaciones_detalle');
 
-            return $dataTable;
+            return $dataTable->result();
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -119,12 +125,12 @@ class QM_Certifications extends CI_Model {
      * Get information from table t14web_certificaciones_detalle by a14Identificador
      */
 
-    public function get_DataTableByForm() {
+    public function get_DataTableByForm($formCode) {
         try {
-            $this->db->where("a14Identificador", $this->arrayProperties["a14Identificador"]);
-            $dataTable = $this->db->select('t14web_certificaciones_detalle');
+            $this->db->where("a14Identificador", $formCode);
+            $dataTable = $this->db->get('t14web_certificaciones_detalle');
 
-            return $dataTable;
+            return $dataTable->result();
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

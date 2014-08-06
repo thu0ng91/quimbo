@@ -5,6 +5,26 @@
  */
 $(document).ready(function() {
 
+    $("#saveInformation").click(function() {
+        $.ajax({
+            url: "index.php/certifications/do_saveForm",
+            type: "POST",
+            data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
+            success: function(result) {
+                if (result == "ok") {
+                    alert("La información se almaceno correctamente");
+                    window.location = 'index.php/certifications/admin?formCode=' + formCode;
+                } else {
+                    //Habilitar para mostrar error de PHP
+                    //alert(result);
+                }
+            },
+            error: function() {
+                alert("Opps! Ocurrio un error inesperado, por favor contacte al administrador del sistema.");
+            }
+        });
+    });
+
     $("#txtIdentificador").html(formCode);
 
     $("input[name='txtFechaSuministrada']").change(function() {
@@ -16,7 +36,6 @@ $(document).ready(function() {
     });
 
     $("input[name='txtValoresCertificados']").change(function() {
-        console.log($("input[name='txtValoresCertificados']:checked").val());
         if ($("input[name='txtValoresCertificados']:checked").val() == "1") {
             enabledUnits("block");
         } else if ($("input[name='txtValoresCertificados']:checked").val() == "0") {
@@ -64,38 +83,37 @@ $(document).ready(function() {
         }
     });
 
-    $("#saveInformation").click(function() {
-        $.ajax({
-            url: "index.php/certifications/do_saveForm",
-            type: "POST",
-            data: {'<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>', "formCode": formCode, "code": code, "dataForm": JSON.stringify($('#controls input, select textarea').serializeArray())},
-            success: function(result) {
-                if (result == "ok") {
-                    alert("La información se almaceno correctamente");
-                } else {
-                    //Habilitar para mostrar error de PHP
-                    //alert(result);
-                }
-            },
-            error: function() {
-                alert("Opps! Ocurrio un error inesperado, por favor contacte al administrador del sistema.");
-            }
-        });
-    });
-
     getLocations();
-    
-    $("#txtMunicipioExpedicion").change(function(){
+
+    $("#txtMunicipioExpedicion").change(function() {
         $.getJSON("index.php/api/get_cities/" + $("#txtMunicipioExpedicion :selected").attr("code"), function(objRData) {
             $("#txtVeredaCertificacion").html("");
             for (var i = 0; i < objRData.length; i++) {
                 var objLOption = document.createElement("option");
 
                 $(objLOption).val(objRData[i].a10Codigo).html(objRData[i].a10Nombre)
-                    .appendTo("#txtVeredaCertificacion");
+                        .appendTo("#txtVeredaCertificacion");
             }
         });
     });
+
+    if (code != "0") {
+        $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
+            for (var item in JSONresult[0]) {
+                var nameControlDOM = item.replace("a14", "txt");
+                if (nameControlDOM == "txtFechaSuministrada" || nameControlDOM == "txtValoresCertificados") {
+                    for (var i = 0; i < document.getElementsByName(nameControlDOM).length; i++) {
+                        if ($($(document.getElementsByName(nameControlDOM))[i]).val() == JSONresult[0][item]) {
+                            $($(document.getElementsByName(nameControlDOM))[i]).trigger("click");
+                        }
+                    }
+                } else {
+                    $(document.getElementsByName(nameControlDOM)).val(JSONresult[0][item]);
+                    $(document.getElementsByName(nameControlDOM)).trigger("change");
+                }
+            }
+        });
+    }
 
 });
 
@@ -157,5 +175,7 @@ function getLocations() {
                         .appendTo("#txtMunicipioExpedicion");
             }
         }
+
+        $("#txtMunicipioExpedicion").trigger("change");
     });
 }
