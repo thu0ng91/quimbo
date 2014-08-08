@@ -164,6 +164,14 @@ var idsBlock;
 function enabledCertificationLabor(isEnabled) {
     idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion";
     $(idsBlock).css("display", isEnabled);
+    $("#labeltxtNombrePersonaJuridica").html("Nombre de Persona juridica que certifica");
+    $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
+    $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
+    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
+    $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtCargo").html("Cargo certificado");
+    
 }
 /*
  * 
@@ -172,6 +180,13 @@ function enabledCertificationCommercial(isEnabled) {
     idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
                         #containerTxtDescripcionRelacion, #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerTxtDescripcionUnidades";
     $(idsBlock).css("display", isEnabled);
+    $("#labeltxtNombrePersonaJuridica").html("Nombre persona que firma la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
+    $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
+    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
+    $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtCargo").html("Cargo de la persona que certifica");
 }
 /*
  * 
@@ -179,6 +194,13 @@ function enabledCertificationCommercial(isEnabled) {
 function enabledCertificationLocal(isEnabled) {
     idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
     $(idsBlock).css("display", isEnabled);
+    $("#labeltxtNombrePersonaJuridica").html("Nombre persona jurídica que certifica");
+    $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
+    $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
+    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
+    $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtCargo").html("Cargo de la persona que certifica");
 }
 
 /*

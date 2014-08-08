@@ -33,7 +33,7 @@
                     <input type='date' name='txtFechaExpedicion' class='form-control' id='txtFechaExpedicion' name='txtFechaExpedicion'>
                 </div>
                 <div class='form-group'>
-                    <label for='txtMunicipioExpedicion'>Municipio</label>
+                    <label id="labeltxtMunicipioExpedicion" for='txtMunicipioExpedicion'>Municipio</label>
                     <select class='form-control' id="txtMunicipioExpedicion" name="txtMunicipioExpedicion">
                     </select>
                     <div class='form-group' id='containertxtOtroMunicipio' style='display: none;'>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class='form-group'>
-                    <label for='txtVeredaCertificacion'>Vereda</label>
+                    <label id="labeltxtVeredaCertificacion" for='txtVeredaCertificacion'>Vereda</label>
                     <select class='form-control' id="txtVeredaCertificacion" name="txtVeredaCertificacion">
                     </select>
                     <div class='form-group' id='containertxtOtraVereda' style='display: none;'>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class='form-group' >
-                    <label for='txtPredioCertificacion'>Predio</label>
+                    <label id="labeltxtPredioCertificacion" for='txtPredioCertificacion'>Predio</label>
                     <select class='form-control' id="txtPredioCertificacion" name="txtPredioCertificacion">
                     </select>
                     <div class='form-group' id="containertxtOtroPredio" style='display: none;'>
@@ -80,7 +80,7 @@
                     <input type='date' class='form-control' id='txtFechaFin' name='txtFechaFin'>
                 </div>
                 <div class='form-group'>
-                    <label for='txtCargo'>Cargo</label>
+                    <label id='labeltxtCargo' for='txtCargo'>Cargo</label>
                     <input type='text' class='form-control' id='txtCargo' name='txtCargo'>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                     <input type='text' onkeypress="return isNumberKey(event);" class='form-control' id='txtNITEmpresa' name='txtNITEmpresa'>
                 </div>
                 <div class='form-group' id='containerTxtNombrePersonaJuridica' style='display: none;'>
-                    <label for='txtNombrePersonaJuridica'>Nombre Persona</label>
+                    <label id="labeltxtNombrePersonaJuridica" for='txtNombrePersonaJuridica'>Nombre Persona</label>
                     <input type='text' class='form-control' id='txtNombrePersonaJuridica' name='txtNombrePersonaJuridica'>
                 </div>
                 <div class='form-group' id='containerTxtNITPersonaJuridica' style='display: none;'>
@@ -109,7 +109,7 @@
                     <input type='text' class='form-control' id='txtNITPersonaJuridica' name='txtNITPersonaJuridica'>
                 </div>
                 <div class='form-group' id='containerTxtDocumentoIdentificacion' style='display: none;'>
-                    <label for='txtDocumentoIdentificacion'>Documento Identificación</label>
+                    <label id="labeltxtDocumentoIdentificacion" for='txtDocumentoIdentificacion'>Documento Identificación</label>
                     <input type='text' onkeypress="return isNumberKey(event);" class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
                 </div>
 
