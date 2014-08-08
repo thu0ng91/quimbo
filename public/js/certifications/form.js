@@ -6,23 +6,25 @@
 $(document).ready(function() {
 
     $("#saveInformation").click(function() {
-        $.ajax({
-            url: "index.php/certifications/do_saveForm",
-            type: "POST",
-            data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
-            success: function(result) {
-                if (result == "ok") {
-                    alert("La información se almaceno correctamente");
-                    window.location = 'index.php/certifications/admin?formCode=' + formCode;
-                } else {
-                    //Habilitar para mostrar error de PHP
-                    //alert(result);
+        if (validateRequiredFields(idsBlock)) {
+            $.ajax({
+                url: "index.php/certifications/do_saveForm",
+                type: "POST",
+                data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
+                success: function(result) {
+                    if (result == "ok") {
+                        alert("La información se almaceno correctamente");
+                        window.location = 'index.php/certifications/admin?formCode=' + formCode;
+                    } else {
+                        //Habilitar para mostrar error de PHP
+                        //alert(result);
+                    }
+                },
+                error: function() {
+                    alert("Opps! Ocurrio un error inesperado, por favor contacte al administrador del sistema.");
                 }
-            },
-            error: function() {
-                alert("Opps! Ocurrio un error inesperado, por favor contacte al administrador del sistema.");
-            }
-        });
+            });
+        }
     });
 
     $("#txtIdentificador").html(formCode);
@@ -117,18 +119,20 @@ $(document).ready(function() {
 
 });
 
+var idsBlock;
+
 /*
  * 
  */
 function enabledCertificationLabor(isEnabled) {
-    var idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion";
     $(idsBlock).css("display", isEnabled);
 }
 /*
  * 
  */
 function enabledCertificationCommercial(isEnabled) {
-    var idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
+    idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
                         #containerTxtDescripcionRelacion, #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerTxtDescripcionUnidades";
     $(idsBlock).css("display", isEnabled);
 }
@@ -136,7 +140,7 @@ function enabledCertificationCommercial(isEnabled) {
  * 
  */
 function enabledCertificationLocal(isEnabled) {
-    var idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
     $(idsBlock).css("display", isEnabled);
 }
 
@@ -152,6 +156,69 @@ function enabledDates(isEnabled) {
  */
 function enabledUnits(isEnabled) {
     $("#containerTxtUnidades, #containerTxtCantidad").css("display", isEnabled);
+}
+/*
+ * 
+ *
+ */
+function validateRequiredFields(ids) {
+    var errors = 0;
+    $(".alertLabel").remove();
+
+    $(".left, .right").find("input[type='text'], input[type='date'], select, textarea").each(function() {
+        $(this).css("border", "");
+        if ($.trim($(this).val()) == "") {
+            if ($(this).parent().css("display") != "none") {
+                if($("#txtTipoCertificacion").val() == "2" && $(this).attr("id") != "txtNombreEmpresa" && $(this).attr("id") != "txtNITEmpresa" && $(this).attr("id") != "txtCargo"  && $(this).attr("id") != "txtDocumentoIdentificacion" || $("#txtTipoCertificacion").val() != "2" ){
+                    console.log($(this).attr("id"));
+                    $(this).css("border", "2px solid #CC0202");
+                    $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
+                    errors++;
+                }
+                /*$(this).change(function() {
+                    validateRequiredFields(idsBlock);
+                });*/
+            }
+        } else {
+            $(this).css("border", "2px solid #56AB2E");
+            return true;
+        }
+    });
+    
+    var namePosition = "";
+    $(".left, .right").find("input[type='radio']").each(function() {
+        if($(this).attr("name") != namePosition){
+            namePosition = $(this).attr("name");
+        }
+            
+        if ($(this).parent().css("display") != "none") {
+            if (!$("input[name='" + namePosition + "']").is(":checked")) {
+                $(this).css("border", "2px solid #CC0202");
+                $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
+                errors++;
+                /*$(this).change(function() {
+                    validateRequiredFields(idsBlock);
+                });*/
+            }
+        } else {
+            $(this).css("border", "2px solid #56AB2E");
+            return true;
+        }
+    });
+
+    if (errors > 0) {
+        return false;
+    } else {
+        return true;
+    }
+
+    /*$(ids).find("input[type='radio']").each(function(){ 
+     console.log($(this).is(":checked")); 
+     });
+     
+     $(ids).find("select").each(function(){ 
+     console.log($(this).val() == ""); 
+     });*/
 }
 
 /*
