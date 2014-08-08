@@ -98,6 +98,18 @@ $(document).ready(function() {
             }
         });
     });
+    
+    $("#txtVeredaCertificacion").change(function() {
+        $.getJSON("index.php/api/get_locations/" + $("#txtVeredaCertificacion :selected").val(), function(objRData) {
+            $("#txtVeredaCertificacion").html("");
+            for (var i = 0; i < objRData.length; i++) {
+                var objLOption = document.createElement("option");
+
+                $(objLOption).val(objRData[i].a15Codigo).html(objRData[i].a15Predio)
+                        .appendTo("#txtVeredaCertificacion");
+            }
+        });
+    });
 
     if (code != "0") {
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
@@ -161,7 +173,8 @@ function enabledUnits(isEnabled) {
  * 
  *
  */
-function validateRequiredFields(ids) {
+function validateRequiredFields() {
+    
     var errors = 0;
     $(".alertLabel").remove();
 
@@ -175,13 +188,9 @@ function validateRequiredFields(ids) {
                     $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
                     errors++;
                 }
-                /*$(this).change(function() {
-                    validateRequiredFields(idsBlock);
-                });*/
             }
         } else {
             $(this).css("border", "2px solid #56AB2E");
-            return true;
         }
     });
     
@@ -191,34 +200,23 @@ function validateRequiredFields(ids) {
             namePosition = $(this).attr("name");
         }
             
-        if ($(this).parent().css("display") != "none") {
+        if ($(this).parent().parent().parent().css("display") != "none") {
             if (!$("input[name='" + namePosition + "']").is(":checked")) {
                 $(this).css("border", "2px solid #CC0202");
                 $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
                 errors++;
-                /*$(this).change(function() {
-                    validateRequiredFields(idsBlock);
-                });*/
             }
         } else {
             $(this).css("border", "2px solid #56AB2E");
-            return true;
         }
     });
 
+    console.log(errors);
     if (errors > 0) {
         return false;
     } else {
         return true;
     }
-
-    /*$(ids).find("input[type='radio']").each(function(){ 
-     console.log($(this).is(":checked")); 
-     });
-     
-     $(ids).find("select").each(function(){ 
-     console.log($(this).val() == ""); 
-     });*/
 }
 
 /*
