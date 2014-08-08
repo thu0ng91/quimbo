@@ -101,4 +101,24 @@ class QM_API extends CI_Model {
 
         return $SQLResult->result_array();
     }
+    
+    /**
+     * Metodo get_locations
+     *
+     * Método que Obtiene los predios para la
+     * Vereda solicitada
+     *
+     * @param string $inRTown ID de la vereda
+     * @return array
+     */
+    public function get_locations($inRTown, $bolRActive) {
+        if ($bolRActive) {
+            $this->db->where("a15Estado", "A");
+        }
+
+        $this->db->where("a15Vereda", $inRTown);
+        $SQLResult = $this->db->get("t15web_predios");
+
+        return $SQLResult->result_array();
+    }
 }

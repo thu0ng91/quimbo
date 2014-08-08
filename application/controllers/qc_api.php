@@ -54,6 +54,22 @@ class QC_API extends QC_Controller {
         $this->output->set_content_type("application/json");
         echo json_encode($arrLResponse);
     }
+    
+    /**
+     * Metodo get_locations
+     *
+     * Método que Obtiene los Preduos para la
+     * Vereda solicitado
+     *
+     * @param string $inRTown ID de la vereda
+     */
+    public function get_locations($inRTown, $bolRStatus = false) {
+        $this->load->model("qm_api", "api", true);
+
+        $arrLResponse = $this->api->get_locations($inRTown, $bolRStatus);
+        $this->output->set_content_type("application/json");
+        echo json_encode($arrLResponse);
+    }
     /**
      * Método sync
      *
