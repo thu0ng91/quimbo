@@ -74,7 +74,7 @@ $(document).ready(function() {
         if ($(this).val() == "Otro") {
             $("#containerTxtOtraDescripcionUnidades").css("display", "block");
         } else {
-            $("#containerTxtOtraDescripcionUnidades").css("display", "block");
+            $("#containerTxtOtraDescripcionUnidades").css("display", "none");
         }
     });
 
