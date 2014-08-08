@@ -53,7 +53,6 @@
                 <div class='form-group' >
                     <label for='txtPredioCertificacion'>Predio</label>
                     <select class='form-control' id="txtPredioCertificacion" name="txtPredioCertificacion">
-                        <option value="1">Prueba Predio</option>
                     </select>
                     <div class='form-group' style='display: none;'>
                         <label for='txtOtroPredio'>Cual?</label>
@@ -99,7 +98,7 @@
                 </div>
                 <div class='form-group' id='containerTxtNITEmpresa' style='display: none;'>
                     <label for='txtNITEmpresa'>NIT Empresa</label>
-                    <input type='text' class='form-control' id='txtNITEmpresa' name='txtNITEmpresa'>
+                    <input type='text' onkeypress="return isNumberKey(event);" class='form-control' id='txtNITEmpresa' name='txtNITEmpresa'>
                 </div>
                 <div class='form-group' id='containerTxtNombrePersonaJuridica' style='display: none;'>
                     <label for='txtNombrePersonaJuridica'>Nombre Persona Juridica</label>
@@ -111,7 +110,7 @@
                 </div>
                 <div class='form-group' id='containerTxtDocumentoIdentificacion' style='display: none;'>
                     <label for='txtDocumentoIdentificacion'>Documento Identificación</label>
-                    <input type='text' class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
+                    <input type='text' onkeypress="return isNumberKey(event);" class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
                 </div>
 
                 <div class='form-group' id='containerTxtDescripcionRelacion' style='display: none;'>

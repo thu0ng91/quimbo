@@ -96,17 +96,18 @@ $(document).ready(function() {
                 $(objLOption).val(objRData[i].a10Codigo).html(objRData[i].a10Nombre)
                         .appendTo("#txtVeredaCertificacion");
             }
+            $("#txtVeredaCertificacion").trigger("change");
         });
     });
-    
+
     $("#txtVeredaCertificacion").change(function() {
         $.getJSON("index.php/api/get_locations/" + $("#txtVeredaCertificacion :selected").val(), function(objRData) {
-            $("#txtVeredaCertificacion").html("");
+            $("#txtPredioCertificacion").html("");
             for (var i = 0; i < objRData.length; i++) {
                 var objLOption = document.createElement("option");
 
                 $(objLOption).val(objRData[i].a15Codigo).html(objRData[i].a15Predio)
-                        .appendTo("#txtVeredaCertificacion");
+                        .appendTo("#txtPredioCertificacion");
             }
         });
     });
@@ -174,7 +175,7 @@ function enabledUnits(isEnabled) {
  *
  */
 function validateRequiredFields() {
-    
+
     var errors = 0;
     $(".alertLabel").remove();
 
@@ -182,7 +183,7 @@ function validateRequiredFields() {
         $(this).css("border", "");
         if ($.trim($(this).val()) == "") {
             if ($(this).parent().css("display") != "none") {
-                if($("#txtTipoCertificacion").val() == "2" && $(this).attr("id") != "txtNombreEmpresa" && $(this).attr("id") != "txtNITEmpresa" && $(this).attr("id") != "txtCargo"  && $(this).attr("id") != "txtDocumentoIdentificacion" || $("#txtTipoCertificacion").val() != "2" ){
+                if ($("#txtTipoCertificacion").val() == "2" && $(this).attr("id") != "txtNombreEmpresa" && $(this).attr("id") != "txtNITEmpresa" && $(this).attr("id") != "txtCargo" && $(this).attr("id") != "txtDocumentoIdentificacion" || $("#txtTipoCertificacion").val() != "2") {
                     console.log($(this).attr("id"));
                     $(this).css("border", "2px solid #CC0202");
                     $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
@@ -193,13 +194,13 @@ function validateRequiredFields() {
             $(this).css("border", "2px solid #56AB2E");
         }
     });
-    
+
     var namePosition = "";
     $(".left, .right").find("input[type='radio']").each(function() {
-        if($(this).attr("name") != namePosition){
+        if ($(this).attr("name") != namePosition) {
             namePosition = $(this).attr("name");
         }
-            
+
         if ($(this).parent().parent().parent().css("display") != "none") {
             if (!$("input[name='" + namePosition + "']").is(":checked")) {
                 $(this).css("border", "2px solid #CC0202");
@@ -243,4 +244,13 @@ function getLocations() {
 
         $("#txtMunicipioExpedicion").trigger("change");
     });
+}
+
+function isNumberKey(evt)
+{
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+    return true;
 }
