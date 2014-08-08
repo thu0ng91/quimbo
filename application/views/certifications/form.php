@@ -36,7 +36,7 @@
                     <label for='txtMunicipioExpedicion'>Municipio</label>
                     <select class='form-control' id="txtMunicipioExpedicion" name="txtMunicipioExpedicion">
                     </select>
-                    <div class='form-group' style='display: none;'>
+                    <div class='form-group' id='containertxtOtroMunicipio' style='display: none;'>
                         <label for='txtOtroMunicipio'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtroMunicipio' name='txtOtroMunicipio'>
                     </div>
@@ -45,7 +45,7 @@
                     <label for='txtVeredaCertificacion'>Vereda</label>
                     <select class='form-control' id="txtVeredaCertificacion" name="txtVeredaCertificacion">
                     </select>
-                    <div class='form-group' style='display: none;'>
+                    <div class='form-group' id='containertxtOtraVereda' style='display: none;'>
                         <label for='txtOtraVereda'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtraVereda' name='txtOtraVereda'>
                     </div>
@@ -54,7 +54,7 @@
                     <label for='txtPredioCertificacion'>Predio</label>
                     <select class='form-control' id="txtPredioCertificacion" name="txtPredioCertificacion">
                     </select>
-                    <div class='form-group' style='display: none;'>
+                    <div class='form-group' id="containertxtOtroPredio" style='display: none;'>
                         <label for='txtOtroPredio'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtroPredio' name='txtOtroPredio'>
                     </div>
@@ -101,7 +101,7 @@
                     <input type='text' onkeypress="return isNumberKey(event);" class='form-control' id='txtNITEmpresa' name='txtNITEmpresa'>
                 </div>
                 <div class='form-group' id='containerTxtNombrePersonaJuridica' style='display: none;'>
-                    <label for='txtNombrePersonaJuridica'>Nombre Persona Juridica</label>
+                    <label for='txtNombrePersonaJuridica'>Nombre Persona</label>
                     <input type='text' class='form-control' id='txtNombrePersonaJuridica' name='txtNombrePersonaJuridica'>
                 </div>
                 <div class='form-group' id='containerTxtNITPersonaJuridica' style='display: none;'>

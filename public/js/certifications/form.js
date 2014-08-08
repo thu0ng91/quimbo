@@ -88,6 +88,13 @@ $(document).ready(function() {
     getLocations();
 
     $("#txtMunicipioExpedicion").change(function() {
+
+        if ($("#txtMunicipioExpedicion :selected").text() == "Otro") {
+            $("#containertxtOtroMunicipio").css("display", "block");
+        } else {
+            $("#containertxtOtroMunicipio").css("display", "none");
+        }
+
         $.getJSON("index.php/api/get_cities/" + $("#txtMunicipioExpedicion :selected").attr("code"), function(objRData) {
             $("#txtVeredaCertificacion").html("");
             for (var i = 0; i < objRData.length; i++) {
@@ -101,6 +108,13 @@ $(document).ready(function() {
     });
 
     $("#txtVeredaCertificacion").change(function() {
+
+        if ($("#txtVeredaCertificacion :selected").text() == "Otro") {
+            $("#containertxtOtraVereda").css("display", "block");
+        } else {
+            $("#containertxtOtraVereda").css("display", "none");
+        }
+
         $.getJSON("index.php/api/get_locations/" + $("#txtVeredaCertificacion :selected").val(), function(objRData) {
             $("#txtPredioCertificacion").html("");
             for (var i = 0; i < objRData.length; i++) {
@@ -109,7 +123,17 @@ $(document).ready(function() {
                 $(objLOption).val(objRData[i].a15Codigo).html(objRData[i].a15Predio)
                         .appendTo("#txtPredioCertificacion");
             }
+            
+            $("#txtPredioCertificacion").trigger("change");
         });
+    });
+
+    $("#txtPredioCertificacion").change(function() {
+        if ($("#txtPredioCertificacion :selected").text() == "Otro") {
+            $("#containertxtOtroPredio").css("display", "block");
+        } else {
+            $("#containertxtOtroPredio").css("display", "none");
+        }
     });
 
     if (code != "0") {
