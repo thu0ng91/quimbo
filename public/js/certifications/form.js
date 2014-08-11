@@ -4,7 +4,7 @@
  * 
  */
 $(document).ready(function() {
-
+    $(".modal").modal('show');
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
             $.ajax({
@@ -144,10 +144,6 @@ $(document).ready(function() {
             
             $("#txtPredioCertificacion").trigger("change");
             
-            if (code != "0") {
-                $("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); 
-                $("#txtPredioCertificacion").trigger("change");
-            }
         });
     });
 
@@ -168,7 +164,8 @@ var CertObj;
 function reloadSelect(){
     $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
     $("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion);
-    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change")', 300);
+    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change")', 500);
+    $(".modal").modal('hide');
 }
 
 function loadControlValues(){
