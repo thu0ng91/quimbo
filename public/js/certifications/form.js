@@ -135,7 +135,11 @@ $(document).ready(function() {
             $("#containertxtOtroPredio").css("display", "none");
         }
     });
+   
+    setTimeout("loadControlValues();", 500);
+});
 
+function loadControlValues(){
     if (code != "0") {
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
             for (var item in JSONresult[0]) {
@@ -147,14 +151,14 @@ $(document).ready(function() {
                         }
                     }
                 } else {
-                    $(document.getElementsByName(nameControlDOM)).val(JSONresult[0][item]);
-                    $(document.getElementsByName(nameControlDOM)).trigger("change");
+                    console.log("LLave: " + nameControlDOM + " , Valor: " + $.trim(JSONresult[0][item]));
+                    $(document.getElementsByName(nameControlDOM)).val($.trim(JSONresult[0][item]));
+                    $(document.getElementsByName(nameControlDOM)).trigger("change");   
                 }
             }
         });
     }
-
-});
+}
 
 var idsBlock;
 
