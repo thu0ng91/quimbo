@@ -143,6 +143,11 @@ $(document).ready(function() {
             }
             
             $("#txtPredioCertificacion").trigger("change");
+            
+            if (code != "0") {
+                $("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); 
+                $("#txtPredioCertificacion").trigger("change");
+            }
         });
     });
 
