@@ -44,7 +44,15 @@ $(document).ready(function() {
             enabledUnits("none");
         }
     });
-
+    
+    $("#txtNITEmpresa, #txtNITPersonaJuridica, #txtDocumentoIdentificacion" ).change(function(){
+        $(".alertLabel").remove();
+        if(isNaN($(this).val())){
+            $(this).parent().append('<span class="alertLabel label label-warning">El valor ingresado no es un número valido</span>');
+            $(this).val("");
+        }
+    });
+    
     $("#txtTipoCertificacion").change(function() {
         if ($(this).val() == "1") {
             enabledUnits("none");
@@ -147,11 +155,21 @@ $(document).ready(function() {
     });
    
     setTimeout("loadControlValues();", 500);
+    setTimeout("reloadSelect();", 1000);
 });
+
+var CertObj;
+
+function reloadSelect(){
+    $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
+    $("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion);
+    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change")', 300);
+}
 
 function loadControlValues(){
     if (code != "0") {
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
+            CertObj = JSONresult[0];
             for (var item in JSONresult[0]) {
                 var nameControlDOM = item.replace("a14", "txt");
                 if (nameControlDOM == "txtFechaSuministrada" || nameControlDOM == "txtValoresCertificados" || nameControlDOM == "txtPersonaNoFigura") {
@@ -161,12 +179,12 @@ function loadControlValues(){
                         }
                     }
                 } else {
-                    console.log("LLave: " + nameControlDOM + " , Valor: " + $.trim(JSONresult[0][item]));
                     $(document.getElementsByName(nameControlDOM)).val($.trim(JSONresult[0][item]));
-                    $(document.getElementsByName(nameControlDOM)).trigger("change");   
+                    $(document.getElementsByName(nameControlDOM)).trigger("change");
                 }
             }
         });
+        
     }
 }
 
@@ -287,7 +305,7 @@ function validateRequiredFields() {
         }
     });
 
-    console.log(errors);
+    
     if (errors > 0) {
         return false;
     } else {
@@ -319,13 +337,4 @@ function getLocations() {
 
         $("#txtMunicipioExpedicion").trigger("change");
     });
-}
-
-function isNumberKey(evt)
-{
-    var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-
-    return true;
 }
