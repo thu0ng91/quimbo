@@ -1,11 +1,13 @@
 <link href="public/css/certifications/form.css" rel="stylesheet" />
 <script type='text/javascript'>
     var formCode = '<?php echo $_GET["formCode"]; ?>';
-    var code = '<?php if (isset($_GET["code"])) {
+    var code = '<?php
+if (isset($_GET["code"])) {
     echo $_GET["code"];
 } else {
     echo "0";
-} ?>';
+}
+?>';
     var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
     var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 </script>
@@ -124,11 +126,11 @@
                     </div>
                     <div class='form-group' id='containerTxtNITPersonaJuridica' style='display: none;'>
                         <label for='txtNITPersonaJuridica'>NIT Persona Juridica</label>
-                        <input type='text' class='form-control' id='txtNITPersonaJuridica' name='txtNITPersonaJuridica'>
+                        <input type='text' maxlength="10" class='form-control' id='txtNITPersonaJuridica' name='txtNITPersonaJuridica'>
                     </div>
                     <div class='form-group' id='containerTxtDocumentoIdentificacion' style='display: none;'>
                         <label id="labeltxtDocumentoIdentificacion" for='txtDocumentoIdentificacion'>Documento Identificación</label>
-                        <input type='text' class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
+                        <input type='text' maxlength="10" class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
                     </div>
 
                     <div class='form-group' id='containerTxtDescripcionRelacion' style='display: none;'>
@@ -200,5 +202,13 @@
             </form>
             <br/>
             <br/>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                ...
+            </div>
         </div>
     </div>
