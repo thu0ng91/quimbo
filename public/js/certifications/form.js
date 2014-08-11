@@ -4,7 +4,7 @@
  * 
  */
 $(document).ready(function() {
-    $(".modal").modal('show');
+    
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
             $.ajax({
@@ -170,6 +170,7 @@ function reloadSelect(){
 
 function loadControlValues(){
     if (code != "0") {
+        $(".modal").modal('show');
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
             CertObj = JSONresult[0];
             for (var item in JSONresult[0]) {
