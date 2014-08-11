@@ -26,6 +26,7 @@
                         <option value='1'>Laboral</option>
                         <option value='2'>Comercial</option>
                         <option value='3'>Vecindad</option>
+                        <!--<option value='4'>Mixta</option>-->
                     </select>
                 </div>
                 <div class='form-group' >
@@ -82,6 +83,18 @@
                 <div class='form-group'>
                     <label id='labeltxtCargo' for='txtCargo'>Cargo</label>
                     <input type='text' class='form-control' id='txtCargo' name='txtCargo'>
+                </div>
+                <div class='form-group'>
+                    <label for='txtPersonaNoFigura'>La persona encuestada figura en la certificación?</label>
+                    <br/>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="txtPersonaNoFigura" value="1"> Si
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="txtPersonaNoFigura" value="0"> No
+                        </label>
+                    </div>
                 </div>
             </div>
             <!-- End Principal Fields -->
@@ -164,6 +177,9 @@
                         </option>
                         <option value='Rural'>
                             Rural
+                        </option>
+                        <option value='NoFigura'>
+                            No figura en la certificación
                         </option>
                     </select>
                 </div>

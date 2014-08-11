@@ -144,7 +144,7 @@ function loadControlValues(){
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
             for (var item in JSONresult[0]) {
                 var nameControlDOM = item.replace("a14", "txt");
-                if (nameControlDOM == "txtFechaSuministrada" || nameControlDOM == "txtValoresCertificados") {
+                if (nameControlDOM == "txtFechaSuministrada" || nameControlDOM == "txtValoresCertificados" || nameControlDOM == "txtPersonaNoFigura") {
                     for (var i = 0; i < document.getElementsByName(nameControlDOM).length; i++) {
                         if ($($(document.getElementsByName(nameControlDOM))[i]).val() == JSONresult[0][item]) {
                             $($(document.getElementsByName(nameControlDOM))[i]).trigger("click");
