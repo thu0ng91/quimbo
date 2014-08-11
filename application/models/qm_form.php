@@ -219,6 +219,21 @@ class QM_Form extends CI_Model {
 
         return $arrLCode["a07Codigo"];
     }
+    
+    /**
+     * Método get_uuid
+     *
+     * Método que Obtiene un UUID de MySQL
+     *
+     * @return string
+     */
+    public function get_files($codeForm) {
+        $SQLResult = $this->db->query("SELECT a13Identificador, a13Tipo, a13Documento FROM t13web_usuario_docs WHERE a13Identificador = '$codeForm'");
+        $dataArray = $SQLResult->result();
+
+        return $dataArray;
+    }
+    
     /**
      * Método do_search
      *

@@ -1,31 +1,3 @@
-<script type="text/javascript">
-    /*
-     * Autor: Juan Camilo Martinez Morales
-     * Fecha: 04/08/2014
-     * Modificacion: Se agrega procedimiento por ajax 
-     * para obtener los documentos cargados para el formulario actual 
-     */
-
-    $(document).ready(function() {
-
-    });
-
-    function getFilesFromForm() {
-        $.ajax({
-            url: "index.php/form/",
-            type: "POST",
-            data: {},
-            success: function() {
-
-            },
-            error: function() {
-
-            }
-        });
-    }
-
-
-</script>          
 <section class="main-content">
     <div class="container">
         <div class="row">
@@ -37,14 +9,14 @@
                         <legend>Subir documetos</legend>
                         <p class="text-info text-right"><span class="text-danger">*</span> Indica un campo requerido</p>
                         <div class="form-group">
-                            <label for="TxtFileHabeasData" class="col-sm-3 control-label">01. Formato + Habeas Data</label>
+                            <label for="TxtFileHabeasData01" class="col-sm-3 control-label">01. Formato + Habeas Data</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileHabeasData" name="TxtFileHabeasData"
+                                <input type="file" class="form-control" id="TxtFileHabeasData01" name="TxtFileHabeasData01"
                                        placeholder="Habeas Data" title="Ingrese el Doc de Habeas Data!">
                             </div>
-                            <label for="TxtHabeasData" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtHabeasData01" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtHabeasData" name="TxtHabeasData"
+                                <input type="number" class="form-control" id="TxtHabeasData01" name="TxtHabeasData01"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
@@ -63,145 +35,145 @@
                           <div class="col-sm-3 pull-right"></div>
                         </div> -->
                         <div class="form-group">
-                            <label for="TxtFileIdentification" class="col-sm-3 control-label">02. Documento de Identidad</label>
+                            <label for="TxtFileIdentification02" class="col-sm-3 control-label">02. Documento de Identidad</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileIdentification" name="TxtFileIdentification"
+                                <input type="file" class="form-control" id="TxtFileIdentification02" name="TxtFileIdentification02"
                                        placeholder="Documento de Identidad" title="Ingrese el Documento de Identidad!">
                             </div>
-                            <label for="TxtIdentification" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtIdentification02" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtIdentification" name="TxtIdentification"
+                                <input type="number" class="form-control" id="TxtIdentification02" name="TxtIdentification02"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileLawyer" class="col-sm-3 control-label">03. Poder de Abogado</label>
+                            <label for="TxtFileLawyer03" class="col-sm-3 control-label">03. Poder de Abogado</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileLawyer" name="TxtFileLawyer"
+                                <input type="file" class="form-control" id="TxtFileLawyer03" name="TxtFileLawyer03"
                                        placeholder="Poder de Abogado" title="Ingrese el Poder de Abogado!">
                             </div>
-                            <label for="TxtLawyer" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtLawyer03" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtLawyer" name="TxtLawyer"
+                                <input type="number" class="form-control" id="TxtLawyer03" name="TxtLawyer03"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileCertifieds" class="col-sm-3 control-label">04. Certificaciones Laborales</label>
+                            <label for="TxtFileCertifieds04" class="col-sm-3 control-label">04. Certificaciones Laborales</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileCertifieds" name="TxtFileCertifieds"
+                                <input type="file" class="form-control" id="TxtFileCertifieds04" name="TxtFileCertifieds04"
                                        placeholder="Certificaciones Laborales" title="Ingrese las Certificaciones Laborales!">
                             </div>
-                            <label for="TxtCertifieds" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtCertifieds04" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtCertifieds" name="TxtCertifieds"
+                                <input type="number" class="form-control" id="TxtCertifieds04" name="TxtCertifieds04"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileAutorize" class="col-sm-3 control-label">05. Autorización de Entidiades</label>
+                            <label for="TxtFileAutorize05" class="col-sm-3 control-label">05. Autorización de Entidiades</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileAutorize" name="TxtFileAutorize"
+                                <input type="file" class="form-control" id="TxtFileAutorize05" name="TxtFileAutorize05"
                                        placeholder="Autorización de Entidiades" title="Ingrese la Autorización de Entidiades!">
                             </div>
-                            <label for="TxtAutorize" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtAutorize05" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtAutorize" name="TxtAutorize"
+                                <input type="number" class="form-control" id="TxtAutorize05" name="TxtAutorize05"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileThirdParty" class="col-sm-3 control-label">06. Certificaciones de Terceros</label>
+                            <label for="TxtFileThirdParty06" class="col-sm-3 control-label">06. Certificaciones de Terceros</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileThirdParty" name="TxtFileThirdParty"
+                                <input type="file" class="form-control" id="TxtFileThirdParty06" name="TxtFileThirdParty06"
                                        placeholder="Certificaciones de Terceros" title="Ingrese las Certificaciones de Terceros!">
                             </div>
-                            <label for="TxtThirdParty" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtThirdParty06" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtThirdParty" name="TxtThirdParty"
+                                <input type="number" class="form-control" id="TxtThirdParty06" name="TxtThirdParty06"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileCommercial" class="col-sm-3 control-label">07. Certificaciones Comerciales</label>
+                            <label for="TxtFileCommercial07" class="col-sm-3 control-label">07. Certificaciones Comerciales</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileCommercial" name="TxtFileCommercial"
+                                <input type="file" class="form-control" id="TxtFileCommercial07" name="TxtFileCommercial07"
                                        placeholder="Certificaciones Comerciales" title="Ingrese las Certificaciones Comerciales!">
                             </div>
-                            <label for="TxtCommercial" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtCommercial07" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtCommercial" name="TxtCommercial"
+                                <input type="number" class="form-control" id="TxtCommercial07" name="TxtCommercial07"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileInvoices" class="col-sm-3 control-label">08. Facturas - Recibos</label>
+                            <label for="TxtFileInvoices08" class="col-sm-3 control-label">08. Facturas - Recibos</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileInvoices" name="TxtFileInvoices"
+                                <input type="file" class="form-control" id="TxtFileInvoices08" name="TxtFileInvoices08"
                                        placeholder="Facturas - Recibos" title="Ingrese las Facturas - Recibos!">
                             </div>
-                            <label for="TxtInvoices" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtInvoices08" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtInvoices" name="TxtInvoices"
+                                <input type="number" class="form-control" id="TxtInvoices08" name="TxtInvoices08"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileNeighbor" class="col-sm-3 control-label">09. Certificaciones de Vecindad</label>
+                            <label for="TxtFileNeighbor09" class="col-sm-3 control-label">09. Certificaciones de Vecindad</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileNeighbor" name="TxtFileNeighbor"
+                                <input type="file" class="form-control" id="TxtFileNeighbor09" name="TxtFileNeighbor09"
                                        placeholder="Certificaciones de Vecindad" title="Ingrese las Certificaciones de Vecindad!">
                             </div>
-                            <label for="TxtNeighbor" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtNeighbor09" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtNeighbor" name="TxtNeighbor"
+                                <input type="number" class="form-control" id="TxtNeighbor09" name="TxtNeighbor09"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFilePQR" class="col-sm-3 control-label">10. Derechos de Petición a Entidades de Control</label>
+                            <label for="TxtFilePQR10" class="col-sm-3 control-label">10. Derechos de Petición a Entidades de Control</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFilePQR" name="TxtFilePQR"
+                                <input type="file" class="form-control" id="TxtFilePQR10" name="TxtFilePQR10"
                                        placeholder="Derechos de Petición a Entidades de Control"
                                        title="Ingrese los Derechos de Petición a Entidades de Control!">
                             </div>
-                            <label for="TxtPQR" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtPQR10" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtPQR" name="TxtPQR"
+                                <input type="number" class="form-control" id="TxtPQR10" name="TxtPQR10"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileEmgesa" class="col-sm-3 control-label">11. Radicados Emgesa</label>
+                            <label for="TxtFileEmgesa11" class="col-sm-3 control-label">11. Radicados Emgesa</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileEmgesa" name="TxtFileEmgesa"
+                                <input type="file" class="form-control" id="TxtFileEmgesa11" name="TxtFileEmgesa11"
                                        placeholder="Radicados Emgesa" title="Ingrese los Radicados Emgesa!">
                             </div>
-                            <label for="TxtEmgesa" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtEmgesa11" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtEmgesa" name="TxtEmgesa"
+                                <input type="number" class="form-control" id="TxtEmgesa11" name="TxtEmgesa11"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
                         <div class="form-group">
-                            <label for="TxtFileOthers" class="col-sm-3 control-label">12. Otros</label>
+                            <label for="TxtFileOthers12" class="col-sm-3 control-label">12. Otros</label>
                             <div class="col-sm-4">
-                                <input type="file" class="form-control" id="TxtFileOthers" name="TxtFileOthers"
+                                <input type="file" class="form-control" id="TxtFileOthers12" name="TxtFileOthers12"
                                        placeholder="Otros" title="Ingrese Otros!">
                             </div>
-                            <label for="TxtOthers" class="col-sm-1 control-label">No. de Folios</label>
+                            <label for="TxtOthers12" class="col-sm-1 control-label">No. de Folios</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="TxtOthers" name="TxtOthers"
+                                <input type="number" class="form-control" id="TxtOthers12" name="TxtOthers12"
                                        placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
                             </div>
                             <div class="col-sm-3 pull-right"></div>
