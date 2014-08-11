@@ -50,18 +50,28 @@ $(document).ready(function() {
             enabledUnits("none");
             enabledCertificationLocal("none");
             enabledCertificationCommercial("none");
+            enabledCertificationMix("none");
             enabledCertificationLabor("block");
         } else if ($(this).val() == "2") {
             enabledCertificationLocal("none");
             enabledCertificationLabor("none");
+            enabledCertificationMix("none");
             enabledCertificationCommercial("block");
         } else if ($(this).val() == "3") {
             enabledCertificationLabor("none");
             enabledCertificationCommercial("none");
             enabledUnits("none");
+            enabledCertificationMix("none");
             enabledCertificationLocal("block");
+        } else if ($(this).val() == "4") {
+            enabledCertificationLabor("none");
+            enabledCertificationCommercial("none");
+            enabledUnits("none");
+            enabledCertificationLocal("none");
+            enabledCertificationMix("block");
 
         }
+        
         if ($(this).val() == "") {
             enabledCertificationLabor("none");
             enabledCertificationLocal("none");
@@ -205,6 +215,21 @@ function enabledCertificationLocal(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
     $("#labeltxtCargo").html("Cargo de la persona que certifica");
+}
+
+/*
+ * 
+ */
+function enabledCertificationMix(isEnabled) {
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
+    $(idsBlock).css("display", isEnabled);
+    $("#labeltxtNombrePersonaJuridica").html("Nombre persona jurídica que certifica");
+    $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
+    $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
+    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
+    $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtCargo").html("Cargo certificado");
 }
 
 /*

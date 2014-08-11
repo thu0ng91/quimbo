@@ -26,7 +26,7 @@
                         <option value='1'>Laboral</option>
                         <option value='2'>Comercial</option>
                         <option value='3'>Vecindad</option>
-                        <!--<option value='4'>Mixta</option>-->
+                        <option value='4'>Mixta</option>
                     </select>
                 </div>
                 <div class='form-group' >
