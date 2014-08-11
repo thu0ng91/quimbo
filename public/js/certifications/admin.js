@@ -12,6 +12,9 @@ $(document).ready(function() {
                 case "3":
                     JSONresult[item].a14TipoCertificacion = "Vecindad";
                     break;
+                case "3":
+                    JSONresult[item].a14TipoCertificacion = "Mixta";
+                    break;
             }
 
             baseHtmlTbody = baseHtmlTbody.replace("{1}", JSONresult[item].a14TipoCertificacion);
@@ -24,10 +27,10 @@ $(document).ready(function() {
     });
 });
 
-function eliminarDetalleCertificacion(code){
-    if(confirm("¿Esta seguro que desea eliminar la certificación seleccionada?")){
+function eliminarDetalleCertificacion(code) {
+    if (confirm("¿Esta seguro que desea eliminar la certificación seleccionada?")) {
         $.getJSON("index.php/certifications/do_deleteCertification/" + code, function(JSONresult) {
-           window.location.reload(); 
+            window.location.reload();
         });
     }
 }
