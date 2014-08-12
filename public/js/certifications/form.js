@@ -182,9 +182,9 @@ var countFechasN = 0;
  */
 function reloadSelect() {
     $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
-    $("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion);
-    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change")', 500);
-    $(".modal").modal('hide');
+    $("#txtMunicipioExpedicion").trigger("change");
+    setTimeout('$("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion); $("#txtVeredaCertificacion").trigger("change");', 500);
+    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change"); $(".modal").modal("hide");', 1000);
 }
 
 /*
