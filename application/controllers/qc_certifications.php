@@ -45,7 +45,7 @@ class QC_Certifications extends QC_Controller {
     }
 
     /**
-     * Function form
+     * Function do_saveForm
      *
      * Show form page
      */
@@ -90,9 +90,9 @@ class QC_Certifications extends QC_Controller {
     }
     
     /*
+     * Function do_deleteCertification
      * 
-     * 
-     * 
+     * Call do_delete function from qm_certifications
      */
     public function do_deleteCertification($code){
         $this->load->model("qm_certifications", "certificationsModel", true);
@@ -100,18 +100,18 @@ class QC_Certifications extends QC_Controller {
     }
 
     /*
+     * Function get_DataCertificationByCode
      * 
-     * 
-     * 
+     * Call do_delete function from qm_certifications
      */
     public function get_DataCertificationByCode($code) {
         $this->load->model("qm_certifications", "certificationsModel", true);
         echo json_encode($this->certificationsModel->get_DataTableByCode($code));
     }
     /*
+     * Function get_DataCertificationByForm
      * 
-     * 
-     * 
+     * Call get_DataTableByForm function from qm_certifications
      */
     public function get_DataCertificationByForm($formCode) {
         $this->load->model("qm_certifications", "certificationsModel", true);
@@ -119,9 +119,9 @@ class QC_Certifications extends QC_Controller {
     }
     
     /*
+     * Function get_FechasN
      * 
-     * 
-     * 
+     * Call get_FechasN function from qm_certifications
      */
     public function get_FechasN($code) {
         $this->load->model("qm_certifications", "certificationsModel", true);

@@ -155,7 +155,9 @@ class QM_Certifications extends CI_Model {
             echo $exc->getTraceAsString();
         }
     }
-
+    /*
+     * Set properties for this model t16web_nfechascertificaciones
+     */
     public function do_setPropertiesNFechas($arrayDataFechasN) {
 
         $this->arrayPropertiesFechasN = array(
@@ -180,7 +182,10 @@ class QM_Certifications extends CI_Model {
             echo $exc->getTraceAsString();
         }
     }
-
+    
+    /*
+     * Delete information for table t16 by code certification
+     */
     public function do_delete_fechasn($code) {
         try {
             $this->db->where("a16Certificacion", (int)$code);

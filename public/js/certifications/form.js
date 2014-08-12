@@ -4,7 +4,7 @@
  * 
  */
 $(document).ready(function() {
-    
+
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
@@ -45,15 +45,15 @@ $(document).ready(function() {
             enabledUnits("none");
         }
     });
-    
-    $("#txtNITEmpresa, #txtNITPersonaJuridica, #txtDocumentoIdentificacion" ).change(function(){
+
+    $("#txtNITEmpresa, #txtNITPersonaJuridica, #txtDocumentoIdentificacion").change(function() {
         $(".alertLabel").remove();
-        if(isNaN($(this).val())){
+        if (isNaN($(this).val())) {
             $(this).parent().append('<span class="alertLabel label label-warning">El valor ingresado no es un número valido</span>');
             $(this).val("");
         }
     });
-    
+
     $("#txtTipoCertificacion").change(function() {
         if ($(this).val() == "1") {
             enabledUnits("none");
@@ -80,7 +80,7 @@ $(document).ready(function() {
             enabledCertificationMix("block");
 
         }
-        
+
         if ($(this).val() == "") {
             enabledCertificationLabor("none");
             enabledCertificationLocal("none");
@@ -142,9 +142,9 @@ $(document).ready(function() {
                 $(objLOption).val(objRData[i].a15Codigo).html(objRData[i].a15Predio)
                         .appendTo("#txtPredioCertificacion");
             }
-            
+
             $("#txtPredioCertificacion").trigger("change");
-            
+
         });
     });
 
@@ -155,28 +155,43 @@ $(document).ready(function() {
             $("#containertxtOtroPredio").css("display", "none");
         }
     });
-   
+
     setTimeout("loadControlValues();", 500);
     setTimeout("reloadSelect();", 1000);
-    
-    $("#addDates").click(function(){
+
+    $("#addDates").click(function() {
         var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/><legend></legend>";
         $("#contentFechas").append(itemDates);
+        $("#FechaInicio" + countFechasN + ", #FechaFin" + countFechasN).change(function() {
+            if (new Date($("#FechaInicio" + countFechasN).val()) > new Date($("#FechaFin" + countFechasN).val())) {
+                alert("La fecha de inicio no puede ser mayor a la fecha de fin");
+                $(this).val("");
+            }
+        });
         countFechasN++;
     });
 });
 
 var CertObj;
-var countFechasN = 0;;
+var countFechasN = 0;
+;
 
-function reloadSelect(){
+/*
+ * Function reloadSelect
+ * Set properties of Municipio, Vereda and one timer later 500 miliseconds for Predio
+ */
+function reloadSelect() {
     $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
     $("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion);
     setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change")', 500);
     $(".modal").modal('hide');
 }
 
-function loadControlValues(){
+/*
+ * Function loadControlValues
+ * Load information from database to form in update case
+ */
+function loadControlValues() {
     if (code != "0") {
         $(".modal").modal('show');
         $.getJSON("index.php/certifications/get_DataCertificationByCode/" + code, function(JSONresult) {
@@ -195,18 +210,19 @@ function loadControlValues(){
                 }
             }
         });
-        
+
         $.getJSON("index.php/certifications/get_FechasN/" + code, function(objRData) {
             arrayNFechas = objRData;
             generateNFechas();
         });
-        
+
     }
 }
 
 var idsBlock;
 /*
- * 
+ * Function enabledCertificationLabor
+ * Enabled controls for certification type = 1
  */
 function enabledCertificationLabor(isEnabled) {
     idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas";
@@ -218,10 +234,11 @@ function enabledCertificationLabor(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
     $("#labeltxtCargo").html("Cargo certificado");
-    
+
 }
 /*
- * 
+ * Function enabledCertificationCommercial
+ * Enabled controls for certification type = 2
  */
 function enabledCertificationCommercial(isEnabled) {
     idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
@@ -236,7 +253,8 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtCargo").html("Cargo de la persona que certifica");
 }
 /*
- * 
+ * Function enabledCertificationLocal
+ * Enabled controls for certification type = 3
  */
 function enabledCertificationLocal(isEnabled) {
     idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
@@ -251,7 +269,8 @@ function enabledCertificationLocal(isEnabled) {
 }
 
 /*
- * 
+ * Function enabledCertificationMix
+ * Enabled controls for certification type = 4
  */
 function enabledCertificationMix(isEnabled) {
     idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion";
@@ -266,21 +285,23 @@ function enabledCertificationMix(isEnabled) {
 }
 
 /*
- * 
+ * Function enabledDates
+ * Show controls with Ids = #containerTxtFechaInicio, #containerTxtFechaFin
  */
 function enabledDates(isEnabled) {
     $("#containerTxtFechaInicio, #containerTxtFechaFin").css("display", isEnabled);
 }
 
 /*
- * 
+ * Function enabledUnits
+ * Show controls with Ids = #containerTxtUnidades, #containerTxtCantidad
  */
 function enabledUnits(isEnabled) {
     $("#containerTxtUnidades, #containerTxtCantidad").css("display", isEnabled);
 }
 /*
- * 
- *
+ * Function validateRequiredFields
+ * Execute validation for controls that require
  */
 function validateRequiredFields() {
 
@@ -320,7 +341,7 @@ function validateRequiredFields() {
         }
     });
 
-    
+
     if (errors > 0) {
         return false;
     } else {
@@ -329,7 +350,8 @@ function validateRequiredFields() {
 }
 
 /*
- * 
+ * Function getLocations
+ * Get Locations from id municipio
  */
 function getLocations() {
     $.getJSON("index.php/api/get_towns/13", function(objRData) {
@@ -355,18 +377,40 @@ function getLocations() {
 }
 
 var arrayNFechas = [];
-
-function generateNFechas(){
-    for(var item in arrayNFechas){
+/*
+ * Function generateNFechas
+ * Generate controls from arrayNFechas in update case
+ */
+function generateNFechas() {
+    for (var item in arrayNFechas) {
         var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><legend></legend>";
         $("#contentFechas").append(itemDates);
+
+        idInicio = "#FechaInicio" + countFechasN;
+        idFin = "#FechaFin" + countFechasN;
+
+        $(idInicio + ", " + idFin).change(function() {
+            var itemDate = $(this).attr("id").replace("FechaInicio", "").replace("FechaFin", "");
+            
+            idInicio = "#FechaInicio" + itemDate;
+            idFin = "#FechaFin" + itemDate;
+            
+            if (new Date($(idInicio).val()) > new Date($(idFin).val())) {
+                alert("La fecha de inicio no puede ser mayor a la fecha de fin");
+                $(this).val("");
+            }
+        });
+
         countFechasN++;
     }
 }
-
-function generateArrayFechasN(){
+/*
+ * Function generateArrayFechasN
+ * Load data into arrayNFechas
+ */
+function generateArrayFechasN() {
     arrayNFechas = [];
-    for(var i = 0; i < countFechasN; i++){
-        arrayNFechas.push({ "FechaInicio" : $("#FechaInicio" + i).val(), "FechaFin" : $("#FechaFin" + i).val()  });
+    for (var i = 0; i < countFechasN; i++) {
+        arrayNFechas.push({"FechaInicio": $("#FechaInicio" + i).val(), "FechaFin": $("#FechaFin" + i).val()});
     }
 }
