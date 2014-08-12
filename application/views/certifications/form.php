@@ -109,7 +109,16 @@ if (isset($_GET["code"])) {
             <div class='right'>
                 <div class='form-group' id='containerTxtTipoPersonaJuridica' style='display: none;'>
                     <label for='txtTipoPersonaJuridica'>Tipo Persona Juridica</label>
-                    <input type='text' class='form-control' id='txtTipoPersonaJuridica' name='txtTipoPersonaJuridica'>
+                    <select id='txtTipoPersonaJuridica' name='txtTipoPersonaJuridica' class='form-control'>
+                        <option value='1'>1. Persona Natural</option>
+                        <option value='2'>2. JAC</option>
+                        <option value='3'>3. Unidad de Justicia</option>
+                        <option value='4'>4. Asociación</option>
+                        <option value='5'>5. Alcaldía</option>
+                        <option value='6'>6. Personería</option>
+                        <option value='7'>7. Empresa Privada</option>
+                        <option value='8'>8. Otra Entidad Pública</option>
+                    </select>
                 </div>
                 <div class='form-group' id='containerTxtNombreEmpresa' style='display: none;'>
                     <label for='txtNombreEmpresa'>Nombre Empresa</label>
