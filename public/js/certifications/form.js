@@ -308,38 +308,54 @@ function validateRequiredFields() {
     var errors = 0;
     $(".alertLabel").remove();
 
-    $(".left, .right").find("input[type='text'], input[type='date'], select, textarea").each(function() {
-        $(this).css("border", "");
-        if ($.trim($(this).val()) == "") {
-            if ($(this).parent().css("display") != "none") {
-                if ($("#txtTipoCertificacion").val() == "2" && $(this).attr("id") != "txtNombreEmpresa" && $(this).attr("id") != "txtNITEmpresa" && $(this).attr("id") != "txtCargo" && $(this).attr("id") != "txtDocumentoIdentificacion" || $("#txtTipoCertificacion").val() != "2") {
-                    console.log($(this).attr("id"));
+    if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+        $("#containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion").find("input[type='text'], input[type='date'], select, textarea").each(function() {
+            $(this).css("border", "");
+            if ($.trim($(this).val()) == "") {
+                if ($(this).parent().css("display") != "none") {
                     $(this).css("border", "2px solid #CC0202");
                     $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
                     errors++;
                 }
+            } else {
+                $(this).css("border", "2px solid #56AB2E");
             }
-        } else {
-            $(this).css("border", "2px solid #56AB2E");
-        }
-    });
-
-    var namePosition = "";
-    $(".left, .right").find("input[type='radio']").each(function() {
-        if ($(this).attr("name") != namePosition) {
-            namePosition = $(this).attr("name");
-        }
-
-        if ($(this).parent().parent().parent().css("display") != "none") {
-            if (!$("input[name='" + namePosition + "']").is(":checked")) {
-                $(this).css("border", "2px solid #CC0202");
-                $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
-                errors++;
+        });
+    } else {
+        $(".left, .right").find("input[type='text'], input[type='date'], select, textarea").each(function() {
+            $(this).css("border", "");
+            if ($.trim($(this).val()) == "") {
+                if ($(this).parent().css("display") != "none") {
+                    if ($("#txtTipoCertificacion").val() == "2" && $(this).attr("id") != "txtNombreEmpresa" && $(this).attr("id") != "txtNITEmpresa" && $(this).attr("id") != "txtCargo" && $(this).attr("id") != "txtDocumentoIdentificacion" || $("#txtTipoCertificacion").val() != "2") {
+                        $(this).css("border", "2px solid #CC0202");
+                        $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
+                        errors++;
+                    }
+                }
+            } else {
+                $(this).css("border", "2px solid #56AB2E");
             }
-        } else {
-            $(this).css("border", "2px solid #56AB2E");
-        }
-    });
+        });
+
+        var namePosition = "";
+        $(".left, .right").find("input[type='radio']").each(function() {
+            if ($(this).attr("name") != namePosition) {
+                namePosition = $(this).attr("name");
+            }
+
+            if ($(this).parent().parent().parent().css("display") != "none") {
+                if (!$("input[name='" + namePosition + "']").is(":checked")) {
+                    $(this).css("border", "2px solid #CC0202");
+                    $(this).parent().append('<span class="alertLabel label label-danger">Campo requerido</span>');
+                    errors++;
+                }
+            } else {
+                $(this).css("border", "2px solid #56AB2E");
+            }
+        });
+    }
+
+
 
 
     if (errors > 0) {
@@ -391,10 +407,10 @@ function generateNFechas() {
 
         $(idInicio + ", " + idFin).change(function() {
             var itemDate = $(this).attr("id").replace("FechaInicio", "").replace("FechaFin", "");
-            
+
             idInicio = "#FechaInicio" + itemDate;
             idFin = "#FechaFin" + itemDate;
-            
+
             if (new Date($(idInicio).val()) > new Date($(idFin).val())) {
                 alert("La fecha de inicio no puede ser mayor a la fecha de fin");
                 $(this).val("");

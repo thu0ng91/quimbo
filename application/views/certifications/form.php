@@ -19,11 +19,22 @@ if (isset($_GET["code"])) {
             <br/>
             <div class='left'>
                 <!-- Start Principal Fields -->
-
                 <div class='form-group' >
                     <label for='txtIdentificador'>Identificador de formulario:</label>
                     <br/>
                     <label class='label label-info' id='txtIdentificador'></label>
+                </div>
+                <div class='form-group'>
+                    <label for='txtPersonaNoFigura'>La persona encuestada figura en la certificación?</label>
+                    <br/>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="txtPersonaNoFigura" value="1"> Si
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="txtPersonaNoFigura" value="0"> No
+                        </label>
+                    </div>
                 </div>
                 <div class='form-group'>
                     <label for='txtTipoCertificacion'>Tipo de Certificado</label>
@@ -89,18 +100,6 @@ if (isset($_GET["code"])) {
                 <div class='form-group'>
                     <label id='labeltxtCargo' for='txtCargo'>Cargo</label>
                     <input type='text' class='form-control' id='txtCargo' name='txtCargo'>
-                </div>
-                <div class='form-group'>
-                    <label for='txtPersonaNoFigura'>La persona encuestada figura en la certificación?</label>
-                    <br/>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary active">
-                            <input type="radio" name="txtPersonaNoFigura" value="1"> Si
-                        </label>
-                        <label class="btn btn-primary">
-                            <input type="radio" name="txtPersonaNoFigura" value="0"> No
-                        </label>
-                    </div>
                 </div>
             </div>
             <!-- End Principal Fields -->
