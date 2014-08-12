@@ -15,6 +15,7 @@
 class QM_Certifications extends CI_Model {
 
     private $arrayProperties = array();
+    private $arrayPropertiesFechasN = array();
 
     /**
      * Constructor de la Clase
@@ -28,7 +29,7 @@ class QM_Certifications extends CI_Model {
      */
 
     public function do_setProperties($arrayDataFromView) {
-        
+
         $this->arrayProperties = array(
             'a14Codigo' => (isset($arrayDataFromView['txtCodigo'])) ? $arrayDataFromView['txtCodigo'] : null,
             'a14Identificador' => (isset($arrayDataFromView['txtIdentificador'])) ? $arrayDataFromView['txtIdentificador'] : null,
@@ -69,10 +70,10 @@ class QM_Certifications extends CI_Model {
 
     public function do_insert() {
         try {
-            $this->db->trans_start();
             $this->db->insert('t14web_certificaciones_detalle', $this->arrayProperties);
-            $this->db->trans_complete();
-            return $this->db->trans_status();
+            $query = $this->db->query('SELECT max(a14Codigo) as id from t14web_certificaciones_detalle');
+            $row = $query->row_array();
+            return $row['id'];
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -99,6 +100,9 @@ class QM_Certifications extends CI_Model {
 
     public function do_delete($code) {
         try {
+            $this->db->where("a16Certificacion", (int)$code);
+            $this->db->delete('t16web_nfechascertificaciones');
+            
             $this->db->where("a14Codigo", $code);
             $this->db->delete('t14web_certificaciones_detalle');
             return true;
@@ -132,6 +136,56 @@ class QM_Certifications extends CI_Model {
             $dataTable = $this->db->get('t14web_certificaciones_detalle');
 
             return $dataTable->result();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    /*
+     * Get information from table t14web_certificaciones_detalle by a14Identificador
+     */
+
+    public function get_FechasN($code) {
+        try {
+            $SQLResult = $this->db->query("SELECT a16FechaInicio as FechaInicio, a16FechaFin as FechaFin FROM t16web_nfechascertificaciones WHERE a16Certificacion = $code");
+            $dataArray = $SQLResult->result();
+
+            return $dataArray;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function do_setPropertiesNFechas($arrayDataFechasN) {
+
+        $this->arrayPropertiesFechasN = array(
+            'a16Codigo' => (isset($arrayDataFechasN['txtCodigo'])) ? $arrayDataFechasN['txtCodigo'] : null,
+            'a16Certificacion' => (isset($arrayDataFechasN['txtCertificacion'])) ? $arrayDataFechasN['txtCertificacion'] : null,
+            'a16FechaInicio' => (isset($arrayDataFechasN['txtFechaInicio'])) ? $arrayDataFechasN['txtFechaInicio'] : null,
+            'a16FechaFin' => (isset($arrayDataFechasN['txtFechaFin'])) ? $arrayDataFechasN['txtFechaFin'] : null,
+        );
+    }
+
+    /*
+     * Insert information into table t16
+     */
+
+    public function do_insert_fechasn() {
+        try {
+            $this->db->trans_start();
+            $this->db->insert('t16web_nfechascertificaciones', $this->arrayPropertiesFechasN);
+            $this->db->trans_complete();
+            return $this->db->trans_status();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function do_delete_fechasn($code) {
+        try {
+            $this->db->where("a16Certificacion", (int)$code);
+            $this->db->delete('t16web_nfechascertificaciones');
+            return true;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

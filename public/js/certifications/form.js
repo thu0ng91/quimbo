@@ -7,10 +7,11 @@ $(document).ready(function() {
     
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
+            generateArrayFechasN();
             $.ajax({
                 url: "index.php/certifications/do_saveForm",
                 type: "POST",
-                data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
+                data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "fechasN": JSON.stringify(arrayNFechas), "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
                 success: function(result) {
                     if (result == "ok") {
                         alert("La información se almaceno correctamente");
@@ -157,9 +158,16 @@ $(document).ready(function() {
    
     setTimeout("loadControlValues();", 500);
     setTimeout("reloadSelect();", 1000);
+    
+    $("#addDates").click(function(){
+        var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/><legend></legend>";
+        $("#contentFechas").append(itemDates);
+        countFechasN++;
+    });
 });
 
 var CertObj;
+var countFechasN = 0;;
 
 function reloadSelect(){
     $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
@@ -188,16 +196,20 @@ function loadControlValues(){
             }
         });
         
+        $.getJSON("index.php/certifications/get_FechasN/" + code, function(objRData) {
+            arrayNFechas = objRData;
+            generateNFechas();
+        });
+        
     }
 }
 
 var idsBlock;
-
 /*
  * 
  */
 function enabledCertificationLabor(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre de Persona juridica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -340,4 +352,21 @@ function getLocations() {
 
         $("#txtMunicipioExpedicion").trigger("change");
     });
+}
+
+var arrayNFechas = [];
+
+function generateNFechas(){
+    for(var item in arrayNFechas){
+        var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><legend></legend>";
+        $("#contentFechas").append(itemDates);
+        countFechasN++;
+    }
+}
+
+function generateArrayFechasN(){
+    arrayNFechas = [];
+    for(var i = 0; i < countFechasN; i++){
+        arrayNFechas.push({ "FechaInicio" : $("#FechaInicio" + i).val(), "FechaFin" : $("#FechaFin" + i).val()  });
+    }
 }

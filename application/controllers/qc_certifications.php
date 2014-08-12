@@ -66,11 +66,24 @@ class QC_Certifications extends QC_Controller {
             $arrayData["txtCodigo"] = null;
             $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_insert();
+            $arrayFechasN = json_decode($_POST["fechasN"]);
+            foreach ($arrayFechasN as $item => $valueItem) {
+                $arrayFechasNLocal = array( "txtCertificacion" => $resultDoInsert, "txtFechaInicio" => $valueItem->FechaInicio, "txtFechaFin" => $valueItem->FechaFin );
+                $this->certificationsModel->do_setPropertiesNFechas($arrayFechasNLocal);
+                $this->certificationsModel->do_insert_fechasn();
+            }
         } else {
             $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_update();
+            $arrayFechasN = json_decode($_POST["fechasN"]);
+            $this->certificationsModel->do_delete_fechasn($arrayData["txtCodigo"]);
+            foreach ($arrayFechasN as $item => $valueItem) {
+                $arrayFechasNLocal = array( "txtCertificacion" => $arrayData["txtCodigo"], "txtFechaInicio" => $valueItem->FechaInicio, "txtFechaFin" => $valueItem->FechaFin );
+                $this->certificationsModel->do_setPropertiesNFechas($arrayFechasNLocal);
+                $this->certificationsModel->do_insert_fechasn();
+            }
         }
-        if ($resultDoInsert)
+        if ($resultDoInsert > 0)
             echo "ok";
         else
             echo $resultDoInsert;
@@ -103,6 +116,16 @@ class QC_Certifications extends QC_Controller {
     public function get_DataCertificationByForm($formCode) {
         $this->load->model("qm_certifications", "certificationsModel", true);
         echo json_encode($this->certificationsModel->get_DataTableByForm($formCode));
+    }
+    
+    /*
+     * 
+     * 
+     * 
+     */
+    public function get_FechasN($code) {
+        $this->load->model("qm_certifications", "certificationsModel", true);
+        echo json_encode($this->certificationsModel->get_FechasN($code));
     }
 
 }
