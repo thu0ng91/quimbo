@@ -159,6 +159,7 @@ if (isset($_GET["code"])) {
                 <div class='form-group' id='containerTxtDescripcionUnidades' name='containerTxtDescripcionUnidades' style='display: none;'>
                     <label for='txtDescripcionUnidades'>Descripción Unidades</label>
                     <select class='form-control' id='txtDescripcionUnidades' name='txtDescripcionUnidades'>
+                        <option value=''>Seleccione...</option>
                         <option value='Oro'>Oro</option>
                         <option value='Pescado'>Pescado</option>
                         <option value='Madera'>Madera</option>
