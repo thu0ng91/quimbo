@@ -242,7 +242,7 @@ function enabledCertificationLabor(isEnabled) {
  */
 function enabledCertificationCommercial(isEnabled) {
     idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
-                        #containerTxtDescripcionRelacion, #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerTxtDescripcionUnidades";
+                        #containerTxtDescripcionRelacion, #containerTxtValoresCertificados";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona que firma la certificación");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -297,7 +297,7 @@ function enabledDates(isEnabled) {
  * Show controls with Ids = #containerTxtUnidades, #containerTxtCantidad
  */
 function enabledUnits(isEnabled) {
-    $("#containerTxtUnidades, #containerTxtCantidad").css("display", isEnabled);
+    $("#containerTxtUnidades, #containerTxtCantidad, #containerTxtDescripcionUnidades").css("display", isEnabled);
 }
 /*
  * Function validateRequiredFields
