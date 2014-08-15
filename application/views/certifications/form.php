@@ -43,7 +43,7 @@ if (isset($_GET["code"])) {
                         <option value='1'>Laboral</option>
                         <option value='2'>Comercial</option>
                         <option value='3'>Vecindad</option>
-                        <option value='4'>Mixta</option>
+                        <!-- <option value='4'>Mixta</option> -->
                     </select>
                 </div>
                 <div class='form-group' >
@@ -141,6 +141,14 @@ if (isset($_GET["code"])) {
                     <input type='text' maxlength="10" class='form-control' id='txtDocumentoIdentificacion' name='txtDocumentoIdentificacion'>
                 </div>
 
+                <div class='form-group' id='containerTxtNombrePersonaFirma' style='display: none;'>
+                    <label for="txtNombrePersonaFirma">Nombre de la persona que firma</label>
+                    <input type="text" class='form-control' id='txtNombrePersonaFirma' name='txtNombrePersonaFirma'>
+                </div>
+                <div class='form-group' id='containerTxtCargoPersonaFirma' style='display: none;'>
+                    <label for="txtCargoPersonaFirma">Cargo de la persona que firma</label>
+                    <input type="text" class='form-control' id='txtCargoPersonaFirma' name='txtCargoPersonaFirma'>
+                </div>
                 <div class='form-group' id='containerTxtDescripcionRelacion' style='display: none;'>
                     <label for='txtDescripcionRelacion'>Descripción Relación</label>
                     <textarea class='form-control' id='txtDescripcionRelacion' name='txtDescripcionRelacion'></textarea>

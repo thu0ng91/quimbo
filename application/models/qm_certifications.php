@@ -60,7 +60,9 @@ class QM_Certifications extends CI_Model {
             'a14OtroPredio' => (isset($arrayDataFromView['txtOtroPredio'])) ? $arrayDataFromView['txtOtroPredio'] : null,
             'a14TipoCertificacion' => (isset($arrayDataFromView['txtTipoCertificacion'])) ? $arrayDataFromView['txtTipoCertificacion'] : null,
             'a14OtraDescripcionUnidades' => (isset($arrayDataFromView['txtOtraDescripcionUnidades'])) ? $arrayDataFromView['txtOtraDescripcionUnidades'] : null,
-            'a14PersonaNoFigura' => (isset($arrayDataFromView['txtPersonaNoFigura'])) ? $arrayDataFromView['txtPersonaNoFigura'] : null
+            'a14PersonaNoFigura' => (isset($arrayDataFromView['txtPersonaNoFigura'])) ? $arrayDataFromView['txtPersonaNoFigura'] : null,
+            'a14NombrePersonaFirma' => (isset($arrayDataFromView['txtNombrePersonaFirma'])) ? $arrayDataFromView['txtNombrePersonaFirma'] : null,
+            'a14CargoPersonaFirma' => (isset($arrayDataFromView['txtCargoPersonaFirma'])) ? $arrayDataFromView['txtCargoPersonaFirma'] : null
         );
     }
 
