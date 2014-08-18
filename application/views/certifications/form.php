@@ -150,7 +150,7 @@ if (isset($_GET["code"])) {
                     <input type="text" class='form-control' id='txtCargoPersonaFirma' name='txtCargoPersonaFirma'>
                 </div>
                 <div class='form-group' id='containerTxtDescripcionRelacion' style='display: none;'>
-                    <label for='txtDescripcionRelacion'>Descripción Relación</label>
+                    <label id="labeltxtDescripcionRelacion" for='txtDescripcionRelacion'>Descripción Relación</label>
                     <textarea class='form-control' id='txtDescripcionRelacion' name='txtDescripcionRelacion'></textarea>
                 </div>
                 <div class='form-group' id='containerTxtValoresCertificados' style='display: none;'>

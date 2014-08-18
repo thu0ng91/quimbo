@@ -230,8 +230,8 @@ function enabledCertificationLabor(isEnabled) {
     $("#labeltxtNombrePersonaJuridica").html("Nombre de la persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
     $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
-    $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
-    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio donde desempeñó labor");
+    $("#labeltxtVeredaCertificacion").html("Vereda donde desempeñó labor");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
     $("#labeltxtCargo").html("Cargo certificado");
 
@@ -247,9 +247,10 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona que firma la certificación");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
     $("#labeltxtDocumentoIdentificacion").html("Documento de identificación de quien firma la certificación");
-    $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
-    $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
-    $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtMunicipioExpedicion").html("Municipio donde sostenía la relación comercial");
+    $("#labeltxtVeredaCertificacion").html("Vereda donde sostenía la relación comercial");
+    $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
+    $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
     $("#labeltxtCargo").html("Cargo de la persona que certifica");
 }
 /*
@@ -309,6 +310,7 @@ function validateRequiredFields() {
     $(".alertLabel").remove();
 
     if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+        //$(".left > ").css("display","none");
         $("#containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion").find("input[type='text'], input[type='date'], select, textarea").each(function() {
             $(this).css("border", "");
             if ($.trim($(this).val()) == "") {
