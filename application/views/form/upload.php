@@ -178,6 +178,19 @@
                             </div>
                             <div class="col-sm-3 pull-right"></div>
                         </div>
+                        <div class="form-group">
+                            <label for="TxtFileVideo13" class="col-sm-3 control-label">13. Videos</label>
+                            <div class="col-sm-4">
+                                <input type="file" accept=".wmv"class="form-control" id="TxtFileVideo13" name="TxtFileVideo13"
+                                       placeholder="Otros" title="Ingrese Otros!">
+                            </div>
+                            <label for="TxtVideo13" class="col-sm-1 control-label">No. de Folios</label>
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control" id="TxtVideo13" name="TxtVideo13"
+                                       placeholder="No. de Folios" title="Ingrese el No. de Folios!" min="0">
+                            </div>
+                            <div class="col-sm-3 pull-right"></div>
+                        </div>
                     </fieldset>
                     <div class="form-actions clearfix">
                         <div class="pull-right">
