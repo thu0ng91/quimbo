@@ -225,7 +225,7 @@ var idsBlock;
  * Enabled controls for certification type = 1
  */
 function enabledCertificationLabor(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerTxtObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre de la persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -242,7 +242,7 @@ function enabledCertificationLabor(isEnabled) {
  */
 function enabledCertificationCommercial(isEnabled) {
     idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
-                        #containerTxtDescripcionRelacion, #containerTxtValoresCertificados";
+                        #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerTxtObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona que firma la certificación");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -258,7 +258,7 @@ function enabledCertificationCommercial(isEnabled) {
  * Enabled controls for certification type = 3
  */
 function enabledCertificationLocal(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerTxtObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
