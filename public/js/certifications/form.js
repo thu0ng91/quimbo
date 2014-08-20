@@ -131,6 +131,7 @@ $(document).ready(function() {
         if ($("#txtVeredaCertificacion :selected").text() == "Otro") {
             $("#containertxtOtraVereda").css("display", "block");
         } else {
+            $("#txtOtroPredio").val("");
             $("#containertxtOtraVereda").css("display", "none");
         }
 
@@ -152,6 +153,7 @@ $(document).ready(function() {
         if ($("#txtPredioCertificacion :selected").text() == "Otro") {
             $("#containertxtOtroPredio").css("display", "block");
         } else {
+            $("#txtOtroPredio").val("");
             $("#containertxtOtroPredio").css("display", "none");
         }
     });
@@ -181,10 +183,12 @@ var countFechasN = 0;
  * Set properties of Municipio, Vereda and one timer later 500 miliseconds for Predio
  */
 function reloadSelect() {
-    $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
-    $("#txtMunicipioExpedicion").trigger("change");
-    setTimeout('$("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion); $("#txtVeredaCertificacion").trigger("change");', 500);
-    setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change"); $(".modal").modal("hide");', 1000);
+    if (code != "0") {
+        $("#txtMunicipioExpedicion").val(CertObj.a14MunicipioExpedicion);
+        $("#txtMunicipioExpedicion").trigger("change");
+        setTimeout('$("#txtVeredaCertificacion").val(CertObj.a14VeredaCertificacion); $("#txtVeredaCertificacion").trigger("change");', 500);
+        setTimeout('$("#txtPredioCertificacion").val(CertObj.a14PredioCertificacion); $("#txtPredioCertificacion").trigger("change"); $(".modal").modal("hide");', 1000);
+    }
 }
 
 /*
@@ -266,6 +270,7 @@ function enabledCertificationLocal(isEnabled) {
     $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#containerTxtCargoPersonaFirma").css("display","none");
     $("#labeltxtCargo").html("Cargo de la persona que certifica");
 }
 
