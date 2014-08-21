@@ -33,6 +33,27 @@ $(document).ready(function() {
 
     $("#txtIdentificador").html(formCode);
 
+    $("input[name='txtPersonaNoFigura']").change(function() {
+        varControles = ["#txtMunicipioExpedicion", "#txtVeredaCertificacion", "#txtPredioCertificacion", "#txtFechaExpedicion", "#txtOtroPredio", "#addVereda", "#txtCargo", "#txtFechaSuministrada", "#labelFechaExpedicion", "#labeltxtMunicipioExpedicion", "#labeltxtVeredaCertificacion", "#labeltxtPredioCertificacion", "#labelFechaSuministrada", "#labeltxtCargo", "#txtOtroMunicipio", "#txtOtraVereda", "#txtOtroPredio", "#lblCualOtroMunicipio", "#lblCualOtraVereda", "#lblCualOtroPredio", "#txtFechaInicio", "#txtFechaFin", "#labeltxtFechaInicio", "#labeltxtFechafin", "#containerFechaSuministrada"];
+
+        if ($("input[name='txtPersonaNoFigura']:checked").val() == "1") {
+            //Persona si figura
+            for (var item = 0; item < varControles.length; item++) {
+                //Recorre el array de controles
+                console.log(varControles[item]);
+                $(varControles[item]).css("display","block");
+            }
+
+        } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+            //Persona no figura
+            for (var item = 0; item < varControles.length; item++) {
+                //Recorre el array de controles
+                console.log(varControles[item]);
+                $(varControles[item]).css("display","none");
+            }
+        }
+    });
+
     $("input[name='txtFechaSuministrada']").change(function() {
         if ($("input[name='txtFechaSuministrada']:checked").val() == "1") {
             enabledDates("block");

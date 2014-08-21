@@ -17,25 +17,27 @@ if (isset($_GET["code"])) {
             <br/>
             <legend>Registro de información para detalle de certificaciones laborales, comerciales y de vecindad.</legend>
             <br/>
+
+            <div class='form-group' >
+                <label for='txtIdentificador'>Identificador de formulario:</label>
+                <br/>
+                <label class='label label-info' id='txtIdentificador'></label>
+            </div>
+            <div class='form-group'>
+                <label for='txtPersonaNoFigura'>La persona encuestada figura en la certificación?</label>
+                <br/>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="txtPersonaNoFigura" value="1"> Si
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="txtPersonaNoFigura" value="0"> No
+                    </label>
+                </div>
+            </div>
+
             <div class='left'>
                 <!-- Start Principal Fields -->
-                <div class='form-group' >
-                    <label for='txtIdentificador'>Identificador de formulario:</label>
-                    <br/>
-                    <label class='label label-info' id='txtIdentificador'></label>
-                </div>
-                <div class='form-group'>
-                    <label for='txtPersonaNoFigura'>La persona encuestada figura en la certificación?</label>
-                    <br/>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary active">
-                            <input type="radio" name="txtPersonaNoFigura" value="1"> Si
-                        </label>
-                        <label class="btn btn-primary">
-                            <input type="radio" name="txtPersonaNoFigura" value="0"> No
-                        </label>
-                    </div>
-                </div>
                 <div class='form-group'>
                     <label for='txtTipoCertificacion'>Tipo de Certificado</label>
                     <select class='form-control' id='txtTipoCertificacion' name='txtTipoCertificacion'>
@@ -47,7 +49,7 @@ if (isset($_GET["code"])) {
                     </select>
                 </div>
                 <div class='form-group' >
-                    <label for='txtFechaExpedicion'>Fecha Expedicion</label>
+                    <label id='labelFechaExpedicion' for='txtFechaExpedicion'>Fecha Expedicion</label>
                     <input type='date' name='txtFechaExpedicion' class='form-control' id='txtFechaExpedicion' name='txtFechaExpedicion'>
                 </div>
                 <div class='form-group'>
@@ -55,7 +57,7 @@ if (isset($_GET["code"])) {
                     <select class='form-control' id="txtMunicipioExpedicion" name="txtMunicipioExpedicion">
                     </select>
                     <div class='form-group' id='containertxtOtroMunicipio' style='display: none;'>
-                        <label for='txtOtroMunicipio'>Cual?</label>
+                        <label id='lblCualOtroMunicipio' for='txtOtroMunicipio'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtroMunicipio' name='txtOtroMunicipio'>
                     </div>
                 </div>
@@ -64,7 +66,7 @@ if (isset($_GET["code"])) {
                     <select class='form-control' id="txtVeredaCertificacion" name="txtVeredaCertificacion">
                     </select>
                     <div class='form-group' id='containertxtOtraVereda' style='display: none;'>
-                        <label for='txtOtraVereda'>Cual?</label>
+                        <label id='lblCualOtraVereda' for='txtOtraVereda'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtraVereda' name='txtOtraVereda'>
                     </div>
                 </div>
@@ -73,7 +75,7 @@ if (isset($_GET["code"])) {
                     <select class='form-control' id="txtPredioCertificacion" name="txtPredioCertificacion">
                     </select>
                     <div class='form-group' id="containertxtOtroPredio" style='display: none;'>
-                        <label for='txtOtroPredio'>Cual?</label>
+                        <label id='lblCualOtroPredio' for='txtOtroPredio'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtroPredio' name='txtOtroPredio'>
                     </div>
                     <button id="addVereda" class="btn btn-primary">Agregar Predio</button>
@@ -83,9 +85,9 @@ if (isset($_GET["code"])) {
                 </div>
                 </br>
                 <div class='form-group'>
-                    <label for='txtFechaSuministrada'>Fecha Suministrada</label>
+                    <label id='labelFechaSuministrada' for='txtFechaSuministrada'>Fecha Suministrada</label>
                     <br/>
-                    <div class="btn-group" data-toggle="buttons">
+                    <div id='containerFechaSuministrada' class="btn-group" data-toggle="buttons">
                         <label class="btn btn-primary active">
                             <input type="radio" name="txtFechaSuministrada" value="1"> Si
                         </label>
@@ -95,11 +97,11 @@ if (isset($_GET["code"])) {
                     </div>
                 </div>
                 <div class='form-group' id='containerTxtFechaInicio' style='display: none;'>
-                    <label for='txtFechaInicio'>Fecha de Inicio</label>
+                    <label id='labeltxtFechaInicio' for='txtFechaInicio'>Fecha de Inicio</label>
                     <input type='date' class='form-control' id='txtFechaInicio' name='txtFechaInicio'>
                 </div>
                 <div id='containerTxtFechaFin' class='form-group' style='display: none;'>
-                    <label for='txtFechaFin' id="containerTxtFechaFin">Fecha de Fin</label>
+                    <label id='labeltxtFechafin' for='txtFechaFin' id="containerTxtFechaFin">Fecha de Fin</label>
                     <input type='date' class='form-control' id='txtFechaFin' name='txtFechaFin'>
                 </div>
                 <div class='form-group'>
