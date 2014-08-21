@@ -16,6 +16,7 @@ class QM_Certifications extends CI_Model {
 
     private $arrayProperties = array();
     private $arrayPropertiesFechasN = array();
+    private $arrayPropertiesVeredasN = array();
 
     /**
      * Constructor de la Clase
@@ -173,7 +174,6 @@ class QM_Certifications extends CI_Model {
     /*
      * Insert information into table t16
      */
-
     public function do_insert_fechasn() {
         try {
             $this->db->trans_start();
@@ -194,6 +194,57 @@ class QM_Certifications extends CI_Model {
             $this->db->delete('t16web_nfechascertificaciones');
             return true;
         } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    /* Get information from model t17 */
+    public function get_VeredasN($code){
+        try{
+            $SQLResult = $this->db->query("select vc.a17Municipio as Municipio, vc.a17Vereda as Vereda, vc.a17Predio as Predio, vc.a17OtroMun as OtroMun, vc.a17OtraVda as OtraVda, vc.a17OtroPredio as OtroPredio, m.a06Nombre as NMunicipio, v.a10Nombre as NVereda, p.a15Predio as NPredio from t17web_nveredascertificaciones vc left join t06web_municipios m on vc.a17Municipio = m.a06DANE left join t10web_veredas v on vc.a17Vereda = v.a10Codigo left join t15web_predios p on vc.a17Predio = p.a15Codigo WHERE vc.a17Certificacion = $code union select vc.a17Municipio as Municipio, vc.a17Vereda as Vereda, vc.a17Predio as Predio, vc.a17OtroMun as OtroMun, vc.a17OtraVda as OtraVda, vc.a17OtroPredio as OtroPredio, m.a06Nombre as NMunicipio, v.a10Nombre as NVereda, p.a15Predio as NPredio from t17web_nveredascertificaciones vc right join t06web_municipios m on vc.a17Municipio = m.a06DANE right join t10web_veredas v on vc.a17Vereda = v.a10Codigo right join t15web_predios p on vc.a17Predio = p.a15Codigo WHERE vc.a17Certificacion = $code");
+            
+
+            $dataArray = $SQLResult->result();
+            return $dataArray;
+
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    /* Properties for model t17 */
+    public function do_setPropertiesNVeredas($arrayDataPropertiesVeredasN){
+        $this->arrayPropertiesVeredasN = array(
+            'a17Codigo' =>(isset($arrayDataPropertiesVeredasN['txtCodigo'])) ? $arrayDataPropertiesVeredasN['txtCodigo'] : null, 
+            'a17Certificacion' =>(isset($arrayDataPropertiesVeredasN['txtCertificacion'])) ? $arrayDataPropertiesVeredasN['txtCertificacion'] : null,
+            'a17Municipio' => (isset($arrayDataPropertiesVeredasN['txtMunicipio'])) ? $arrayDataPropertiesVeredasN['txtMunicipio'] : null,
+            'a17Vereda' => (isset($arrayDataPropertiesVeredasN['txtVereda'])) ? $arrayDataPropertiesVeredasN['txtVereda'] : null,
+            'a17Predio' => (isset($arrayDataPropertiesVeredasN['txtPredio'])) ? $arrayDataPropertiesVeredasN['txtPredio'] : null,
+            'a17OtroMun' => (isset($arrayDataPropertiesVeredasN['txtOtroMun'])) ? $arrayDataPropertiesVeredasN['txtOtroMun'] : null,
+            'a17OtraVda' => (isset($arrayDataPropertiesVeredasN['txtOtraVda'])) ? $arrayDataPropertiesVeredasN['txtOtraVda'] : null,
+            'a17OtroPredio' => (isset($arrayDataPropertiesVeredasN['txtOtroPredio'])) ? $arrayDataPropertiesVeredasN['txtOtroPredio'] : null,
+        );
+    }
+
+    /* Insert info into table t17*/
+    public function do_insert_veredasn() {
+        try{
+            $this->db->trans_start();
+            $this->db->insert('t17web_nveredascertificaciones', $this->arrayPropertiesVeredasN);
+            $this->db->trans_complete();
+            return $this->db->trans_status();
+        }catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    /* Delete information for table t17 by certification code */
+    public function do_delete_veredasn($code){
+        try{
+            $this->db->where("a17Certificacion", (int)$code);
+            $this->db->delete('t17web_nveredascertificaciones');
+            return true;
+        } catch (Exception $exc){
             echo $exc->getTraceAsString();
         }
     }

@@ -8,11 +8,14 @@ $(document).ready(function() {
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
+            generateArrayVeredasN();
+            console.log(JSON.stringify(arrayNVeredas));
             $.ajax({
                 url: "index.php/certifications/do_saveForm",
                 type: "POST",
-                data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "fechasN": JSON.stringify(arrayNFechas), "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
+                data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "fechasN": JSON.stringify(arrayNFechas), "veredasN": JSON.stringify(arrayNVeredas), "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
                 success: function(result) {
+                    console.log(result);
                     if (result == "ok") {
                         alert("La información se almaceno correctamente");
                         window.location = 'index.php/certifications/admin?formCode=' + formCode;
@@ -172,9 +175,43 @@ $(document).ready(function() {
         });
         countFechasN++;
     });
+
+    $("#addVereda").click(function(){
+        var PredioCert = "";
+        var PrpVal = "";
+        var VeredaCert = "";
+        var VdaVal = "";
+        var TwnsVal = "";
+
+        //Predio validation - Option: Other
+        if($("#txtPredioCertificacion option:selected").text() == "Otro"){
+            PredioCert = "(" + $("#txtOtroPredio").val() + ")";
+            PrpVal = "-1";
+        } else {
+            PredioCert = $("#txtPredioCertificacion option:selected").text();
+            PrpVal = $("#txtPredioCertificacion").val();
+        }
+
+        //Vereda validation - Option: Other
+        if($("#txtVeredaCertificacion option:selected").text() == "Otro"){
+            VeredaCert = "(" + $("#txtOtraVereda").val() + ")";
+            VdaVal = "-1";
+        } else {
+            VeredaCert = $("#txtVeredaCertificacion option:selected").text();
+            VdaVal = $("#txtVeredaCertificacion").val();
+        }
+
+        TwnsVal = $("#txtMunicipioExpedicion").val();
+
+        var itemVered = "</br><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + $("#txtOtroMunicipio").val() + "' OthSdw='" + $("#txtOtraVereda").val() + "' OthPro='" + $("#txtOtroPredio").val() + "' TwnsVal='" + TwnsVal + "' PropVal='" + PrpVal + "' VdaVal='" + VdaVal + "' value='" + VeredaCert + " - " + PredioCert + "' readonly />";
+        $("#contentPredios").append(itemVered);
+        countPrediosN++;
+    });
+
 });
 
 var CertObj;
+var countPrediosN = 0;
 var countFechasN = 0;
 ;
 
@@ -219,6 +256,11 @@ function loadControlValues() {
             arrayNFechas = objRData;
             generateNFechas();
         });
+
+        $.getJSON("index.php/certifications/get_VeredasN/" + code, function(objRData){
+            arrayNVeredas = objRData;
+            generateNVeredas();
+        }); 
 
     }
 }
@@ -400,6 +442,7 @@ function getLocations() {
 }
 
 var arrayNFechas = [];
+var arrayNVeredas = [];
 /*
  * Function generateNFechas
  * Generate controls from arrayNFechas in update case
@@ -427,6 +470,7 @@ function generateNFechas() {
         countFechasN++;
     }
 }
+
 /*
  * Function generateArrayFechasN
  * Load data into arrayNFechas
@@ -436,4 +480,38 @@ function generateArrayFechasN() {
     for (var i = 0; i < countFechasN; i++) {
         arrayNFechas.push({"FechaInicio": $("#FechaInicio" + i).val(), "FechaFin": $("#FechaFin" + i).val()});
     }
+}
+
+/* Generate controls from arrayNVeredas in update case */
+function generateNVeredas(){
+    for (var item in arrayNVeredas) {
+        
+        var LPredio = "";
+        var LVereda = "";
+
+        if (arrayNVeredas[item].Predio != "-1"){
+            LPredio = arrayNVeredas[item].NPredio;
+        } else {
+            LPredio = "(" + arrayNVeredas[item].OtroPredio + ")";
+        }
+
+        if (arrayNVeredas[item].Vereda != "-1"){
+            LVereda = arrayNVeredas[item].NVereda;
+        } else {
+            LVereda = "(" + arrayNVeredas[item].OtraVda + ")";
+        }
+
+        var itemVered = "<br/><legend></legend><label>Predio</label><input id='Npredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + arrayNVeredas[item].OtroMun + "' OthSdw='" + arrayNVeredas[item].OtraVda + "' OthPro='" + arrayNVeredas[item].OtroPredio + "' TwnsVal='" + arrayNVeredas[item].Municipio + "' PropVal='" + arrayNVeredas[item].Predio + "' VdaVal='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly />";
+        $("#contentPredios").append(itemVered);
+    }
+}
+
+/* Load data into arrayNVeredas */
+function generateArrayVeredasN(){
+    arrayNVeredas=[];
+    for (var i = 0; i < countPrediosN; i++){
+
+        arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("TwnsVal"), "Vereda": $("#NPredio" + i).attr("VdaVal"), "Predio": $("#NPredio" + i).attr("PropVal"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
+    }
+    console.log(arrayNVeredas);
 }

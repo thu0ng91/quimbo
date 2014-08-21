@@ -76,7 +76,12 @@ if (isset($_GET["code"])) {
                         <label for='txtOtroPredio'>Cual?</label>
                         <input type='text' class='form-control' id='txtOtroPredio' name='txtOtroPredio'>
                     </div>
+                    <button id="addVereda" class="btn btn-primary">Agregar Predio</button>
                 </div>
+                <div id="contentPredios">
+
+                </div>
+                </br>
                 <div class='form-group'>
                     <label for='txtFechaSuministrada'>Fecha Suministrada</label>
                     <br/>
