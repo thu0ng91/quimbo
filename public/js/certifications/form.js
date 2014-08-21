@@ -318,7 +318,28 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda donde sostenía la relación comercial");
     $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
     $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
-    $("#labeltxtCargo").html("Cargo de la persona que certifica");
+    $("#containerTxtCargoPersonaFirma").css("display","block");
+
+    //Hide some controls
+    varControles = ["#txtObservaciones", "#labeltxtObservaciones", "#containerTxtValoresCertificados", "#txtDescripcionRelacion", "#labeltxtDescripcionRelacion"];
+
+    if ($("input[name='txtPersonaNoFigura']:checked").val() == "1") {
+        //Persona si figura
+        for (var item = 0; item < varControles.length; item++) {
+            //Recorre el array de controles
+            console.log(varControles[item]);
+            $(varControles[item]).css("display","block");
+        }
+
+    } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+        //Persona no figura
+        for (var item = 0; item < varControles.length; item++) {
+            //Recorre el array de controles
+            console.log(varControles[item]);
+            $(varControles[item]).css("display","none");
+        }
+    }
+
 }
 /*
  * Function enabledCertificationLocal
@@ -333,8 +354,28 @@ function enabledCertificationLocal(isEnabled) {
     $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
-    $("#containerTxtCargoPersonaFirma").css("display","none");
-    $("#labeltxtCargo").html("Cargo de la persona que certifica");
+    $("#containerTxtCargoPersonaFirma").css("display","block");
+
+    //Hide some controls
+    varControles = ["#containerTxtBarrio", "#containerTxtZona", "#containerTxtDireccionCertificacion", "#containerTxtTipoPersonaJuridica"];
+
+    if ($("input[name='txtPersonaNoFigura']:checked").val() == "1") {
+        //Persona si figura
+        for (var item = 0; item < varControles.length; item++) {
+            //Recorre el array de controles
+            console.log(varControles[item]);
+            $(varControles[item]).css("display","block");
+        }
+
+    } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+        //Persona no figura
+        for (var item = 0; item < varControles.length; item++) {
+            //Recorre el array de controles
+            console.log(varControles[item]);
+            $(varControles[item]).css("display","none");
+        }
+    }
+
 }
 
 /*

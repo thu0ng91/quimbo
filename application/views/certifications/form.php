@@ -230,7 +230,7 @@ if (isset($_GET["code"])) {
                     <input type='text' class='form-control' id='txtBarrio' name='txtBarrio'>
                 </div>
                 <div class='form-group' id='containerTxtObservaciones' style='display: none;'>
-                    <label for="txtObservaciones">Observaciones</label>
+                    <label id='labeltxtObservaciones' for="txtObservaciones">Observaciones</label>
                     <input type="text" class='form-control' id='txtObservaciones' name='txtObservaciones' style="height: 5em;">
                 </div>
             </div>
