@@ -9,13 +9,11 @@ $(document).ready(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
             generateArrayVeredasN();
-            console.log(JSON.stringify(arrayNVeredas));
             $.ajax({
                 url: "index.php/certifications/do_saveForm",
                 type: "POST",
                 data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "fechasN": JSON.stringify(arrayNFechas), "veredasN": JSON.stringify(arrayNVeredas), "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
                 success: function(result) {
-                    console.log(result);
                     if (result == "ok") {
                         alert("La información se almaceno correctamente");
                         window.location = 'index.php/certifications/admin?formCode=' + formCode;
@@ -40,15 +38,16 @@ $(document).ready(function() {
             //Persona si figura
             for (var item = 0; item < varControles.length; item++) {
                 //Recorre el array de controles
-                console.log(varControles[item]);
                 $(varControles[item]).css("display","block");
+                $("#txtMunicipioExpedicion").val("");
+                $("#txtVeredaCertificacion").val("");
+                $("#txtPredioCertificacion").val("");
             }
 
         } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
             //Persona no figura
             for (var item = 0; item < varControles.length; item++) {
                 //Recorre el array de controles
-                console.log(varControles[item]);
                 $(varControles[item]).css("display","none");
             }
         }
@@ -327,7 +326,6 @@ function enabledCertificationCommercial(isEnabled) {
         //Persona si figura
         for (var item = 0; item < varControles.length; item++) {
             //Recorre el array de controles
-            console.log(varControles[item]);
             $(varControles[item]).css("display","block");
         }
 
@@ -335,7 +333,6 @@ function enabledCertificationCommercial(isEnabled) {
         //Persona no figura
         for (var item = 0; item < varControles.length; item++) {
             //Recorre el array de controles
-            console.log(varControles[item]);
             $(varControles[item]).css("display","none");
         }
     }
@@ -363,7 +360,6 @@ function enabledCertificationLocal(isEnabled) {
         //Persona si figura
         for (var item = 0; item < varControles.length; item++) {
             //Recorre el array de controles
-            console.log(varControles[item]);
             $(varControles[item]).css("display","block");
         }
 
@@ -371,7 +367,6 @@ function enabledCertificationLocal(isEnabled) {
         //Persona no figura
         for (var item = 0; item < varControles.length; item++) {
             //Recorre el array de controles
-            console.log(varControles[item]);
             $(varControles[item]).css("display","none");
         }
     }
@@ -575,5 +570,4 @@ function generateArrayVeredasN(){
 
         arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("TwnsVal"), "Vereda": $("#NPredio" + i).attr("VdaVal"), "Predio": $("#NPredio" + i).attr("PropVal"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
     }
-    console.log(arrayNVeredas);
 }
