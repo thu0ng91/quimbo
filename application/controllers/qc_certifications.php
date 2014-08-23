@@ -58,7 +58,6 @@ class QC_Certifications extends QC_Controller {
                 $arrayData[$itemValue->name] = $itemValue->value;
             }
         }
-
         $arrayData["txtIdentificador"] = $_POST["formCode"];
         $arrayData["txtCodigo"] = $_POST["code"];
 
@@ -84,10 +83,16 @@ class QC_Certifications extends QC_Controller {
             $arrayFechasN = json_decode($_POST["fechasN"]);
             $arrayVeredasN = json_decode($_POST["veredasN"]);
             $this->certificationsModel->do_delete_fechasn($arrayData["txtCodigo"]);
+            $this->certificationsModel->do_delete_veredasn($arrayData["txtCodigo"]);
             foreach ($arrayFechasN as $item => $valueItem) {
                 $arrayFechasNLocal = array( "txtCertificacion" => $arrayData["txtCodigo"], "txtFechaInicio" => $valueItem->FechaInicio, "txtFechaFin" => $valueItem->FechaFin );
                 $this->certificationsModel->do_setPropertiesNFechas($arrayFechasNLocal);
                 $this->certificationsModel->do_insert_fechasn();
+            }
+            foreach ($arrayVeredasN as $vereda => $valueItem) {
+                $arrayVeredasNLocal = array( "txtCertificacion" => $arrayData["txtCodigo"], "txtMunicipio" => $valueItem->Municipio, "txtVereda" => $valueItem->Vereda, "txtPredio" => $valueItem->Predio, "txtOtroMun" => $valueItem->OtroMun, "txtOtraVda" => $valueItem->OtraVda, "txtOtroPredio" => $valueItem->OtroPredio);
+                $this->certificationsModel->do_setPropertiesNVeredas($arrayVeredasNLocal);
+                $this->certificationsModel->do_insert_veredasn();
             }
         }
         if ($resultDoInsert > 0)

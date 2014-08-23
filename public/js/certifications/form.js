@@ -5,6 +5,14 @@
  */
 $(document).ready(function() {
 
+    var stat = "";
+
+    if (getParameterByName("code") != ""){
+        stat = "edit";
+    } else {
+        stat = "new";
+    }
+
     $("#saveInformation").click(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
@@ -14,6 +22,7 @@ $(document).ready(function() {
                 type: "POST",
                 data: {csrf_test_name: get_csrf_hash, "formCode": formCode, "code": code, "fechasN": JSON.stringify(arrayNFechas), "veredasN": JSON.stringify(arrayNVeredas), "dataForm": JSON.stringify($('#controls input, select, textarea').serializeArray())},
                 success: function(result) {
+
                     if (result == "ok") {
                         alert("La información se almaceno correctamente");
                         window.location = 'index.php/certifications/admin?formCode=' + formCode;
@@ -223,12 +232,49 @@ $(document).ready(function() {
 
         TwnsVal = $("#txtMunicipioExpedicion").val();
 
-        var itemVered = "</br><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + $("#txtOtroMunicipio").val() + "' OthSdw='" + $("#txtOtraVereda").val() + "' OthPro='" + $("#txtOtroPredio").val() + "' TwnsVal='" + TwnsVal + "' PropVal='" + PrpVal + "' VdaVal='" + VdaVal + "' value='" + VeredaCert + " - " + PredioCert + "' readonly />";
+        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + $("#txtOtroMunicipio").val() + "' OthSdw='" + $("#txtOtraVereda").val() + "' OthPro='" + $("#txtOtroPredio").val() + "' TwnsVal='" + TwnsVal + "' PropVal='" + PrpVal + "' VdaVal='" + VdaVal + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
     });
 
+    /* Functions available trough the form stats */
+    if (stat == "new"){
+        /*New*/
+    }else{
+        /*Edit*/
+        varControles = ["#txtMunicipioExpedicion", "#txtVeredaCertificacion", "#txtPredioCertificacion", "#txtFechaExpedicion", "#txtOtroPredio", "#addVereda", "#txtCargo", "#txtFechaSuministrada", "#labelFechaExpedicion", "#labeltxtMunicipioExpedicion", "#labeltxtVeredaCertificacion", "#labeltxtPredioCertificacion", "#labelFechaSuministrada", "#labeltxtCargo", "#txtOtroMunicipio", "#txtOtraVereda", "#txtOtroPredio", "#lblCualOtroMunicipio", "#lblCualOtraVereda", "#lblCualOtroPredio", "#txtFechaInicio", "#txtFechaFin", "#labeltxtFechaInicio", "#labeltxtFechafin", "#containerFechaSuministrada"];
+
+        if ($("input[name='txtPersonaNoFigura']:checked").val() == "1") {
+            //Persona si figura
+            for (var item = 0; item < varControles.length; item++) {
+                //Recorre el array de controles
+                $(varControles[item]).css("display","block");
+                $("#txtMunicipioExpedicion").val("");
+                $("#txtVeredaCertificacion").val("");
+                $("#txtPredioCertificacion").val("");
+            }
+
+        } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
+            //Persona no figura
+            for (var item = 0; item < varControles.length; item++) {
+                //Recorre el array de controles
+                $(varControles[item]).css("display","none");
+            }
+        }
+
+        $("#txtTipoCertificacion").trigger("change");
+
+    }
+
 });
+
+/* Function to remove items in the Predios list */
+function rmvPredio(elemento){
+    var control = "#divPredio" + elemento;
+    var indice = elemento +1;
+    $(control).remove();
+    arrayNVeredas = arrayNVeredas.slice(indice);
+}
 
 var CertObj;
 var countPrediosN = 0;
@@ -498,6 +544,14 @@ function getLocations() {
     });
 }
 
+//-Extraer parametros QueryString-//
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 var arrayNFechas = [];
 var arrayNVeredas = [];
 /*
@@ -558,7 +612,7 @@ function generateNVeredas(){
             LVereda = "(" + arrayNVeredas[item].OtraVda + ")";
         }
 
-        var itemVered = "<br/><legend></legend><label>Predio</label><input id='Npredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + arrayNVeredas[item].OtroMun + "' OthSdw='" + arrayNVeredas[item].OtraVda + "' OthPro='" + arrayNVeredas[item].OtroPredio + "' TwnsVal='" + arrayNVeredas[item].Municipio + "' PropVal='" + arrayNVeredas[item].Predio + "' VdaVal='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly />";
+        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='Npredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + arrayNVeredas[item].OtroMun + "' OthSdw='" + arrayNVeredas[item].OtraVda + "' OthPro='" + arrayNVeredas[item].OtroPredio + "' TwnsVal='" + arrayNVeredas[item].Municipio + "' PropVal='" + arrayNVeredas[item].Predio + "' VdaVal='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
     }
 }
@@ -567,7 +621,9 @@ function generateNVeredas(){
 function generateArrayVeredasN(){
     arrayNVeredas=[];
     for (var i = 0; i < countPrediosN; i++){
-
-        arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("TwnsVal"), "Vereda": $("#NPredio" + i).attr("VdaVal"), "Predio": $("#NPredio" + i).attr("PropVal"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
+        //Check for undefined array items to skip
+        if ($("#NPredio" + i).attr("TwnsVal") != undefined){
+            arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("TwnsVal"), "Vereda": $("#NPredio" + i).attr("VdaVal"), "Predio": $("#NPredio" + i).attr("PropVal"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
+        }        
     }
 }
