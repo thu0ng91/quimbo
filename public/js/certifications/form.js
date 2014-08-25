@@ -50,8 +50,8 @@ $(document).ready(function() {
                 $("#txtMunicipioExpedicion").val("");
                 $("#txtVeredaCertificacion").val("");
                 $("#txtPredioCertificacion").val("");
-                $("#txtCargo").val("");
-                $("#txtFechaExpedicion").val("");
+                //$("#txtCargo").val("");
+                //$("#txtFechaExpedicion").val("");
             }
 
         } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
@@ -123,11 +123,11 @@ $(document).ready(function() {
     });
 
     $("#txtDescripcionUnidades").change(function() {
-        if ($(this).val() == "Otro") {
-            $("#containerTxtOtraDescripcionUnidades").css("display", "block");
-        } else {
-            $("#containerTxtOtraDescripcionUnidades").css("display", "none");
-        }
+        // if ($(this).val() == "Otro") {
+        //     $("#containerTxtOtraDescripcionUnidades").css("display", "block");
+        // } else {
+        //     $("#containerTxtOtraDescripcionUnidades").css("display", "none");
+        // }
     });
 
     $("#txtFechaInicio, #txtFechaFin").change(function() {
@@ -195,7 +195,7 @@ $(document).ready(function() {
     setTimeout("reloadSelect();", 1000);
 
     $("#addDates").click(function() {
-        var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/><legend></legend>";
+        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/> <p id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
         $("#contentFechas").append(itemDates);
         $("#FechaInicio" + countFechasN + ", #FechaFin" + countFechasN).change(function() {
             if (new Date($("#FechaInicio" + countFechasN).val()) > new Date($("#FechaFin" + countFechasN).val())) {
@@ -275,6 +275,14 @@ function rmvPredio(elemento){
     var indice = elemento +1;
     $(control).remove();
     arrayNVeredas = arrayNVeredas.slice(indice);
+}
+
+/* Function to remove items in the Fechas list */
+function rmvFecha(elemento){
+    var control = "#divFecha" + elemento;
+    var indice = elemento +1;
+    $(control).remove();
+    arrayNFechas = arrayNFechas.slice(indice);
 }
 
 var CertObj;
@@ -560,7 +568,7 @@ var arrayNVeredas = [];
  */
 function generateNFechas() {
     for (var item in arrayNFechas) {
-        var itemDates = "<br/><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><legend></legend>";
+        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><p id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
         $("#contentFechas").append(itemDates);
 
         idInicio = "#FechaInicio" + countFechasN;
@@ -589,7 +597,10 @@ function generateNFechas() {
 function generateArrayFechasN() {
     arrayNFechas = [];
     for (var i = 0; i < countFechasN; i++) {
-        arrayNFechas.push({"FechaInicio": $("#FechaInicio" + i).val(), "FechaFin": $("#FechaFin" + i).val()});
+        //Check for undefined array items to skip
+        if ($("#FechaInicio" + i).val() != undefined) {
+            arrayNFechas.push({"FechaInicio": $("#FechaInicio" + i).val(), "FechaFin": $("#FechaFin" + i).val()});
+        }
     }
 }
 
