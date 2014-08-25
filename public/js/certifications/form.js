@@ -51,6 +51,8 @@ $(document).ready(function() {
                 $("#txtMunicipioExpedicion").val("");
                 $("#txtVeredaCertificacion").val("");
                 $("#txtPredioCertificacion").val("");
+                $("#txtCargo").val("");
+                $("#txtFechaExpedicion").val("");
             }
 
         } else if ($("input[name='txtPersonaNoFigura']:checked").val() == "0") {
