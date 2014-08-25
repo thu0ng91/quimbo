@@ -4,7 +4,6 @@
  * 
  */
 $(document).ready(function() {
-
     var stat = "";
 
     if (getParameterByName("code") != ""){
@@ -17,6 +16,7 @@ $(document).ready(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
             generateArrayVeredasN();
+            console.log("veredasN:" + JSON.stringify(arrayNVeredas));
             $.ajax({
                 url: "index.php/certifications/do_saveForm",
                 type: "POST",
@@ -211,8 +211,8 @@ $(document).ready(function() {
         var PredioCert = "";
         var PrpVal = "";
         var VeredaCert = "";
-        var VdaVal = "";
-        var TwnsVal = "";
+        var vdaval = "";
+        var twnsval = "";
 
         //Predio validation - Option: Other
         if($("#txtPredioCertificacion option:selected").text() == "Otro"){
@@ -226,17 +226,18 @@ $(document).ready(function() {
         //Vereda validation - Option: Other
         if($("#txtVeredaCertificacion option:selected").text() == "Otro"){
             VeredaCert = "(" + $("#txtOtraVereda").val() + ")";
-            VdaVal = "-1";
+            vdaval = "-1";
         } else {
             VeredaCert = $("#txtVeredaCertificacion option:selected").text();
-            VdaVal = $("#txtVeredaCertificacion").val();
+            vdaval = $("#txtVeredaCertificacion").val();
         }
 
-        TwnsVal = $("#txtMunicipioExpedicion").val();
+        twnsval = $("#txtMunicipioExpedicion").val();
 
-        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + $("#txtOtroMunicipio").val() + "' OthSdw='" + $("#txtOtraVereda").val() + "' OthPro='" + $("#txtOtroPredio").val() + "' TwnsVal='" + TwnsVal + "' PropVal='" + PrpVal + "' VdaVal='" + VdaVal + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
+        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
+        console.log("addvereda" + countPrediosN);
     });
 
     /* Functions available trough the form stats */
@@ -281,7 +282,6 @@ function rmvPredio(elemento){
 var CertObj;
 var countPrediosN = 0;
 var countFechasN = 0;
-;
 
 /*
  * Function reloadSelect
@@ -327,6 +327,7 @@ function loadControlValues() {
 
         $.getJSON("index.php/certifications/get_VeredasN/" + code, function(objRData){
             arrayNVeredas = objRData;
+            console.log("veredas json " + arrayNVeredas.length);
             generateNVeredas();
         }); 
 
@@ -614,18 +615,26 @@ function generateNVeredas(){
             LVereda = "(" + arrayNVeredas[item].OtraVda + ")";
         }
 
-        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='Npredio" + countPrediosN + "' class='form-control' type='text' OthTwn='" + arrayNVeredas[item].OtroMun + "' OthSdw='" + arrayNVeredas[item].OtraVda + "' OthPro='" + arrayNVeredas[item].OtroPredio + "' TwnsVal='" + arrayNVeredas[item].Municipio + "' PropVal='" + arrayNVeredas[item].Predio + "' VdaVal='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
+        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + arrayNVeredas[item].OtroMun + "' othsdw='" + arrayNVeredas[item].OtraVda + "' othpro='" + arrayNVeredas[item].OtroPredio + "' twnsval='" + arrayNVeredas[item].Municipio + "' propval='" + arrayNVeredas[item].Predio + "' vdaval='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
+
+        countPrediosN++;
+
     }
 }
 
 /* Load data into arrayNVeredas */
 function generateArrayVeredasN(){
     arrayNVeredas=[];
+    console.log("genera nveredas" + countPrediosN);
     for (var i = 0; i < countPrediosN; i++){
+        console.log("Elemento NPredio" + i + "twnsval" + $("#NPredio" + i).attr("twnsval"));
         //Check for undefined array items to skip
-        if ($("#NPredio" + i).attr("TwnsVal") != undefined){
-            arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("TwnsVal"), "Vereda": $("#NPredio" + i).attr("VdaVal"), "Predio": $("#NPredio" + i).attr("PropVal"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
+        if ($("#NPredio" + i).attr("twnsval") != undefined){
+            console.log($("#NPredio" + i).attr("twnsval"));
+            arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("twnsval"), "Vereda": $("#NPredio" + i).attr("vdaval"), "Predio": $("#NPredio" + i).attr("propval"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
         }        
+
     }
+    alert("pere");
 }

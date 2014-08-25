@@ -62,6 +62,7 @@ class QC_Certifications extends QC_Controller {
         $arrayData["txtCodigo"] = $_POST["code"];
 
         if ($arrayData["txtCodigo"] == "0") {
+            /* Nuevo registro */
             $arrayData["txtCodigo"] = null;
             $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_insert();
@@ -78,6 +79,7 @@ class QC_Certifications extends QC_Controller {
                 $this->certificationsModel->do_insert_veredasn();
             }
         } else {
+            /* Edicion */
             $this->certificationsModel->do_setProperties($arrayData);
             $resultDoInsert = $this->certificationsModel->do_update();
             $arrayFechasN = json_decode($_POST["fechasN"]);
