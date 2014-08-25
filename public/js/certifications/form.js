@@ -236,6 +236,10 @@ $(document).ready(function() {
         var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
+
+        $("#txtMunicipioExpedicion").val("41298");
+        $("#txtMunicipioExpedicion").trigger("change");
+
     });
 
     /* Functions available trough the form stats */
@@ -372,7 +376,7 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
     $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
     $("#containerTxtCargoPersonaFirma").css("display","block");
-
+    
     //Hide some controls
     varControles = ["#txtObservaciones", "#labeltxtObservaciones", "#containerTxtValoresCertificados", "#txtDescripcionRelacion", "#labeltxtDescripcionRelacion"];
 
