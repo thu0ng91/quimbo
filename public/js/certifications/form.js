@@ -195,7 +195,7 @@ $(document).ready(function() {
     setTimeout("reloadSelect();", 1000);
 
     $("#addDates").click(function() {
-        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/> <p id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
+        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='' /><br/> <p style='cursor:pointer' id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
         $("#contentFechas").append(itemDates);
         $("#FechaInicio" + countFechasN + ", #FechaFin" + countFechasN).change(function() {
             if (new Date($("#FechaInicio" + countFechasN).val()) > new Date($("#FechaFin" + countFechasN).val())) {
@@ -233,7 +233,7 @@ $(document).ready(function() {
 
         twnsval = $("#txtMunicipioExpedicion").val();
 
-        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
+        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
 
@@ -376,7 +376,7 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
     $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
     $("#containerTxtCargoPersonaFirma").css("display","block");
-    
+
     //Hide some controls
     varControles = ["#txtObservaciones", "#labeltxtObservaciones", "#containerTxtValoresCertificados", "#txtDescripcionRelacion", "#labeltxtDescripcionRelacion"];
 
@@ -572,7 +572,7 @@ var arrayNVeredas = [];
  */
 function generateNFechas() {
     for (var item in arrayNFechas) {
-        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><p id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
+        var itemDates = "<br/><div id='divFecha" + countFechasN + "'><legend></legend><label>Fecha Inicio</label><input id='FechaInicio" + countFechasN + "' class='form-control' type='date' value='" + arrayNFechas[item].FechaInicio + "' /><br/><label>Fecha Fin</label><input id='FechaFin" + countFechasN + "'  class='form-control' type='date' value='" + arrayNFechas[item].FechaFin + "' /><br/><p style='cursor:pointer' id='rmvPredio" + countFechasN + "' onclick='rmvFecha(" + countFechasN + ")''>Remover</p> <legend></legend></div>";
         $("#contentFechas").append(itemDates);
 
         idInicio = "#FechaInicio" + countFechasN;
@@ -627,7 +627,7 @@ function generateNVeredas(){
             LVereda = "(" + arrayNVeredas[item].OtraVda + ")";
         }
 
-        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + arrayNVeredas[item].OtroMun + "' othsdw='" + arrayNVeredas[item].OtraVda + "' othpro='" + arrayNVeredas[item].OtroPredio + "' twnsval='" + arrayNVeredas[item].Municipio + "' propval='" + arrayNVeredas[item].Predio + "' vdaval='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
+        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + arrayNVeredas[item].OtroMun + "' othsdw='" + arrayNVeredas[item].OtraVda + "' othpro='" + arrayNVeredas[item].OtroPredio + "' twnsval='" + arrayNVeredas[item].Municipio + "' propval='" + arrayNVeredas[item].Predio + "' vdaval='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
 
         countPrediosN++;
