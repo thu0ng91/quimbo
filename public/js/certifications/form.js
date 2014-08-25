@@ -16,7 +16,6 @@ $(document).ready(function() {
         if (validateRequiredFields(idsBlock)) {
             generateArrayFechasN();
             generateArrayVeredasN();
-            console.log("veredasN:" + JSON.stringify(arrayNVeredas));
             $.ajax({
                 url: "index.php/certifications/do_saveForm",
                 type: "POST",
@@ -237,7 +236,6 @@ $(document).ready(function() {
         var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
-        console.log("addvereda" + countPrediosN);
     });
 
     /* Functions available trough the form stats */
@@ -327,7 +325,6 @@ function loadControlValues() {
 
         $.getJSON("index.php/certifications/get_VeredasN/" + code, function(objRData){
             arrayNVeredas = objRData;
-            console.log("veredas json " + arrayNVeredas.length);
             generateNVeredas();
         }); 
 
@@ -626,15 +623,11 @@ function generateNVeredas(){
 /* Load data into arrayNVeredas */
 function generateArrayVeredasN(){
     arrayNVeredas=[];
-    console.log("genera nveredas" + countPrediosN);
     for (var i = 0; i < countPrediosN; i++){
-        console.log("Elemento NPredio" + i + "twnsval" + $("#NPredio" + i).attr("twnsval"));
         //Check for undefined array items to skip
         if ($("#NPredio" + i).attr("twnsval") != undefined){
-            console.log($("#NPredio" + i).attr("twnsval"));
             arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("twnsval"), "Vereda": $("#NPredio" + i).attr("vdaval"), "Predio": $("#NPredio" + i).attr("propval"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
         }        
 
     }
-    alert("pere");
 }
