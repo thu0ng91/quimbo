@@ -378,7 +378,7 @@ function enabledCertificationCommercial(isEnabled) {
     $("#containerTxtCargoPersonaFirma").css("display","block");
 
     //Hide some controls
-    varControles = ["#txtObservaciones", "#labeltxtObservaciones", "#containerTxtValoresCertificados", "#txtDescripcionRelacion", "#labeltxtDescripcionRelacion"];
+    varControles = ["#containerTxtValoresCertificados", "#txtDescripcionRelacion", "#labeltxtDescripcionRelacion"];
 
     if ($("input[name='txtPersonaNoFigura']:checked").val() == "1") {
         //Persona si figura
