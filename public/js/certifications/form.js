@@ -3,7 +3,7 @@
  * Fecha: 05/08/2014
  * 
  */
-$(document).ready(function() {
+$(document).ready(function () {
     var stat = "";
 
     if (getParameterByName("code") != ""){
@@ -38,6 +38,18 @@ $(document).ready(function() {
     });
 
     $("#txtIdentificador").html(formCode);
+
+    //Require field Observaciones
+    $("input[name='chkObservaciones']").change(function() {
+        
+        if ($("input[name='chkObservaciones']:checked").val() == "1"){
+            $("#containerTxtObservaciones").css("display","block");
+        }else if($("input[name='chkObservaciones']:checked").val() == "0"){
+            $("#containerTxtObservaciones").css("display","none");
+        }
+
+    });
+    
 
     $("input[name='txtPersonaNoFigura']").change(function() {
         varControles = ["#txtMunicipioExpedicion", "#txtVeredaCertificacion", "#txtPredioCertificacion", "#txtFechaExpedicion", "#txtOtroPredio", "#addVereda", "#txtCargo", "#txtFechaSuministrada", "#labelFechaExpedicion", "#labeltxtMunicipioExpedicion", "#labeltxtVeredaCertificacion", "#labeltxtPredioCertificacion", "#labelFechaSuministrada", "#labeltxtCargo", "#txtOtroMunicipio", "#txtOtraVereda", "#txtOtroPredio", "#lblCualOtroMunicipio", "#lblCualOtraVereda", "#lblCualOtroPredio", "#txtFechaInicio", "#txtFechaFin", "#labeltxtFechaInicio", "#labeltxtFechafin", "#containerFechaSuministrada"];
@@ -338,7 +350,7 @@ function loadControlValues() {
         $.getJSON("index.php/certifications/get_VeredasN/" + code, function(objRData){
             arrayNVeredas = objRData;
             generateNVeredas();
-        }); 
+        });
 
     }
 }
@@ -349,7 +361,7 @@ var idsBlock;
  * Enabled controls for certification type = 1
  */
 function enabledCertificationLabor(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerTxtObservaciones";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerChkObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre de la persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -365,8 +377,7 @@ function enabledCertificationLabor(isEnabled) {
  * Enabled controls for certification type = 2
  */
 function enabledCertificationCommercial(isEnabled) {
-    idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, \n\
-                        #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerTxtObservaciones";
+    idsBlock = "#containerTxtNombreEmpresa, #containerTxtNITEmpresa, #containerTxtNombrePersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtDescripcionRelacion, #containerTxtValoresCertificados, #containerChkObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona que firma la certificación");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -401,7 +412,7 @@ function enabledCertificationCommercial(isEnabled) {
  * Enabled controls for certification type = 3
  */
 function enabledCertificationLocal(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerTxtObservaciones";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerTxtZona, #containerTxtBarrio, #containerTxtDireccionCertificacion, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerChkObservaciones";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -642,7 +653,7 @@ function generateArrayVeredasN(){
         //Check for undefined array items to skip
         if ($("#NPredio" + i).attr("twnsval") != undefined){
             arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("twnsval"), "Vereda": $("#NPredio" + i).attr("vdaval"), "Predio": $("#NPredio" + i).attr("propval"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
-        }        
+        }    
 
     }
 }

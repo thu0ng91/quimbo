@@ -105,6 +105,7 @@ if (isset($_GET["code"])) {
                     <input type='date' class='form-control' id='txtFechaFin' name='txtFechaFin'>
                 </div>
                 <div class='form-group'>
+                    <br/>
                     <label id='labeltxtCargo' for='txtCargo'>Cargo</label>
                     <input type='text' class='form-control' id='txtCargo' name='txtCargo'>
                 </div>
@@ -229,8 +230,19 @@ if (isset($_GET["code"])) {
                     <label for='txtBarrio'>Barrio</label>
                     <input type='text' class='form-control' id='txtBarrio' name='txtBarrio'>
                 </div>
+                <div class='form-group' id='containerChkObservaciones' style='display: none;'>
+                    <label id='labeltxtObservaciones' for="chkObservaciones">Observaciones</label>
+                    <br/>
+                    <div id='containerBtnObservaciones' class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="chkObservaciones" value="1"> Si
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="chkObservaciones" value="0"> No
+                        </label>
+                    </div>
+                </div>
                 <div class='form-group' id='containerTxtObservaciones' style='display: none;'>
-                    <label id='labeltxtObservaciones' for="txtObservaciones">Observaciones</label>
                     <input type="text" class='form-control' id='txtObservaciones' name='txtObservaciones' style="height: 5em;">
                 </div>
             </div>
