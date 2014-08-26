@@ -397,8 +397,7 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda donde sostenía la relación comercial");
     $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
     $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
-    $("#labeltxtCargo").css("display","none");
-    $("#txtCargo").css("display","none");
+    $("#containerTxtCargo").css("display","none");
     $("#containerTxtCargoPersonaFirma").css("display","block");
 
     //Hide some controls
@@ -433,8 +432,7 @@ function enabledCertificationLocal(isEnabled) {
     $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
-    $("#labeltxtCargo").css("display","none");
-    $("#txtCargo").css("display","none");
+    $("#containerTxtCargo").css("display","none");
     $("#containerTxtCargoPersonaFirma").css("display","block");
 
     //Hide some controls
@@ -640,6 +638,13 @@ function generateNVeredas(){
         
         var LPredio = "";
         var LVereda = "";
+        var LMunicipio = "";
+
+        if (arrayNVeredas[item].Municipio != "-1"){
+            LMunicipio = arrayNVeredas[item].NMunicipio;
+        } else {
+            LMunicipio = "(" + arrayNVeredas[item].OtroMunicipio + ")";
+        }
 
         if (arrayNVeredas[item].Predio != "-1"){
             LPredio = arrayNVeredas[item].NPredio;
@@ -653,7 +658,7 @@ function generateNVeredas(){
             LVereda = "(" + arrayNVeredas[item].OtraVda + ")";
         }
 
-        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + arrayNVeredas[item].OtroMun + "' othsdw='" + arrayNVeredas[item].OtraVda + "' othpro='" + arrayNVeredas[item].OtroPredio + "' twnsval='" + arrayNVeredas[item].Municipio + "' propval='" + arrayNVeredas[item].Predio + "' vdaval='" + arrayNVeredas[item].Vereda + "' value='" + LVereda + " - " + LPredio + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
+        var itemVered = "<br/><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + arrayNVeredas[item].OtroMun + "' othsdw='" + arrayNVeredas[item].OtraVda + "' othpro='" + arrayNVeredas[item].OtroPredio + "' twnsval='" + arrayNVeredas[item].Municipio + "' propval='" + arrayNVeredas[item].Predio + "' vdaval='" + arrayNVeredas[item].Vereda + "' value='" + LMunicipio + " - " + LVereda + " - " + LPredio + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")'>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
 
         countPrediosN++;

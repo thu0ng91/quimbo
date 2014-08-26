@@ -104,7 +104,7 @@ if (isset($_GET["code"])) {
                     <label id='labeltxtFechafin' for='txtFechaFin' id="containerTxtFechaFin">Fecha de Fin</label>
                     <input type='date' class='form-control' id='txtFechaFin' name='txtFechaFin'>
                 </div>
-                <div class='form-group'>
+                <div id='containerTxtCargo' class='form-group' style='display: none;'>
                     <br/>
                     <label id='labeltxtCargo' for='txtCargo'>Cargo</label>
                     <input type='text' class='form-control' id='txtCargo' name='txtCargo'>
