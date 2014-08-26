@@ -219,11 +219,22 @@ $(document).ready(function () {
     });
 
     $("#addVereda").click(function(){
+        var MuniCert = "";
+        var MuniVal = "";
         var PredioCert = "";
         var PrpVal = "";
         var VeredaCert = "";
         var vdaval = "";
         var twnsval = "";
+
+        //Municipio validation - Option: Other
+        if($("#txtMunicipioExpedicion option:selected").text() == "Otro"){
+            MuniCert = "(" + $("#txtOtroMunicipio").val() + ")";
+            MuniVal = "-1";
+        } else {
+            MuniCert = $("#txtMunicipioExpedicion option:selected").text();
+            MuniVal = $("#txtMunicipioExpedicion").val();
+        }
 
         //Predio validation - Option: Other
         if($("#txtPredioCertificacion option:selected").text() == "Otro"){
@@ -245,7 +256,7 @@ $(document).ready(function () {
 
         twnsval = $("#txtMunicipioExpedicion").val();
 
-        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + VeredaCert + " - " + PredioCert + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
+        var itemVered = "</br><div id='divPredio" + countPrediosN + "'><legend></legend><label>Predio</label><input id='NPredio" + countPrediosN + "' class='form-control' type='text' othtwn='" + $("#txtOtroMunicipio").val() + "' othsdw='" + $("#txtOtraVereda").val() + "' othpro='" + $("#txtOtroPredio").val() + "' twnsval='" + twnsval + "' propval='" + PrpVal + "' vdaval='" + vdaval + "' value='" + MuniCert + " - " + VeredaCert + " - " + PredioCert + "' readonly /> <p style='cursor:pointer' id='rmvPredio" + countPrediosN + "' onclick='rmvPredio(" + countPrediosN + ")''>Remover</p> </div>";
         $("#contentPredios").append(itemVered);
         countPrediosN++;
 
@@ -386,6 +397,8 @@ function enabledCertificationCommercial(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda donde sostenía la relación comercial");
     $("#labeltxtPredioCertificacion").html("Predio donde sostenia la relación comercial");
     $("#labeltxtDescripcionRelacion").html("Descripción breve y clara de la relación certificada");
+    $("#labeltxtCargo").css("display","none");
+    $("#txtCargo").css("display","none");
     $("#containerTxtCargoPersonaFirma").css("display","block");
 
     //Hide some controls
@@ -420,6 +433,8 @@ function enabledCertificationLocal(isEnabled) {
     $("#labeltxtMunicipioExpedicion").html("Municipio que cubre la certificación");
     $("#labeltxtVeredaCertificacion").html("Vereda que cubre la certificación");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
+    $("#labeltxtCargo").css("display","none");
+    $("#txtCargo").css("display","none");
     $("#containerTxtCargoPersonaFirma").css("display","block");
 
     //Hide some controls
