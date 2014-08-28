@@ -142,7 +142,7 @@ if (isset($_GET["code"])) {
                 </div>
                 <div class='form-group' id='containerTxtNITPersonaJuridica' style='display: none;'>
                     <label for='txtNITPersonaJuridica'>NIT Persona Juridica</label>
-                    <input type='text' maxlength="10" class='form-control' id='txtNITPersonaJuridica' name='txtNITPersonaJuridica'>
+                    <input type='text' maxlength="11" class='form-control' id='txtNITPersonaJuridica' name='txtNITPersonaJuridica'>
                 </div>
                 <div class='form-group' id='containerTxtDocumentoIdentificacion' style='display: none;'>
                     <label id="labeltxtDocumentoIdentificacion" for='txtDocumentoIdentificacion'>Documento Identificación</label>

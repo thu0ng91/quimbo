@@ -135,11 +135,11 @@ $(document).ready(function () {
     });
 
     $("#txtDescripcionUnidades").change(function() {
-        // if ($(this).val() == "Otro") {
-        //     $("#containerTxtOtraDescripcionUnidades").css("display", "block");
-        // } else {
-        //     $("#containerTxtOtraDescripcionUnidades").css("display", "none");
-        // }
+         if ($(this).val() == "Otro") {
+             $("#containerTxtOtraDescripcionUnidades").css("display", "block");
+         } else {
+             $("#containerTxtOtraDescripcionUnidades").css("display", "none");
+         }
     });
 
     $("#txtFechaInicio, #txtFechaFin").change(function() {
@@ -372,7 +372,7 @@ var idsBlock;
  * Enabled controls for certification type = 1
  */
 function enabledCertificationLabor(isEnabled) {
-    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerChkObservaciones";
+    idsBlock = "#containerTxtTipoPersonaJuridica, #containerTxtNombrePersonaJuridica, #containerTxtNITPersonaJuridica, #containerTxtDocumentoIdentificacion, #containerNFechas, #containerTxtNombrePersonaFirma, #containerTxtCargoPersonaFirma, #containerChkObservaciones , #containerTxtCargo";
     $(idsBlock).css("display", isEnabled);
     $("#labeltxtNombrePersonaJuridica").html("Nombre de la persona jurídica que certifica");
     $("#labeltxtMunicipioExpedicion").html("Municipio de expedición");
@@ -381,6 +381,7 @@ function enabledCertificationLabor(isEnabled) {
     $("#labeltxtVeredaCertificacion").html("Vereda donde desempeñó labor");
     $("#labeltxtPredioCertificacion").html("Predio que cubre la certificación");
     $("#labeltxtCargo").html("Cargo certificado");
+	
 
 }
 /*
