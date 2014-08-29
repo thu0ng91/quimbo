@@ -38,6 +38,16 @@ class QC_Form extends QC_Controller {
 
         redirect("/");
     }
+    /* Formulario para consultar certificaciones*/
+    public function files(){
+        if ($this->session->userdata("isLoggedIn")) {
+            $this->display_page("files", "form");
+            return;
+        }
+
+        redirect("/");
+    }
+
     /**
      * Metodo search
      *
@@ -423,6 +433,13 @@ class QC_Form extends QC_Controller {
 
         echo json_encode($arrLResponse);
     }
+
+    /* Obtener listado de archivos por certificacion*/
+    public function get_FilesN($code) {
+        $this->load->model("qm_form", "form", true);
+        echo json_encode($this->form->get_CertFiles($code));
+    }
+
     /**
      * Método do_finish
      *
@@ -486,7 +503,7 @@ class QC_Form extends QC_Controller {
         $this->output->set_content_type("application/json");
         echo json_encode($arrLResponse);
     }
-    
+
     /**
      * Método do_getFilesPath
      *

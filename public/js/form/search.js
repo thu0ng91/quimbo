@@ -91,6 +91,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorE = $(objLAnchorC).clone();
                 var objLAnchorUD = $(objLAnchorC).clone();
                 var objLAnchorCERT = $(objLAnchorC).clone();
+                var objLAnchorF = $(objLAnchorC).clone();
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
@@ -108,7 +109,8 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Subir Documentos").addClass("btn btn-default");
                 $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.a08Formulario)
                     .html("Digitar Certificaciones").addClass("btn btn-success");
-
+                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.a08Formulario)
+                    .html("Ver Certificaciones").addClass("btn btn-success");
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
 
@@ -132,25 +134,39 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
 
                     var objLAction = $(objLTableData).clone().appendTo(objLTableRow);
 
-                    if (responseText.inRUserType != 3) {
-                        if (!arrRData.a07Imagen || !arrRData.a07CodigoBarras) {
-                            $(objLAction).append(" ").append(objLAnchorU);
-                        }
-                        else {
-                            $(objLAction).append(" ").append(objLAnchorD);
-                        }
-                        if (arrRData.a07Busqueda) {
-                            $(objLAction).append(" ").append(objLAnchorA);
-                        }
-                        if (responseText.inRUserType == 1) {
+                    /*Switch RUser*/
+                    switch(responseText.inRUserType) {
+                        case "1":
                             $(objLAction).append(" ").append(objLAnchorE);
-                        }
+                            $(objLAction).append(" ").append(objLAnchorP);
+                            break;
 
-                        $(objLAction).append(" ").append(objLAnchorP);
-                    }
-                    else {
-                        $(objLAction).append(" ").append(objLAnchorUD);
-                        $(objLAction).append(" ").append(objLAnchorCERT);
+                        case "2":
+                            if (!arrRData.a07Imagen || !arrRData.a07CodigoBarras) {
+                                $(objLAction).append(" ").append(objLAnchorU);
+                            }
+                            else {
+                                $(objLAction).append(" ").append(objLAnchorD);
+                            }
+                            if (arrRData.a07Busqueda) {
+                                $(objLAction).append(" ").append(objLAnchorA);
+                            }
+                            $(objLAction).append(" ").append(objLAnchorP);
+                            break;
+
+                        case "3":
+                            $(objLAction).append(" ").append(objLAnchorUD);
+                            $(objLAction).append(" ").append(objLAnchorCERT);
+                            break;
+
+                        case "4":
+                            console.log("entra 4");
+                            $(objLAction).append(" ").append(objLAnchorF);
+                            console.log("sale 4");
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             });

@@ -106,6 +106,20 @@ class QM_Form extends CI_Model {
 
         return $SQLResult->result_array();
     }
+
+    /* Obtener archivos relacionados con la certificacion*/
+    public function get_CertFiles($code){
+        try {
+            //Generamos el query
+            $query = $this->db->query("SELECT * FROM t18web_scanner WHERE a18codigo = '$code'" );
+            $dataArray = $query->result();
+            return $dataArray;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+
+    }
+
     /**
      * Metodo get_next_chapter
      *
