@@ -9,7 +9,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo site_url(); ?>">
-              <img alt="Emgesa" src="public/img/logo.gif" class="img-responsive" width="150">
+              <img alt="Emgesa" src="public/img/logo.gif" class="img-responsive">
             </a>
           </div>
           <div class="collapse navbar-collapse" id="quimbo-nav">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </nav>
-      <div class="breadcrumb-menu">
+      <div class="breadcrumb-menu" style="height: 38px;">
         <div class="container">
           <ul class="breadcrumb col-md-offset-1 col-md-5">
             <li><a href="<?php echo site_url(); ?>">Inicio</a></li>
@@ -42,9 +42,7 @@
             <li class="active"><?php echo lang("TxtPageDone"); ?></li>
 <?php } ?>
           </ul>
-          <div class="pull-right">
-            <img alt="Proyecto Quimbo" src="public/img/quimbo.png" class="img-responsive" width="150">
-          </div>
+
 <?php if (!empty($inRFormID)) { ?>
           <div class="pull-right">
             <h3><span class="label label-info"><?php echo $inRFormID; ?></span>&nbsp;</h3>
