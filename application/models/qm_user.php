@@ -114,7 +114,7 @@ class QM_User extends CI_Model {
                 case "a08AP019O01":
                     if (!empty($stLAnswer)) {
                         $this->db->where("a04Codigo", $stLAnswer);
-                        $SQLResult = $this->db->get("t04web_pregunta_pespuestas");
+                        $SQLResult = $this->db->get("t04web_pregunta_respuestas");
                         $arrLAnswer = $SQLResult->row_array();
                         $arrLAnswers[$stLKey] = $arrLAnswer["a04Respuesta"];
                     }
