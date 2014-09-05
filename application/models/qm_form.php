@@ -44,9 +44,9 @@ class QM_Form extends CI_Model {
         }
 
         $this->db->where("a07Codigo", $inRFormID);
-        $this->db->join("t05web_Departamentos", "a07Departamento = a05Codigo");
-        $this->db->join("t06web_Municipios", "a07Municipio = a06Codigo");
-        $this->db->join("t08web_Usuario_Respuestas", "a07Codigo = a08Formulario", "LEFT");
+        $this->db->join("t05web_departamentos", "a07Departamento = a05Codigo");
+        $this->db->join("t06web_municipios", "a07Municipio = a06Codigo");
+        $this->db->join("t08web_usuario_respuestas", "a07Codigo = a08Formulario", "LEFT");
         $SQLResult = $this->db->get("t07web_Formularios");
 
         if ($SQLResult->num_rows() == 1) {
