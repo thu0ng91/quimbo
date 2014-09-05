@@ -45,7 +45,7 @@ class QM_User extends CI_Model {
         $inRUserID = $this->session->userdata("inRUserID");
 
         $this->db->where("a01Codigo", $inRUserID);
-        $SQLResult = $this->db->get("t01web_Usuarios");
+        $SQLResult = $this->db->get("t01web_usuarios");
         $arrLAccount = $SQLResult->row_array();
 
         if (!is_null($stROption)) {
@@ -67,8 +67,9 @@ class QM_User extends CI_Model {
         $SQLWhere = array(	"a01Usuario" => $stRUsername,
                             "a01Clave" => $stRPassword);
 
-        $SQLResult = $this->db->get_where("t01web_Usuarios", $SQLWhere);
-        return $SQLResult->row_array();    }
+        $SQLResult = $this->db->get_where("t01web_usuarios", $SQLWhere);
+        return $SQLResult->row_array();    
+    }
     /**
      * Método get_answers
      *
@@ -80,28 +81,28 @@ class QM_User extends CI_Model {
         $inRFormID = $this->session->userdata("inRFormID");
 
         $this->db->where("a08Formulario", $inRFormID);
-        $SQLResult = $this->db->get("t08web_Usuario_Respuestas");
+        $SQLResult = $this->db->get("t08web_usuario_respuestas");
         $arrLAnswers = $SQLResult->row_array();
 
         foreach ($arrLAnswers as $stLKey => $stLAnswer) {
             switch ($stLKey) {
                 case "a08AP09O01":
                     $this->db->where("a12Codigo", $stLAnswer);
-                    $SQLResult = $this->db->get("t12web_Paises");
+                    $SQLResult = $this->db->get("t12web_paises");
                     $arrLAnswer = $SQLResult->row_array();
                     $arrLAnswers[$stLKey] = $arrLAnswer["a12Nombre"];
                     break;
                 case "a08AP03O01":
                 case "a08AP09O02":
                     $this->db->where("a05Codigo", $stLAnswer);
-                    $SQLResult = $this->db->get("t05web_Departamentos");
+                    $SQLResult = $this->db->get("t05web_departamentos");
                     $arrLAnswer = $SQLResult->row_array();
                     $arrLAnswers[$stLKey] = $arrLAnswer["a05Nombre"];
                     break;
                 case "a08AP03O02":
                 case "a08AP09O03":
                     $this->db->where("a06Codigo", $stLAnswer);
-                    $SQLResult = $this->db->get("t06web_Municipios");
+                    $SQLResult = $this->db->get("t06web_municipios");
                     $arrLAnswer = $SQLResult->row_array();
                     $arrLAnswers[$stLKey] = $arrLAnswer["a06Nombre"];
                     break;
@@ -113,7 +114,7 @@ class QM_User extends CI_Model {
                 case "a08AP019O01":
                     if (!empty($stLAnswer)) {
                         $this->db->where("a04Codigo", $stLAnswer);
-                        $SQLResult = $this->db->get("t04web_Pregunta_Respuestas");
+                        $SQLResult = $this->db->get("t04web_pregunta_pespuestas");
                         $arrLAnswer = $SQLResult->row_array();
                         $arrLAnswers[$stLKey] = $arrLAnswer["a04Respuesta"];
                     }
