@@ -44,33 +44,38 @@ class QC_User extends QC_Controller {
      * Método que Ejecuta el Login del Usuario
      */
     public function do_login() {
-        $arrLResponse = array();
-        $this->load->model("qm_user", "user", true);
+        try{
+            $arrLResponse = array();
+            $this->load->model("qm_user", "user", true);
 
-        $stRUsername = $this->input->post("TxtUsername");
-        $stRPassword = md5($this->input->post("TxtPassword"));
+            $stRUsername = $this->input->post("TxtUsername");
+            $stRPassword = md5($this->input->post("TxtPassword"));
 
-        $arrLUserData = $this->user->do_login($stRUsername, $stRPassword);
+            $arrLUserData = $this->user->do_login($stRUsername, $stRPassword);
 
-        if (isset($arrLUserData["a01Codigo"])) {
-            $stLFullName = trim($arrLUserData["a01Nombres"]." ".$arrLUserData["a01Apellidos"]);
+            if (isset($arrLUserData["a01Codigo"])) {
+                $stLFullName = trim($arrLUserData["a01Nombres"]." ".$arrLUserData["a01Apellidos"]);
 
-            $this->session->set_userdata("isLoggedIn", true);
-            $this->session->set_userdata("inRUserID", $arrLUserData["a01Codigo"]);
-            $this->session->set_userdata("inRUserType", $arrLUserData["a01Tipo"]);
-            $this->session->set_userdata("stRUsername", $stLFullName);
+                $this->session->set_userdata("isLoggedIn", true);
+                $this->session->set_userdata("inRUserID", $arrLUserData["a01Codigo"]);
+                $this->session->set_userdata("inRUserType", $arrLUserData["a01Tipo"]);
+                $this->session->set_userdata("stRUsername", $stLFullName);
 
-            $arrLResponse["TxtSuccessForm"] = true;
-            $arrLResponse["TxtTitle"] = "Identificado!";
-            $arrLResponse["TxtSuccess"] = "Ingresando al Aplicativo ...";
-            $arrLResponse["TxtReload"] = true;
+                $arrLResponse["TxtSuccessForm"] = true;
+                $arrLResponse["TxtTitle"] = "Identificado!";
+                $arrLResponse["TxtSuccess"] = "Ingresando al Aplicativo ...";
+                $arrLResponse["TxtReload"] = true;
+            }
+            else {
+                $arrLResponse["TxtErrorForm"] = true;
+                $arrLResponse["TxtError"] = "Usuario NO encontrado";
+            }
+
+            echo json_encode($arrLResponse);
         }
-        else {
-            $arrLResponse["TxtErrorForm"] = true;
-            $arrLResponse["TxtError"] = "Usuario NO encontrado";
+        catch(Exception $ex){
+            echo $ex->getMessage();
         }
-
-        echo json_encode($arrLResponse);
     }
     /**
      * Metodo do_logout
