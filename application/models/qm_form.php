@@ -47,14 +47,14 @@ class QM_Form extends CI_Model {
         $this->db->join("t05web_departamentos", "a07Departamento = a05Codigo");
         $this->db->join("t06web_municipios", "a07Municipio = a06Codigo");
         $this->db->join("t08web_usuario_respuestas", "a07Codigo = a08Formulario", "LEFT");
-        $SQLResult = $this->db->get("t07web_Formularios");
+        $SQLResult = $this->db->get("t07web_formularios");
 
         if ($SQLResult->num_rows() == 1) {
             $arrLForms = $SQLResult->row_array();
             $this->db->where("a09Formulario", $inRFormID);
             $this->db->where("a09Pregunta", "CP019");
             $this->db->select_sum("a09O02", "a07Folios");
-            $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
+            $SQLResult = $this->db->get("t09web_usuario_respuestasn");
             $arrLDocs = $SQLResult->row_array();
 
             if (is_null($arrLDocs["a07Folios"])) {
@@ -64,7 +64,7 @@ class QM_Form extends CI_Model {
             $arrLForms["a07Folios"] = $arrLDocs["a07Folios"];
 
             $this->db->where("a09Formulario", $inRFormID);
-            $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
+            $SQLResult = $this->db->get("t09web_usuario_respuestasn");
             $arrLAnswersN = $SQLResult->result_array();
 /*
             foreach ($arrLAnswersN as $inLKey => $arrLAnswerN) {
@@ -94,7 +94,7 @@ class QM_Form extends CI_Model {
             $this->db->where("a02Letra", $stRChapter);
         }
 
-        $SQLResult = $this->db->get("t02web_Capitulos");
+        $SQLResult = $this->db->get("t02web_capitulos");
 
         if (!is_null($stRChapter)) {
             $arrLChapter = $SQLResult->row_array();
@@ -136,7 +136,7 @@ class QM_Form extends CI_Model {
             $this->db->where("a02Letra", ++$inRChapter);
         }
 
-        $SQLResult = $this->db->get("t02web_Capitulos");
+        $SQLResult = $this->db->get("t02web_capitulos");
         $arrLNextChapter = $SQLResult->row_array();
 
         if ($SQLResult->num_rows() == 1) {
@@ -155,7 +155,7 @@ class QM_Form extends CI_Model {
 
         if (is_numeric($inRSearch)) {
             $this->db->where("a11Codigo", $inRSearch);
-            $SQLResult = $this->db->get("t11web_Busqueda");
+            $SQLResult = $this->db->get("t11web_busqueda");
 
             if ($SQLResult->num_rows() == 1) {
                 $arrLSearch = $SQLResult->row_array();
@@ -193,7 +193,7 @@ class QM_Form extends CI_Model {
         $arrLQuestions = array();
         $this->db->order_by("a03Numero, a03Posicion");
         $this->db->where("a03Capitulo", $inRChapter);
-        $SQLResult = $this->db->get("t03web_Capitulo_Preguntas");
+        $SQLResult = $this->db->get("t03web_capitulo_preguntas");
         $arrLAllQuestions = $SQLResult->result_array();
 
         foreach ($arrLAllQuestions as $inLKey => $arrLQuestion) {
@@ -204,7 +204,7 @@ class QM_Form extends CI_Model {
 
             if ($arrLQuestion["a03Tipo"] == "C" || $arrLQuestion["a03Tipo"] == "M") {
                 $this->db->where("a04Pregunta", $arrLQuestion["a03Codigo"]);
-                $SQLResult = $this->db->get("t04web_Pregunta_Respuestas");
+                $SQLResult = $this->db->get("t04web_pregunta_respuestas");
                 $arrLQuestion["arrRAnswers"] = $SQLResult->result_array();
             }
             if (is_null($arrLQuestion["a03Posicion"])) {
@@ -264,14 +264,14 @@ class QM_Form extends CI_Model {
         if (!empty($arrRFormData["TxtFormNo"])) {
             if (strlen($arrRFormData["TxtFormNo"]) <= 7) {
                 $this->db->where("a11Encuesta", $arrRFormData["TxtFormNo"]);
-                $SQLResult = $this->db->get("t11web_Busqueda");
+                $SQLResult = $this->db->get("t11web_busqueda");
 
                 if ($SQLResult->num_rows() > 0) {
                     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
                 }
 
                 $this->db->where("a07Identificador", $arrRFormData["TxtFormNo"]);
-                $SQLResult = $this->db->get("t07web_Formularios");
+                $SQLResult = $this->db->get("t07web_formularios");
 
                 if ($SQLResult->num_rows() > 0) {
                     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
@@ -279,8 +279,8 @@ class QM_Form extends CI_Model {
             }
             else {
                 $this->db->where("a07Codigo", $arrRFormData["TxtFormNo"]);
-                $this->db->join("t08web_Usuario_Respuestas", "a07Codigo = a08Formulario");
-                $SQLResult = $this->db->get("t07web_Formularios");
+                $this->db->join("t08web_usuario_respuestas", "a07Codigo = a08Formulario");
+                $SQLResult = $this->db->get("t07web_formularios");
 
                 if ($SQLResult->num_rows() > 0) {
                     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
@@ -288,31 +288,31 @@ class QM_Form extends CI_Model {
             }
         }
         if (!empty($arrRFormData["TxtPersonIdentity"])) {
-            $this->db->select("t11web_Busqueda.*");
+            $this->db->select("t11web_busqueda.*");
             $this->db->where("a11NoDoc", $arrRFormData["TxtPersonIdentity"]);
-            $this->db->join("t08web_Usuario_Respuestas", "a11NoDoc != a08AP08O02");
+            $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
             $this->db->group_by("a11Encuesta");
-            $SQLResult = $this->db->get("t11web_Busqueda");
+            $SQLResult = $this->db->get("t11web_busqueda");
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
             }
 
             $this->db->where("a08AP08O02", $arrRFormData["TxtPersonIdentity"]);
-            $this->db->join("t07web_Formularios", "a07Codigo = a08Formulario");
-            $SQLResult = $this->db->get("t08web_Usuario_Respuestas");
+            $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
+            $SQLResult = $this->db->get("t08web_usuario_respuestas");
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
             }
         }
         if (!empty($arrRFormData["TxtPersonName"])) {
-            $this->db->select("t11web_Busqueda.*");
-            $this->db->join("t08web_Usuario_Respuestas", "a11NoDoc != a08AP08O02");
+            $this->db->select("t11web_busqueda.*");
+            $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
             $this->db->like("a11Nombres", $arrRFormData["TxtPersonName"]);
             $this->db->or_like("a11Apellidos", $arrRFormData["TxtPersonName"]);
             $this->db->group_by("a11NoDoc");
-            $SQLResult = $this->db->get("t11web_Busqueda");
+            $SQLResult = $this->db->get("t11web_busqueda");
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
@@ -320,8 +320,8 @@ class QM_Form extends CI_Model {
 
             $this->db->like("a08AP01", $arrRFormData["TxtPersonName"]);
             $this->db->or_like("a08AP02", $arrRFormData["TxtPersonName"]);
-            $this->db->join("t07web_Formularios", "a07Codigo = a08Formulario");
-            $SQLResult = $this->db->get("t08web_Usuario_Respuestas");
+            $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
+            $SQLResult = $this->db->get("t08web_usuario_respuestas");
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
@@ -365,7 +365,7 @@ class QM_Form extends CI_Model {
                             "a07Estado" => "P");
 
         $this->db->trans_start();
-        $this->db->insert("t07web_Formularios", $arrLForm);
+        $this->db->insert("t07web_formularios", $arrLForm);
         $this->db->trans_complete();
 
         return $this->db->trans_status();
@@ -544,16 +544,16 @@ class QM_Form extends CI_Model {
         $this->db->trans_start();
 
         if ($bolLInsert) {
-            $this->db->insert("t08web_Usuario_Respuestas", $arrLChapter);
+            $this->db->insert("t08web_usuario_respuestas", $arrLChapter);
         }
         else {
             $arrLUpdate = array("a08Formulario" => $inRFormID);
-            $this->db->update("t08web_Usuario_Respuestas", $arrLChapter, $arrLUpdate);
+            $this->db->update("t08web_usuario_respuestas", $arrLChapter, $arrLUpdate);
         }
         if (isset($arrLChaptersN)) {
             foreach ($arrLChaptersN as $arrLChapterN) {
                 foreach ($arrLChapterN as $arrLChapter) {
-                    $this->db->insert("t09web_Usuario_RespuestasN", $arrLChapter);
+                    $this->db->insert("t09web_usuario_respuestasn", $arrLChapter);
                 }
             }
         }
@@ -583,7 +583,7 @@ class QM_Form extends CI_Model {
 
         $this->db->trans_start();
         $this->db->where("a07Codigo", $inRFormID);
-        $this->db->update("t07web_Formularios", $arrLForm);
+        $this->db->update("t07web_formularios", $arrLForm);
         $this->db->trans_complete();
 
         //$this->do_sync();
@@ -604,16 +604,16 @@ class QM_Form extends CI_Model {
         foreach ($arrRFiles as $arrLFile) {
             $this->db->where("a13Identificador", $arrLFile["a13Identificador"]);
             $this->db->where("a13Tipo", $arrLFile["a13Tipo"]);
-            $this->db->from("t13web_Usuario_Docs");
+            $this->db->from("t13web_usuario_docs");
 
             if ($this->db->count_all_results() >= 1) {
                 $SQLWhere = array(	"a13Identificador" => $arrLFile["a13Identificador"],
                                     "a13Tipo" => $arrLFile["a13Tipo"]);
 
-                $this->db->update("t13web_Usuario_Docs", $arrLFile, $SQLWhere);
+                $this->db->update("t13web_usuario_docs", $arrLFile, $SQLWhere);
             }
             else {
-                $this->db->insert("t13web_Usuario_Docs", $arrLFile);
+                $this->db->insert("t13web_usuario_docs", $arrLFile);
             }
         }
 
@@ -638,7 +638,7 @@ class QM_Form extends CI_Model {
             $objLSync->trans_start();
 
             $this->db->where("a07Estado", "P");
-            $SQLResult = $this->db->get("t07web_Formularios");
+            $SQLResult = $this->db->get("t07web_formularios");
             $inLForms = 0;
             $inLFiles = 0;
 
@@ -646,13 +646,13 @@ class QM_Form extends CI_Model {
                 $arrLFormsToSync = $SQLResult->result_array();
 
                 foreach ($arrLFormsToSync as $arrLFormToSync) {
-                    $bolLSyncForm = $objLSync->insert("t07web_Formularios", $arrLFormToSync);
+                    $bolLSyncForm = $objLSync->insert("t07web_formularios", $arrLFormToSync);
 
                     if ($bolLSyncForm) {
                         $inLForms++;
                         $arrLUpdateForm = array("a07Estado" => "S");
-                        $this->db->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
-                        $objLSync->update("t07web_Formularios", $arrLUpdateForm, $arrLFormToSync);
+                        $this->db->update("t07web_formularios", $arrLUpdateForm, $arrLFormToSync);
+                        $objLSync->update("t07web_formularios", $arrLUpdateForm, $arrLFormToSync);
                     }
                     if ($bolRFiles) {
                         if ($this->do_upload($arrLFormToSync["a07Imagen"])) {
@@ -666,39 +666,39 @@ class QM_Form extends CI_Model {
             }
 
             $this->db->where("a08Estado", "P");
-            $SQLResult = $this->db->get("t08web_Usuario_Respuestas");
+            $SQLResult = $this->db->get("t08web_usuario_respuestas");
             $inLAnswers = 0;
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLAnswersToSync = $SQLResult->result_array();
 
                 foreach ($arrLAnswersToSync as $arrLAnswerToSync) {
-                    $bolLSyncAnswers = $objLSync->insert("t08web_Usuario_Respuestas", $arrLAnswerToSync);
+                    $bolLSyncAnswers = $objLSync->insert("t08web_usuario_respuestas", $arrLAnswerToSync);
 
                     if ($bolLSyncAnswers) {
                         $inLAnswers++;
                         $arrLUpdateAnswers = array("a08Estado" => "S");
-                        $this->db->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
-                        $objLSync->update("t08web_Usuario_Respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
+                        $this->db->update("t08web_usuario_respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
+                        $objLSync->update("t08web_usuario_respuestas", $arrLUpdateAnswers, $arrLAnswerToSync);
                     }
                 }
             }
 
             $this->db->where("a09Estado", "P");
-            $SQLResult = $this->db->get("t09web_Usuario_RespuestasN");
+            $SQLResult = $this->db->get("t09web_usuario_respuestasn");
             $inLAnswersN = 0;
 
             if ($SQLResult->num_rows() > 0) {
                 $arrLAnswersNToSync = $SQLResult->result_array();
 
                 foreach ($arrLAnswersNToSync as $arrLAnswerNToSync) {
-                    $bolLSyncAnswersN = $objLSync->insert("t09web_Usuario_RespuestasN", $arrLAnswerNToSync);
+                    $bolLSyncAnswersN = $objLSync->insert("t09web_usuario_respuestasn", $arrLAnswerNToSync);
 
                     if ($bolLSyncAnswersN) {
                         $inLAnswersN++;
                         $arrLUpdateAnswersN = array("a09Estado" => "S");
-                        $this->db->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
-                        $objLSync->update("t09web_Usuario_RespuestasN", $arrLUpdateAnswersN, $arrLAnswerNToSync);
+                        $this->db->update("t09web_usuario_respuestasn", $arrLUpdateAnswersN, $arrLAnswerNToSync);
+                        $objLSync->update("t09web_usuario_respuestasn", $arrLUpdateAnswersN, $arrLAnswerNToSync);
                     }
                 }
             }
