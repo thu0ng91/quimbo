@@ -43,7 +43,7 @@ class QM_API extends CI_Model {
             $this->db->where("a12Estado", "A");
         }
 
-        $SQLResult = $this->db->get("t12web_Paises");
+        $SQLResult = $this->db->get("t12web_paises");
 
         return $SQLResult->result_array();
     }
@@ -59,7 +59,7 @@ class QM_API extends CI_Model {
             $this->db->where("a05Estado", "A");
         }
 
-        $SQLResult = $this->db->get("t05web_Departamentos");
+        $SQLResult = $this->db->get("t05web_departamentos");
 
         return $SQLResult->result_array();
     }
@@ -78,7 +78,7 @@ class QM_API extends CI_Model {
         }
 
         $this->db->where("a06Departamento", $inRState);
-        $SQLResult = $this->db->get("t06web_Municipios");
+        $SQLResult = $this->db->get("t06web_municipios");
 
         return $SQLResult->result_array();
     }
@@ -97,7 +97,7 @@ class QM_API extends CI_Model {
         }
 
         $this->db->where("a10Municipio", $inRTown);
-        $SQLResult = $this->db->get("t10web_Veredas");
+        $SQLResult = $this->db->get("t10web_veredas");
 
         return $SQLResult->result_array();
     }
