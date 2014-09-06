@@ -122,7 +122,17 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     $(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
 
                     if (!arrRData.a08AP01) {
-                        $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+                        /*Switch RUser*/
+                        switch(responseText.inRUserType) {
+                            
+                            case "4":
+                            $(objLTableData).clone().append(objLAnchorF).appendTo(objLTableRow);
+                            break;
+
+                            default:
+                            $(objLTableData).clone().append(objLAnchorC).appendTo(objLTableRow);
+                            break;
+                        }
                     }
                 }
                 if (arrRData.a08AP01) {
@@ -160,9 +170,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                             break;
 
                         case "4":
-                            console.log("entra 4");
                             $(objLAction).append(" ").append(objLAnchorF);
-                            console.log("sale 4");
                             break;
 
                         default:
