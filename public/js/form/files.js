@@ -30,6 +30,7 @@ function loadControlValues(){
                     tipo = "Poder";
                     break;
 
+
                 case "04CL":
                     tipo = "Certificación Laboral";
                     break;
@@ -74,7 +75,7 @@ function loadControlValues(){
                     break;
                 }
 
-                tabla += "<tr><td>" + tipo + "</td><td>" + "<a href='" + ruta + "' class='btn btn-success'>Ver Detalle</a>" + "</td></tr>";
+                tabla += "<tr><td>" + tipo + "</td><td>" + "<a href='" + ruta + "' target='_blank' class='btn btn-success'>Ver Detalle</a>" + "</td></tr>";
             }
 
             tabla += "</tbody></table><br/>";
