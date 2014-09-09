@@ -136,6 +136,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     }
                 }
                 if (arrRData.a08AP01) {
+                    console.log("Resultados T8");
                     $(objLTableData).clone().html(arrRData.a08AP08O02).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a08AP01).appendTo(objLTableRow);
                     $(objLTableData).clone().html(arrRData.a08AP02).appendTo(objLTableRow);

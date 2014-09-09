@@ -160,6 +160,8 @@ class QM_Form extends CI_Model {
             if ($SQLResult->num_rows() == 1) {
                 $arrLSearch = $SQLResult->row_array();
 
+                print_r($arrLSearch);
+
                 $arrLResult["a08AP01"] = $arrLSearch["a11Nombres"];
                 $arrLResult["a08AP02"] = $arrLSearch["a11Apellidos"];
                 $arrLResult["a08AP03O02"] = $arrLSearch["a11Lugar"];
@@ -169,6 +171,7 @@ class QM_Form extends CI_Model {
                 $arrLResult["a08AP08O02"] = $arrLSearch["a11NoDoc"];
                 $arrLResult["a08AP013"] = $arrLSearch["a11Sexo"];
                 $arrLResult["a08AP014O01"] = $arrLSearch["a11EstadoCivil"];
+                $arrLResult["a08Formulario"] = $arrLSearch["a08Formulario"];
 
                 return $arrLResult;
             }
