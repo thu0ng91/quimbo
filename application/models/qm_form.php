@@ -111,7 +111,7 @@ class QM_Form extends CI_Model {
     public function get_CertFiles($code){
         try {
             //Generamos el query
-            $query = $this->db->query("SELECT * FROM t18web_scanner WHERE a18codigo = '$code'" );
+            $query = $this->db->query("SELECT * FROM t18web_scanner WHERE a18codigo = '$code' ORDER BY a18TipoArchivo DESC" );
             $dataArray = $query->result();
             return $dataArray;
         } catch (Exception $exc) {
@@ -704,7 +704,7 @@ class QM_Form extends CI_Model {
             }
 
             $objLSync->where("a01Sincro", "P");
-            $SQLResult = $objLSync->get("t01web_Usuarios");
+            $SQLResult = $objLSync->get("t01web_usuarios");
             $inLUsers = 0;
 
             if ($SQLResult->num_rows() > 0) {
@@ -712,16 +712,16 @@ class QM_Form extends CI_Model {
 
                 foreach ($arrLUsersToSync as $arrLUserToSync) {
                     $this->db->where("a01Codigo", $arrLUserToSync["a01Codigo"]);
-                    $SQLResult = $this->db->get("t01web_Usuarios");
+                    $SQLResult = $this->db->get("t01web_usuarios");
 
                     if ($SQLResult->num_rows() == 0) {
-                        $bolLSyncUsers = $this->db->insert("t01web_Usuarios", $arrLUserToSync);
+                        $bolLSyncUsers = $this->db->insert("t01web_usuarios", $arrLUserToSync);
 
                         if ($bolLSyncUsers) {
                             $inLUsers++;
                             $arrLUpdateUsers = array("a01Sincro" => "S");
-                            $this->db->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
-                            $objLSync->update("t01web_Usuarios", $arrLUpdateUsers, $arrLUserToSync);
+                            $this->db->update("t01web_usuarios", $arrLUpdateUsers, $arrLUserToSync);
+                            $objLSync->update("t01web_usuarios", $arrLUpdateUsers, $arrLUserToSync);
                         }
                     }
                 }

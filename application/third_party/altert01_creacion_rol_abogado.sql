@@ -1,0 +1,1 @@
+INSERT INTO `quimbo`.`t00web_roles` (`a01Nombre`, `a01Tag`) VALUES ('Abogado', 'law');

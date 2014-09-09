@@ -6,7 +6,7 @@
 $(document).ready(function () {
     var stat = "";
 
-    if (getParameterByName("code") != ""){
+    if (getParameterByName("code") !== ""){
         stat = "edit";
     } else {
         stat = "new";
@@ -126,7 +126,7 @@ $(document).ready(function () {
 
         }
 
-        if ($(this).val() == "") {
+        if ($(this).val() === "") {
             enabledCertificationLabor("none");
             enabledCertificationLocal("none");
             enabledCertificationCommercial("none");
@@ -672,7 +672,7 @@ function generateArrayVeredasN(){
     arrayNVeredas=[];
     for (var i = 0; i < countPrediosN; i++){
         //Check for undefined array items to skip
-        if ($("#NPredio" + i).attr("twnsval") != undefined){
+        if ($("#NPredio" + i).attr("twnsval") !== undefined){
             arrayNVeredas.push({"Municipio": $("#NPredio" + i).attr("twnsval"), "Vereda": $("#NPredio" + i).attr("vdaval"), "Predio": $("#NPredio" + i).attr("propval"), "OtroMun": $("#NPredio" + i).attr("othtwn"), "OtraVda": $("#NPredio" + i).attr("othsdw"), "OtroPredio": $("#NPredio" + i).attr("othpro")});
         }
 
