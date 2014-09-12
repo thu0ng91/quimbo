@@ -104,6 +104,9 @@ class QM_Certifications extends CI_Model {
 
     public function do_delete($code) {
         try {
+            $this->db->where("a17Certificacion", (int)$code);
+            $this->db->delete('t17web_nveredascertificaciones');
+            
             $this->db->where("a16Certificacion", (int)$code);
             $this->db->delete('t16web_nfechascertificaciones');
             
