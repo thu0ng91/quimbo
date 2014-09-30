@@ -1,7 +1,41 @@
 $(document).ready(function () {
 
 loadControlValues();
+
+loadTutelas();
+
 $("#txtIdentificador").html(getParameterByName("formCode"));
+$("#txtCedula").html(getParameterByName("docId"));
+
+/*Validar formulario*/
+if (formCode == 'undefined'){
+  $("#formulario").css("display","none");
+  $("#results").css("display","none");
+  $("#docuIdentifica").css("display","block");
+}
+
+function loadTutelas(){
+    var cedula = getParameterByName("docId");
+    var tabtutelas = "";
+    $(".modal").modal('show');
+    $.getJSON("index.php/form/get_Tutelas/" + cedula, function(objRData){
+        arrayTutelas = objRData;
+
+        if (arrayTutelas.length >=0){
+            tabtutelas += "<table border='1' cellpadding='1' cellspacing='1' style='width: 65%'><thead><tr><th scope='col'>Número de proceso</th><th scope='col'>Tema</th><th scope='col'>Detalle</th></tr></thead><tbody>";
+
+            for (var t = arrayTutelas.length -1; t >=0; t--){
+                var ruta = arrayTutelas[t].path.replace("Q:emgesaTutelas", "https://s3.amazonaws.com/emgesa/Tutelas/");
+                tabtutelas += "<tr><td>" + arrayTutelas[t].numero_proceso + "</td><td>" + arrayTutelas[t].temas + "</td><td>" + "<a href='" + ruta + "' target='_blank' class='btn btn-success'>Ver Detalle</a>" + "</td></tr>";
+            }
+
+        }
+
+        tabtutelas += "</tbody></table><br/>";
+        $("#tableTutelasResults").html(tabtutelas);
+
+    });
+}
 
 function loadControlValues(){
     var code = getParameterByName("formCode");
@@ -14,7 +48,7 @@ function loadControlValues(){
             tabla += "<table border='1' cellpadding='1' cellspacing='1' style='width: 65%;'><thead><tr><th scope='col'>Tipo de Documento</th><th scope='col'>Detalle</th></tr></thead><tbody>";
 
             for (var i = arrayNDocuments.length - 1; i >= 0; i--) {
-                var ruta = arrayNDocuments[i].a18RutaArchivo.replace("amazon_root", "https://s3.amazonaws.com");
+                var ruta = arrayNDocuments[i].a18RutaArchivo.replace("amazon_root/emgesa/00REPOSITORIO", "https://s3.amazonaws.com/emgesa/00REPOSITORIO13092014");
                 var tipo = "";
 
                 switch(arrayNDocuments[i].a18TipoArchivo) {
@@ -29,7 +63,6 @@ function loadControlValues(){
                 case "03Poder":
                     tipo = "Poder";
                     break;
-
 
                 case "04CL":
                     tipo = "Certificación Laboral";

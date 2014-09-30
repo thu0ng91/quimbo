@@ -109,7 +109,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Subir Documentos").addClass("btn btn-default");
                 $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.a08Formulario)
                     .html("Digitar Certificaciones").addClass("btn btn-success");
-                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.a08Formulario)
+                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.a08Formulario + "&docId=" + arrRData.a11NoDoc)
                     .html("Ver Certificaciones").addClass("btn btn-success");
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);

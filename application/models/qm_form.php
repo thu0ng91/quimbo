@@ -250,7 +250,16 @@ class QM_Form extends CI_Model {
 
         return $dataArray;
     }
-    
+
+    /*Metodo get_tutelas
+      metodo que obtiene las tutelas por numero de cedula*/
+      public function get_tutelas($cedula){
+        $SQLResult = $this->db->query("SELECT numero_proceso, temas, path FROM t19web_tutelas WHERE cedula = '$cedula'");
+        $dataArray = $SQLResult->result();
+
+        return $dataArray;
+      }
+
     /**
      * Método do_search
      *

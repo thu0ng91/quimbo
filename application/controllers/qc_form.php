@@ -440,6 +440,12 @@ class QC_Form extends QC_Controller {
         echo json_encode($this->form->get_CertFiles($code));
     }
 
+    /* Obtener listado de tutelas por numero de cedula*/
+    public function get_Tutelas($cedula){
+        $this->load->model("qm_form", "form", true);
+        echo json_encode($this->form->get_tutelas($cedula));
+    }
+
     /**
      * Método do_finish
      *
