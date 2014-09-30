@@ -48,6 +48,7 @@ if (isset($_GET["code"])) {
           <div id='tutelas' clas='form-group'>
             <br/>
             <label><h3>Tutelas:</h3></label>
+            <legend></legend>
             <table id='tableTutelasResults' class='table table-striped'>
               <thead>
                 <tbody>
