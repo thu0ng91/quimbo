@@ -21,7 +21,7 @@ function loadTutelas(){
     $.getJSON("index.php/form/get_Tutelas/" + cedula, function(objRData){
         arrayTutelas = objRData;
 
-        if (arrayTutelas.length >=0){
+        if (arrayTutelas.length >= 1){
             tabtutelas += "<table border='1' cellpadding='1' cellspacing='1' style='width: 65%'><thead><tr><th scope='col'>Número de proceso</th><th scope='col'>Tema</th><th scope='col'>Detalle</th></tr></thead><tbody>";
 
             for (var t = arrayTutelas.length -1; t >=0; t--){
@@ -29,6 +29,10 @@ function loadTutelas(){
                 tabtutelas += "<tr><td>" + arrayTutelas[t].numero_proceso + "</td><td>" + arrayTutelas[t].temas + "</td><td>" + "<a href='" + ruta + "' target='_blank' class='btn btn-success'>Ver Detalle</a>" + "</td></tr>";
             }
 
+        }
+        else
+        {
+            $("#tutelas").css("display","none");
         }
 
         tabtutelas += "</tbody></table><br/>";
@@ -44,7 +48,7 @@ function loadControlValues(){
     $.getJSON("index.php/form/get_FilesN/" + code, function(objRData){
         arrayNDocuments = objRData;
 
-        if (arrayNDocuments.length >= 0){
+        if (arrayNDocuments.length >= 1){
             tabla += "<table border='1' cellpadding='1' cellspacing='1' style='width: 65%;'><thead><tr><th scope='col'>Tipo de Documento</th><th scope='col'>Detalle</th></tr></thead><tbody>";
 
             for (var i = arrayNDocuments.length - 1; i >= 0; i--) {

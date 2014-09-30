@@ -17,10 +17,10 @@ if (isset($_GET["code"])) {
     <div class="container">
         <div id='controls'>
           <br/>
-          <legend>Detalle de certificaciones laborales, comerciales y de vecindad.</legend>
-          <br/>
 
           <div id='formulario' class='form-group' >
+              <legend>Detalle de certificaciones laborales, comerciales y de vecindad.</legend>
+              <br/>
               <label for='txtIdentificador'>Identificador de formulario:</label>
               <br/>
               <label class='label label-info' id='txtIdentificador'></label>
@@ -47,8 +47,7 @@ if (isset($_GET["code"])) {
 
           <div id='tutelas' clas='form-group'>
             <br/>
-            <label><h3>Tutelas:</h3></label>
-            <legend></legend>
+            <legend>Tutelas:</legend>
             <table id='tableTutelasResults' class='table table-striped'>
               <thead>
                 <tbody>
