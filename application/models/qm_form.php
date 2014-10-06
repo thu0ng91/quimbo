@@ -251,6 +251,21 @@ class QM_Form extends CI_Model {
         return $dataArray;
     }
 
+    /*Metodo get_pqr
+        metodo que obtiene los pqr por numero de cedula*/
+    public function get_pqr($cedula){
+    try {
+            //Generamos el query
+        $SQLResult = $this->db->query("SELECT año, tipo, path, radicado FROM t21web_pqr WHERE cedula = '$cedula'");
+        //$SQLResult = $this->db->query("SELECT numero_proceso, temas, path FROM t19web_tutelas WHERE cedula = '$cedula'");
+        $dataArray = $SQLResult->result();
+
+        return $dataArray;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     /*Metodo get_tutelas
       metodo que obtiene las tutelas por numero de cedula*/
       public function get_tutelas($cedula){
@@ -273,71 +288,107 @@ class QM_Form extends CI_Model {
         $arrLResponse = array("found" => false);
         $arrLResults = array();
 
+        /*Busqueda general*/
+        /*Busqueda por numero de form*/
+
         if (!empty($arrRFormData["TxtFormNo"])) {
-            if (strlen($arrRFormData["TxtFormNo"]) <= 7) {
-                $this->db->where("a11Encuesta", $arrRFormData["TxtFormNo"]);
-                $SQLResult = $this->db->get("t11web_busqueda");
+            // if (strlen($arrRFormData["TxtFormNo"]) <= 7) {
 
-                if ($SQLResult->num_rows() > 0) {
-                    $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
-                }
+            //     $this->db->where("a11Encuesta", $arrRFormData["TxtFormNo"]);
+            //     $SQLResult = $this->db->get("t11web_busqueda");
 
-                $this->db->where("a07Identificador", $arrRFormData["TxtFormNo"]);
-                $SQLResult = $this->db->get("t07web_formularios");
+            //                     if ($SQLResult->num_rows() > 0) {
+            //         $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            //     }
 
-                if ($SQLResult->num_rows() > 0) {
-                    $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
-                }
+            //     $this->db->where("a07Identificador", $arrRFormData["TxtFormNo"]);
+            //     $SQLResult = $this->db->get("t07web_formularios");
+
+            //     if ($SQLResult->num_rows() > 0) {
+            //         $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            //     }
+
+            // }
+            // else {
+            //     $this->db->where("a07Codigo", $arrRFormData["TxtFormNo"]);
+            //     $this->db->join("t08web_usuario_respuestas", "a07Codigo = a08Formulario");
+            //     $SQLResult = $this->db->get("t07web_formularios");
+
+            //     if ($SQLResult->num_rows() > 0) {
+            //         $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            //     }
+            // }
+            
+            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where form = '$arrRFormData[TxtFormNo]' ");
+            $SQLDT = $SQLResult->result();
+
+            if (sizeof($SQLDT) > 0) {
+                $arrLResults = array_merge($arrLResults, $SQLDT);
             }
-            else {
-                $this->db->where("a07Codigo", $arrRFormData["TxtFormNo"]);
-                $this->db->join("t08web_usuario_respuestas", "a07Codigo = a08Formulario");
-                $SQLResult = $this->db->get("t07web_formularios");
 
-                if ($SQLResult->num_rows() > 0) {
-                    $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
-                }
-            }
         }
+
+        /*Busqueda por documento de identificacion*/
+
         if (!empty($arrRFormData["TxtPersonIdentity"])) {
-            $this->db->select("t11web_busqueda.*");
-            $this->db->where("a11NoDoc", $arrRFormData["TxtPersonIdentity"]);
-            $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
-            $this->db->group_by("a11Encuesta");
-            $SQLResult = $this->db->get("t11web_busqueda");
+            // $this->db->select("t11web_busqueda.*");
+            // $this->db->where("a11NoDoc", $arrRFormData["TxtPersonIdentity"]);
+            // $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
+            // $this->db->group_by("a11Encuesta");
+            // $SQLResult = $this->db->get("t11web_busqueda");
 
-            if ($SQLResult->num_rows() > 0) {
-                $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // if ($SQLResult->num_rows() > 0) {
+            //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // }
+
+            // $this->db->where("a08AP08O02", $arrRFormData["TxtPersonIdentity"]);
+            // $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
+            // $SQLResult = $this->db->get("t08web_usuario_respuestas");
+
+            // if ($SQLResult->num_rows() > 0) {
+            //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // }
+
+            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where cc = '$arrRFormData[TxtPersonIdentity]' ");
+            $SQLDT = $SQLResult->result();
+
+            if (sizeof($SQLDT) > 0) {
+                $arrLResults = array_merge($arrLResults, $SQLDT);
             }
 
-            $this->db->where("a08AP08O02", $arrRFormData["TxtPersonIdentity"]);
-            $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
-            $SQLResult = $this->db->get("t08web_usuario_respuestas");
-
-            if ($SQLResult->num_rows() > 0) {
-                $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
-            }
         }
+
+        /*Busqueda por nombres/apellidos*/
+
         if (!empty($arrRFormData["TxtPersonName"])) {
-            $this->db->select("t11web_busqueda.*");
-            $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
-            $this->db->like("a11Nombres", $arrRFormData["TxtPersonName"]);
-            $this->db->or_like("a11Apellidos", $arrRFormData["TxtPersonName"]);
-            $this->db->group_by("a11NoDoc");
-            $SQLResult = $this->db->get("t11web_busqueda");
+            // $this->db->select("t11web_busqueda.*");
+            // $this->db->join("t08web_usuario_respuestas", "a11NoDoc != a08AP08O02");
+            // $this->db->like("a11Nombres", $arrRFormData["TxtPersonName"]);
+            // $this->db->or_like("a11Apellidos", $arrRFormData["TxtPersonName"]);
+            // $this->db->group_by("a11NoDoc");
+            // $SQLResult = $this->db->get("t11web_busqueda");
 
-            if ($SQLResult->num_rows() > 0) {
-                $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // if ($SQLResult->num_rows() > 0) {
+            //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // }
+
+            // $this->db->like("a08AP01", $arrRFormData["TxtPersonName"]);
+            // $this->db->or_like("a08AP02", $arrRFormData["TxtPersonName"]);
+            // $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
+            // $SQLResult = $this->db->get("t08web_usuario_respuestas");
+
+            // if ($SQLResult->num_rows() > 0) {
+            //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
+            // }
+            
+            //$SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where nombresapellidos = '$arrRFormData[TxtPersonName]' ");
+            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where nombresapellidos like('%".str_replace(" ", "%') OR nombresapellidos LIKE('%", $arrRFormData["TxtPersonName"])."%')");
+            $SQLDT = $SQLResult->result();
+
+            if (sizeof($SQLDT) > 0) {
+                $arrLResults = array_merge($arrLResults, $SQLDT);
             }
 
-            $this->db->like("a08AP01", $arrRFormData["TxtPersonName"]);
-            $this->db->or_like("a08AP02", $arrRFormData["TxtPersonName"]);
-            $this->db->join("t07web_formularios", "a07Codigo = a08Formulario");
-            $SQLResult = $this->db->get("t08web_usuario_respuestas");
-
-            if ($SQLResult->num_rows() > 0) {
-                $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
-            }
         }
 
         if (count($arrLResults) > 0) {
@@ -366,7 +417,7 @@ class QM_Form extends CI_Model {
         $stLCode = $this->_get_uuid();
         $this->session->set_userdata("inRFormID", $stLCode);
 
-        $arrLForm = array(	"a07Codigo" => $stLCode,
+        $arrLForm = array(  "a07Codigo" => $stLCode,
                             "a07Usuario" => $inRUserID,
                             "a07Departamento" => $arrRFormData["TxtFormState"],
                             "a07Municipio" => $arrRFormData["TxtFormTown"],
@@ -397,7 +448,7 @@ class QM_Form extends CI_Model {
 
         if ($this->session->userdata("inRSearch") &&
                 !$this->session->userdata("bolRIsNewFormat")) {
-            $arrLFormData = array(	"TxtFormNo" => $this->session->userdata("inRSearch"),
+            $arrLFormData = array(  "TxtFormNo" => $this->session->userdata("inRSearch"),
                                     "TxtFormState" => $arrRFormData["TxtFormAP03O01"],
                                     "TxtFormTown" => $arrRFormData["TxtFormAP03O02"],
                                     "TxtFormDate" => date("Y-m-d H:i:s"),
@@ -410,7 +461,7 @@ class QM_Form extends CI_Model {
             if (!$this->session->userdata("bolRIsNewFormat")) {
                 $stLCode = $this->_get_uuid();
                 $bolLInsert = true;
-                $arrLChapter = array(	"a08Codigo" => $stLCode,
+                $arrLChapter = array(   "a08Codigo" => $stLCode,
                                         "a08Formulario" => $inRFormID,
                                         "a08Fecha" => date("Y-m-d H:i:s"),
                                         "a08Estado" => "P");
@@ -584,7 +635,7 @@ class QM_Form extends CI_Model {
      */
     public function do_finish($arrRFormData) {
         $inRFormID = $this->session->userdata("inRFormID");
-        $arrLForm = array(	"a07CodigoBarras" => $arrRFormData["TxtBarCode"]);
+        $arrLForm = array(  "a07CodigoBarras" => $arrRFormData["TxtBarCode"]);
 
         if (!empty($arrRFormData["TxtFormVideo"])) {
             $arrLForm["a07Video"] = $arrRFormData["TxtFormVideo"];
@@ -619,7 +670,7 @@ class QM_Form extends CI_Model {
             $this->db->from("t13web_usuario_docs");
 
             if ($this->db->count_all_results() >= 1) {
-                $SQLWhere = array(	"a13Identificador" => $arrLFile["a13Identificador"],
+                $SQLWhere = array(  "a13Identificador" => $arrLFile["a13Identificador"],
                                     "a13Tipo" => $arrLFile["a13Tipo"]);
 
                 $this->db->update("t13web_usuario_docs", $arrLFile, $SQLWhere);
