@@ -4,6 +4,7 @@
     $lang["TxtPageChapter"] = "Capítulo ";
     $lang["TxtPageDone"] = "Finalizar formulario";
     $lang["TxtPagePrint"] = "Imprimir formulario";
+    $lang["TxtPagePrint_full"] = "Imprimir formulario";
     $lang["TxtPageSearch"] = "Buscar Persona";
     $lang["TxtPageUpload"] = "Subir Documentos";
     $lang["TxtPageSync"] = "Sincronizando Formularios";
