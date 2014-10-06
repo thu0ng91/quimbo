@@ -4,6 +4,8 @@ loadControlValues();
 
 loadTutelas();
 
+ loadpqrs();
+
 $("#txtIdentificador").html(getParameterByName("formCode"));
 $("#txtCedula").html(getParameterByName("docId"));
 
@@ -12,6 +14,34 @@ if (formCode == 'undefined'){
   $("#formulario").css("display","none");
   $("#results").css("display","none");
   $("#docuIdentifica").css("display","block");
+}
+
+function loadpqrs(){
+    var cedula = getParameterByName("docId");
+    var tablapqr = "";
+    $(".modal").modal('show');
+    $.getJSON("index.php/form/get_Pqr/" + cedula, function(objRData){
+        arrayPqrs = objRData;
+
+        if(arrayPqrs.length >= 1){
+
+            tablapqr += "<table border='1' cellpadding='1' cellspacing='1' style='width: 65%'><thead><tr><th scope='col'>Tipo</th><th scope='col'>Año</th><th scope='col'>Radicado</th><th scope='col'>Detalle</th></tr></thead><tbody>";
+
+            for (var p = arrayPqrs.length -1; p >=0; p--){
+                var ruta = arrayPqrs[p].path.replace("Q:emgesaCD/", "https://emgesa.s3.amazonaws.com/CD/");
+                tablapqr += "<tr><td>" + arrayPqrs[p].tipo + "</td><td>" + arrayPqrs[p].año + "</td><td>" + arrayPqrs[p].radicado + "</td><td>" + "<a href='" + ruta + "' target='_blank' class='btn btn-success'>Ver Detalle</a>" + "</td></tr>";
+            }
+
+        }
+        else
+        {
+            $("tablePqrsResults").css("display","none");
+        }
+
+        tablapqr += "</tbody></table><br/>";
+        $("#tablePqrsResults").html(tablapqr);
+
+    });
 }
 
 function loadTutelas(){

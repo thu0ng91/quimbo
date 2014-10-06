@@ -92,44 +92,39 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorUD = $(objLAnchorC).clone();
                 var objLAnchorCERT = $(objLAnchorC).clone();
                 var objLAnchorF = $(objLAnchorC).clone();
-                var objCedula= arrRData.a11NoDoc;
-
-                if (objCedula === undefined){
-                    objCedula = arrRData.a08AP08O02;
-                }
-                
-                console.log("Cedula" + objCedula);
-                console.log("*******************************************");
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
-                $(objLAnchorD).attr("href", "index.php/form/view/" + arrRData.a08Formulario)
+                $(objLAnchorD).attr("href", "index.php/form/view/" + arrRData.form)
                     .html("Imagen/PDF").addClass("btn btn-success");
-                $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.a08Formulario)
+                $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.form)
                     .html("Terminar").addClass("btn btn-danger");
-                $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario)
+                $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.form)
                     .html("Imprimir").addClass("btn btn-info");
-                $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario + "/full")
+                $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.form + "/full")
                     .html("Ver").addClass("btn btn-warning");
-                $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.a08Formulario)
+                $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.form)
                     .html("Editar").addClass("btn btn-success");
-                $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.a08Formulario)
+                $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.form)
                     .html("Subir Documentos").addClass("btn btn-default");
-                $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.a08Formulario)
+                $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.form)
                     .html("Digitar Certificaciones").addClass("btn btn-success");
-                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.a08Formulario + "&docId=" + objCedula)
+                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.form + "&docId=" + arrRData.cc)
                     .html("Ver Certificaciones").addClass("btn btn-success");
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
 
-                if (arrRData.a11NoDoc) {
-                    $(objLTableData).clone().html(arrRData.a11NoDoc).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a11Nombres).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a11Apellidos).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
+                console.log(arrRData.nombresapellidos);
+                console.log("-/-");
 
-                    if (!arrRData.a08AP01) {
+                if (arrRData.cc) {
+                    $(objLTableData).clone().html(arrRData.cc).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.nombresapellidos).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.form).appendTo(objLTableRow);
+                    //$(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
+                    //$(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
+
+                    if (!arrRData.nombresapellidos) {
                         /*Switch RUser*/
                         switch(responseText.inRUserType) {
                             
@@ -143,12 +138,12 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                         }
                     }
                 }
-                if (arrRData.a08AP01) {
-                    $(objLTableData).clone().html(arrRData.a08AP08O02).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a08AP01).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a08AP02).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a08AP04).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.a08AP06).appendTo(objLTableRow);
+                if (arrRData.nombresapellidos) {
+                    // $(objLTableData).clone().html(arrRData.cc).appendTo(objLTableRow);
+                    // $(objLTableData).clone().html(arrRData.nombresapellidos).appendTo(objLTableRow);
+                    // $(objLTableData).clone().html(arrRData.form).appendTo(objLTableRow);
+                    //$(objLTableData).clone().html(arrRData.a08AP04).appendTo(objLTableRow);
+                    //$(objLTableData).clone().html(arrRData.a08AP06).appendTo(objLTableRow);
 
                     var objLAction = $(objLTableData).clone().appendTo(objLTableRow);
 

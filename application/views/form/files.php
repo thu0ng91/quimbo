@@ -59,6 +59,20 @@ if (isset($_GET["code"])) {
             </table>
           </div>
 
+          <div id="pqrs" class='form-group'>
+            <br/>  
+            <legend>PQRS:</legend>
+            <table id='tablePqrsResults' class='table table-striped'>
+              <thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </thead>
+            </table>
+          </div>
+
         </div>
     </div>
 </section>
