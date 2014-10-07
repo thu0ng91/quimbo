@@ -87,6 +87,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorD = $(objLAnchorC).clone();
                 var objLAnchorU = $(objLAnchorC).clone();
                 var objLAnchorP = $(objLAnchorC).clone();
+                var objLAnchorPF = $(objLAnchorC).clone();
                 var objLAnchorA = $(objLAnchorC).clone();
                 var objLAnchorE = $(objLAnchorC).clone();
                 var objLAnchorUD = $(objLAnchorC).clone();
@@ -99,8 +100,12 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Imagen/PDF").addClass("btn btn-success");
                 $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.form)
                     .html("Terminar").addClass("btn btn-danger");
+                $(objLAnchorP).attr("target","_blank");
                 $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.form)
                     .html("Imprimir").addClass("btn btn-info");
+                $(objLAnchorPF).attr("target","_blank");
+                $(objLAnchorPF).attr("href", "index.php/form/print_full/" + arrRData.form)
+                    .html("Ver Respuestas").addClass("btn btn-info");
                 $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.form + "/full")
                     .html("Ver").addClass("btn btn-warning");
                 $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.form)
@@ -152,6 +157,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                         case "1":
                             $(objLAction).append(" ").append(objLAnchorE);
                             $(objLAction).append(" ").append(objLAnchorP);
+                            $(objLAction).append(" ").append(objLAnchorPF);
                             break;
 
                         case "2":
@@ -165,6 +171,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                                 $(objLAction).append(" ").append(objLAnchorA);
                             }
                             $(objLAction).append(" ").append(objLAnchorP);
+                            $(objLAction).append(" ").append(objLAnchorPF);
                             break;
 
                         case "3":
