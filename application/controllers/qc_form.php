@@ -216,15 +216,11 @@ class QC_Form extends QC_Controller {
                     $arrLPageData["arrRForm"] = $arrLForm;
                     $arrLPageData["arrRChapter"] = $this->form->get_chapters("A");
                     $arrLPageData["arrRAnswers"] = $this->user->get_answers();
+                    $arrLPageData["arrRChapterB"] = $this->form->get_chapterb($inRSearch);
+                    $arrLPageData["arrRChapterC"] = $this->form->get_chapterc($inRSearch);
                     $arrLPageData["stRType"] = $stRType;
-                    $arrLPageData["arrRChapterB"] = $this->form->get_chapters("B");
-                    $arrLPageData["arrRAnswersB"] = $this->user->get_answers();
-                    $arrLPageData["arrRChapterC"] = $this->form->get_chapters("C");
-                    $arrLPageData["arrRAnswersC"] = $this->user->get_answers();
-
                     $this->load->vars($arrLPageData);
                     $this->display_page("print_full", "form", true);
-
                     return;
 
                 }

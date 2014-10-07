@@ -126,27 +126,27 @@
                 <tr>
                   <th colspan="2">Lugar de residencia en 2008 (hasta Septiembre 1)</th>
                   <th>Departamento</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterB[0]->departamento; ?></td>
                   <th>Municipio</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterB[0]->municipio; ?></td>
                   <th>Vereda</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterB[0]->vereda; ?></td>
                 </tr>
                 <tr>
                   <th>Dirección donde residia</th>
-                  <td colspan="2"></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterB[0]->direccion; ?></td>
                   <th>Estado Civil</th>
-                  <td colspan="4"></td>
+                  <td colspan="4" class='itemRespuesta'><?php echo $arrRChapterB[0]->estadociv; ?></td>
                 </tr>
                 <tr>
                   <th>Personas a Cargo</th>
-                  <td colspan="3"></td>
+                  <td colspan="3"><?php echo $arrRChapterB[0]->perscargo; ?></td>
                   <th>Se encontraba trabajando</th>
-                  <td colspan="3"></td>
+                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterB[0]->trabajando; ?></td>
                 </tr>
                 <tr>
                   <th>Actividad económica principal</th>
-                  <td colspan="7"></td>
+                  <td colspan="7" class='itemRespuesta'><?php echo $arrRChapterB[0]->actprinc; ?></td>
                 </tr>
                 <tr>
                   <th>Zona desarrollo de actividad</th>
@@ -171,27 +171,27 @@
 
               <table class="table table-bordered table-condensed">
                 <tr>
-                  <th colspan="2">Lugar de resdidencia entre Agosto 2009/Enero 2010</th>
+                  <th colspan="2">Lugar de residencia entre Agosto 2009/Enero 2010</th>
                   <th>Departamento</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterC[0]->departamento; ?></td>
                   <th>Municipio</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterC[0]->municipio; ?></td>
                   <th>Vereda</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterC[0]->vereda; ?></td>
                 </tr>
                 <tr>
                   <th>Dirección donde residia</th>
-                  <td colspan="2"></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->direccion; ?></td>
                   <th>Estado civil</th>
                   <td colspan="2"></td>
                   <th>Personas a Cargo</th>
-                  <td></td>
+                  <td><?php echo $arrRChapterC[0]->personas; ?></td>
                 </tr>
                 <tr>
                   <th>Se encontraba trabajando?</th>
-                  <td colspan="3"></td>
+                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterC[0]->trabajando; ?></td>
                   <th>Actividad económica principal</th>
-                  <td colspan="3"></td>
+                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterC[0]->actividadprin; ?></td>
                 </tr>
                 <tr>
                   <th>Zona desarrollo de actividad</th>
@@ -210,25 +210,25 @@
                 </tr>
                 <tr>
                   <th>Pagos en seguridad social</th>
-                  <td></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->pagos_ss; ?></td>
                   <th>Régimen de Salud</th>
-                  <td colspan="2"></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->regimen; ?></td>
                   <th>SISBEN</th>
-                  <td colspan="2"></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->sisben; ?></td>
                 </tr>
                 <tr>
                   <th>¿Es usted pensionado?</th>
-                  <td></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->pensionado; ?></td>
                   <th>Programa(s) con el cual(es) se ha beneficiado o se está(n) beneficiando usted o su grupo familiar</th>
                   <td colspan="5"></td>
                 </tr>
                 <tr>
                   <th>Impactos directos o indirectos a su actividad económica con el desarrollo del Proyecto Hidroeléctrico El Quimbo</th>
-                  <td colspan="7"></td>
+                  <td colspan="7" class='itemRespuesta'><?php echo $arrRChapterC[0]->impactos; ?></td>
                 </tr>
                 <tr>
                   <th>Solicitudes anteriores</th>
-                  <td></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->solicitudes; ?></td>
                   <th colspan="3">Familiares compensados con algún tipo de medida por el proyecto</th>
                   <td colspan="3"></td>
                 </tr>
@@ -247,4 +247,11 @@
       </div>
     </section>
   </body>
+
+  <script>
+    var matrizRespuestas = {1:"Cedula de Ciudadania",2:"Tarjeta de Identidad",3:"Pasaporte",4:"Cedula de Extranjeria",5:"Hombre",6:"Mujer",7:"Soltero",8:"Casado",9:"Union Libre",10:"Separado",11:"Viudo",12:"Otro",13:"SI",14:"NO",15:"SI",16:"NO",17:"Reasentamiento",18:"Reubicación",19:"Reactivación de la actividad económica",20:"Empleo temporal",21:"No sabe",22:"SI",23:"NO",24:"Soltero",25:"Casado",26:"Union Libre",27:"Separado",28:"Viudo",29:"Otro",30:"Si",31:"No",32:"Jornalero",33:"Pescador Artesanal",34:"Minero",35:"Palero - Arenero",36:"Transportador pasajeros",37:"Transportador Insumos",38:"Transportador de Arena",39:"Ganadero",40:"Mayordomo",41:"Otro",42:"Soltero",43:"Casado",44:"Union Libre",45:"Separado",46:"Viudo",47:"Otro",48:"Si",49:"No",50:"Jornalero",51:"Pescador Artesanal",52:"Minero",53:"Palero - Arenero",54:"Transportador pasajeros",55:"Transportador Insumos",56:"Transportador de Arena",57:"Ganadero",58:"Mayordomo",59:"Otro",60:"Si",61:"No",62:"Pension",63:"Salud",64:"ARL",65:"Contributivo",66:"Subsidiado",67:"Otro",68:"Ninguno",69:"Si",70:"No",71:"Si",72:"No",73:"Red Unidos (Juntos)",74:"Familias en Acción",75:"Familas Guardabosques",76:"Colombia Mayor",77:"De Cero a Siempre",78:"Jovénes en Acción ",79:"Mujer Rural ",80:"Porgramas del ICBF",81:"Otro",82:"Ninguno de los anteriores",83:"Si",84:"No",85:"Si",86:"No",87:"Reasentamiento",88:"Reubicación",89:"Reactivación de la actividad económica",90:"Empleo temporal",91:"No sabe",92:"Compra directa",94:"Compensación en dinero",95:"Compra directa",96:"Compensación en dinero",97:"No Sabe"};
+    var matrizDOM = document.getElementsByClassName("itemRespuesta");
+    for(var item in matrizDOM) { if(!isNaN(parseInt(matrizDOM[item].innerHTML))){ matrizDOM[item].innerHTML = matrizRespuestas[parseInt(matrizDOM[item].innerHTML)] }; } 
+
+  </script>
 </html>
