@@ -94,7 +94,7 @@
                   <th>Jefe del Hogar</th>
                   <td><?php echo $arrRAnswers["a08AP017"]; ?></td>
                 </tr>
-<?php if (!is_null($stRType)) { ?>
+
                 <tr>
                   <th>Estado Civil</th>
                   <td><?php echo $arrRAnswers["a08AP014O01"]; ?> <?php if (!empty($arrRAnswers["a08AP014O02"])) { ?>
@@ -106,8 +106,9 @@
                 </tr>
                 <tr>
                   <th>Ha recibido alguna medida</th>
-                  <td colspan="4"><?php echo $arrRAnswers["a08AP018O01"]; ?> <?php if (!empty($arrRAnswers["a08AP018O02"])) { ?>
-                    - <?php echo $arrRAnswers["a08AP018O02"]; ?><?php } ?></td>
+                  <td colspan="2"><?php echo $arrRAnswers["a08AP018O01"]; ?></td>
+                  <th>Cual</th>
+                  <td class='itemRespuesta'><?php echo $arrRAnswers["a08AP018O02"]; ?></td>
                   <th>Tiene una solicitud Adicional</th>
                   <td colspan="2"><?php echo $arrRAnswers["a08AP019O01"]; ?></td>
                 </tr>
@@ -115,7 +116,7 @@
                   <th>Cual solicitud</th>
                   <td colspan="7"><?php echo $arrRAnswers["a08AP019O02"]; ?></td>
                 </tr>
-<?php } ?>
+
               </table>
 
               <div class="panel-body">
@@ -136,7 +137,9 @@
                   <th>Dirección donde residia</th>
                   <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterB[0]->direccion; ?></td>
                   <th>Estado Civil</th>
-                  <td colspan="4" class='itemRespuesta'><?php echo $arrRChapterB[0]->estadociv; ?></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterB[0]->estadociv; ?></td>
+                  <th>Cual</th>
+                  <td class='itemRespuesta'><?php echo $arrRChapterB[0]->estadociv_cual; ?></td>
                 </tr>
                 <tr>
                   <th>Personas a Cargo</th>
@@ -181,9 +184,11 @@
                 </tr>
                 <tr>
                   <th>Dirección donde residia</th>
-                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->direccion; ?></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->direccion; ?></td>
                   <th>Estado civil</th>
-                  <td colspan="2"></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->estadociv; ?></td>
+                  <th>Cual</th>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->estadociv_cual; ?></td>
                   <th>Personas a Cargo</th>
                   <td><?php echo $arrRChapterC[0]->personas; ?></td>
                 </tr>
@@ -210,17 +215,33 @@
                 </tr>
                 <tr>
                   <th>Pagos en seguridad social</th>
-                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->pagos_ss; ?></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->pagos_ss; ?></td>
+                  <th>Cual</th>
+                  <td colspan="4" class='itemRespuesta'><?php echo $arrRChapterC[0]->entidad_ss; ?></td>
+                </tr>
+                <tr>
                   <th>Régimen de Salud</th>
                   <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->regimen; ?></td>
+                  <th>Cual</th>
+                  <td colspan="4" class='itemRespuesta'><?php echo $arrRChapterC[0]->otro_regimen; ?></td>
+                </tr>
+                <tr>
+                  <th>Nombre EPS</th>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->nom_eps; ?></td>
                   <th>SISBEN</th>
                   <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->sisben; ?></td>
+                  <th>Nivel</th>
+                  <td colspan="2"><?php echo $arrRChapterC[0]->nivel_sisben; ?></td>
                 </tr>
                 <tr>
                   <th>¿Es usted pensionado?</th>
                   <td class='itemRespuesta'><?php echo $arrRChapterC[0]->pensionado; ?></td>
+                  <th>Entidad que paga su pensión</th>
+                  <td colspan="5"><?php echo $arrRChapterC[0]->entidad_pension; ?></td>
+                </tr>
+                <tr>
                   <th>Programa(s) con el cual(es) se ha beneficiado o se está(n) beneficiando usted o su grupo familiar</th>
-                  <td colspan="5"></td>
+                  <td colspan="7"></td>
                 </tr>
                 <tr>
                   <th>Impactos directos o indirectos a su actividad económica con el desarrollo del Proyecto Hidroeléctrico El Quimbo</th>
