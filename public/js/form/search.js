@@ -129,14 +129,14 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 console.log(arrRData.nombresapellidos);
                 console.log("-/-");
 
-                if (arrRData.cc) {
-                    $(objLTableData).clone().html(arrRData.cc).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.nombresapellidos).appendTo(objLTableRow);
-                    $(objLTableData).clone().html(arrRData.form).appendTo(objLTableRow);
-                    //$(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
-                    //$(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
+                if (arrRData.a11NoDoc) {
+                    $(objLTableData).clone().html(arrRData.a11NoDoc).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a11Nombres).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a11Apellidos).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a11Direccion).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a11Telefono).appendTo(objLTableRow);
 
-                    if (!arrRData.nombresapellidos) {
+                    if (!arrRData.a08AP01) {
                         /*Switch RUser*/
                         switch(responseText.inRUserType) {
 
@@ -150,12 +150,12 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                         }
                     }
                 }
-                if (arrRData.nombresapellidos) {
-                    // $(objLTableData).clone().html(arrRData.cc).appendTo(objLTableRow);
-                    // $(objLTableData).clone().html(arrRData.nombresapellidos).appendTo(objLTableRow);
-                    // $(objLTableData).clone().html(arrRData.form).appendTo(objLTableRow);
-                    //$(objLTableData).clone().html(arrRData.a08AP04).appendTo(objLTableRow);
-                    //$(objLTableData).clone().html(arrRData.a08AP06).appendTo(objLTableRow);
+                if (arrRData.a08AP01) {
+                    $(objLTableData).clone().html(arrRData.a08AP08O02).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a08AP01).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a08AP02).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a08AP04).appendTo(objLTableRow);
+                    $(objLTableData).clone().html(arrRData.a08AP06).appendTo(objLTableRow);
 
                     var objLAction = $(objLTableData).clone().appendTo(objLTableRow);
 
