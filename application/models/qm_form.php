@@ -254,7 +254,7 @@ class QM_Form extends CI_Model {
     /*Metodo get_chapterb
       metodo que obtiene las respuestas del capitulo B*/
       public function get_chapterb($codeform){
-        $SQLResult = $this->db->query("SELECT dpto.a05Nombre AS departamento, mpo.a06Nombre AS municipio, ur.a08BP02 AS vereda, ur.a08BP03 AS direccion, ur.a08BP04O01 AS estadociv, ur.a08BP04O02 AS estadociv_cual, ur.a08bp05 AS perscargo, ur.a08BP06 AS trabajando, ur.a08BP07O01 AS actprinc FROM t08web_usuario_respuestas ur INNER JOIN t05web_departamentos dpto ON ur.a08BP01O01 = dpto.a05Codigo INNER JOIN t06web_municipios mpo ON ur.a08BP01O02 = mpo.a06Codigo WHERE ur.a08Formulario = '$codeform'");
+        $SQLResult = $this->db->query("SELECT dpto.a05Nombre AS departamento, mpo.a06Nombre AS municipio, ur.a08BP02 AS vereda, ur.a08BP03 AS direccion, ur.a08BP04O01 AS estadociv, ur.a08BP04O02 AS estadociv_cual, ur.a08bp05 AS perscargo, ur.a08BP06 AS trabajando, ur.a08BP07O01 AS actprinc, ur.a08BP07O02 AS actprinc_cual FROM t08web_usuario_respuestas ur INNER JOIN t05web_departamentos dpto ON ur.a08BP01O01 = dpto.a05Codigo INNER JOIN t06web_municipios mpo ON ur.a08BP01O02 = mpo.a06Codigo WHERE ur.a08Formulario = '$codeform'");
         $dataArray = $SQLResult->result();
 
         return $dataArray;
@@ -263,7 +263,7 @@ class QM_Form extends CI_Model {
       /*Metodo get_chapterc
         metodo que obtiene las respuestas del capitulo C*/
         public function get_chapterc($codeform){
-          $SQLResult = $this->db->query("SELECT dpto.a05Nombre AS departamento, mpo.a06Nombre AS municipio, ur.a08CP02 AS vereda, ur.a08CP03 AS direccion, ur.a08CP04O01 AS estadociv, ur.a08CP04O02 AS estadociv_cual, ur.a08cp05 AS personas, ur.a08CP06 AS trabajando, ur.a08CP07O01 AS actividadprin, ur.a08CP09O01 AS pagos_ss, CONCAT(ur.a08CP09O03, ' - ' , ur.a08CP09O04, ' - ' , ur.a08CP09O05) AS entidad_ss, ur.a08cp011 AS nom_eps, ur.a08CP010O01 AS regimen, ur.a08CP010O02 AS otro_regimen, ur.a08CP012O01 AS sisben, ur.a08CP012O02 AS nivel_sisben, ur.a08CP013 AS pensionado, ur.a08CP014 AS entidad_pension, ur.a08cp016 AS impactos, ur.a08cp017 AS solicitudes FROM t08web_usuario_respuestas ur INNER JOIN t06web_municipios mpo ON ur.a08BP01O02 = mpo.a06Codigo INNER JOIN t05web_departamentos dpto ON mpo.a06Departamento = dpto.a05Codigo WHERE ur.a08Formulario ='$codeform'");
+          $SQLResult = $this->db->query("SELECT dpto.a05Nombre AS departamento, mpo.a06Nombre AS municipio, ur.a08CP02 AS vereda, ur.a08CP03 AS direccion, ur.a08CP04O01 AS estadociv, ur.a08CP04O02 AS estadociv_cual, ur.a08cp05 AS personas, ur.a08CP06 AS trabajando, ur.a08CP07O01 AS actividadprin, ur.a08CP07O02 AS actividadprin_cual, ur.a08CP09O01 AS pagos_ss, CONCAT(ur.a08CP09O03, ' - ' , ur.a08CP09O04, ' - ' , ur.a08CP09O05) AS entidad_ss, ur.a08cp011 AS nom_eps, ur.a08CP010O01 AS regimen, ur.a08CP010O02 AS otro_regimen, ur.a08CP012O01 AS sisben, ur.a08CP012O02 AS nivel_sisben, ur.a08CP013 AS pensionado, ur.a08CP014 AS entidad_pension, ur.a08cp016 AS impactos, ur.a08cp017 AS solicitudes FROM t08web_usuario_respuestas ur INNER JOIN t06web_municipios mpo ON ur.a08BP01O02 = mpo.a06Codigo INNER JOIN t05web_departamentos dpto ON mpo.a06Departamento = dpto.a05Codigo WHERE ur.a08Formulario ='$codeform'");
           $dataArray = $SQLResult->result();
 
           return $dataArray;
