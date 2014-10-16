@@ -52,8 +52,10 @@
                     <tr>
                       <th>#</th>
                       <th>Identificación</th>
-                      <th>Nombre</th>
-                      <th>Formulario</th>
+                      <th>Nombres</th>
+                      <th>Apellidos</th>
+                      <th>Dirección</th>
+                      <th>Teléfono</th>
                       <th>Acción</th>
                     </tr>
                   </thead>

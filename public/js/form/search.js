@@ -96,32 +96,32 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
-                $(objLAnchorD).attr("href", "index.php/form/view/" + arrRData.form)
+                $(objLAnchorD).attr("href", "index.php/form/view/" + arrRData.a08Formulario)
                     .html("Imagen/PDF").addClass("btn btn-success");
-                $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.form)
+                $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.a08Formulario)
                     .html("Terminar").addClass("btn btn-danger");
                 $(objLAnchorU).attr("target","_blank");
                 $(objLAnchorP).attr("target","_blank");
-                $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.form)
+                $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario)
                     .html("Imprimir").addClass("btn btn-info");
                 $(objLAnchorP).attr("target","_blank");
                 $(objLAnchorPF).attr("target","_blank");
-                $(objLAnchorPF).attr("href", "index.php/form/print_full/" + arrRData.form)
+                $(objLAnchorPF).attr("href", "index.php/form/print_full/" + arrRData.a08Formulario)
                     .html("Ver Respuestas").addClass("btn btn-info");
                 $(objLAnchorPF).attr("target","_blank");
 
-                $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.form + "/full")
+                $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.a08Formulario + "/full")
                     .html("Ver").addClass("btn btn-warning");
-                $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.form)
+                $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.a08Formulario)
                     .html("Editar").addClass("btn btn-success");
-                $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.form)
+                $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.a08Formulario)
                     .html("Subir Documentos").addClass("btn btn-default");
                 $(objLAnchorUD).attr("target","_blank");
-                $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.form)
+                $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.a08Formulario)
                     .html("Digitar Certificaciones").addClass("btn btn-success");
                 $(objLAnchorCERT).attr("target","_blank");
                 $(objLAnchorF).attr("target","_blank");
-                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.form + "&docId=" + arrRData.cc)
+                $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.a08Formulario + "&docId=" + objCedula)
                     .html("Ver Certificaciones").addClass("btn btn-success");
                 $(objLTableRow).appendTo(".table");
                 $(objLTableData).clone().html(++inRIndex).appendTo(objLTableRow);
