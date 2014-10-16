@@ -236,7 +236,7 @@ class QM_Form extends CI_Model {
 
         return $arrLCode["a07Codigo"];
     }
-    
+
     /**
      * Método get_uuid
      *
@@ -336,8 +336,8 @@ class QM_Form extends CI_Model {
             //         $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
             //     }
             // }
-            
-            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where form = '$arrRFormData[TxtFormNo]' ");
+
+            $SQLResult = $this->db->query("SELECT * FROM tmp_base where form = '$arrRFormData[TxtFormNo]' ");
             $SQLDT = $SQLResult->result();
 
             if (sizeof($SQLDT) > 0) {
@@ -398,9 +398,9 @@ class QM_Form extends CI_Model {
             // if ($SQLResult->num_rows() > 0) {
             //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
             // }
-            
+
             //$SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where nombresapellidos = '$arrRFormData[TxtPersonName]' ");
-            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where nombresapellidos like('%".str_replace(" ", "%') OR nombresapellidos LIKE('%", $arrRFormData["TxtPersonName"])."%')");
+            $SQLResult = $this->db->query("SELECT * FROM tmp_base where nombresapellidos like('%".str_replace(" ", "%') OR nombresapellidos LIKE('%", $arrRFormData["TxtPersonName"])."%')");
             $SQLDT = $SQLResult->result();
 
             if (sizeof($SQLDT) > 0) {
@@ -502,8 +502,8 @@ class QM_Form extends CI_Model {
                 $arrLChapter[$stLKey] = trim($stLData);
             }
             else if (strpos($stRKey, "BP08") !== false) {
-                $arrLData = $stLData;                
-                
+                $arrLData = $stLData;
+
                 foreach ($arrLData as $inLNKey => $stLNData) {
                     $stLBNKey = str_replace("TxtFormBP08", "a09", $stRKey);
                     $stLTrimData = trim($stLNData);

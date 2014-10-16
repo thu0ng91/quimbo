@@ -500,7 +500,7 @@ class QC_Form extends QC_Controller {
         $arrLFormData = $this->input->post();
         $inRFormID = $arrLFormData["TxtFormID"];
         $arrLResponse = array();
-        
+
         $this->load->library("upload");
         $config["upload_path"] = "public/uploads/".$inRFormID;
         $config["allowed_types"] = "*";
@@ -509,18 +509,18 @@ class QC_Form extends QC_Controller {
         $inLCount = 0;
 
         $this->upload->initialize($config);
-        
+
         if (!file_exists(FCPATH."/public/uploads/".$inRFormID)
                 && !is_dir(FCPATH."public/uploads/".$inRFormID)) {
             mkdir(FCPATH."/public/uploads/".$inRFormID, 0755, true);
         }
-        
+
         foreach($_FILES as $stLKey => $arrLFile) {
             if ($this->upload->do_upload($stLKey)) {
                 $inLKey = str_replace("File", "", $stLKey);
-                
+
                 $tipo = substr($inLKey, -2);
-                
+
                 $arrLFileData = $this->upload->data();
                 $arrLFileInfo = array( 	"a13Identificador" => $inRFormID,
                                         //"a13Tipo" => ++$inLCount,
@@ -535,9 +535,9 @@ class QC_Form extends QC_Controller {
         }
 
         $bolLDocs = $this->form->do_uploads($arrLFiles);
-        
-        
-        
+
+
+
         if ($bolLDocs) {
             $arrLResponse["TxtSuccessForm"] = true;
             $arrLResponse["TxtTitle"] = "Guardado!";
@@ -558,7 +558,7 @@ class QC_Form extends QC_Controller {
      *
      * Método que Obtiene la ruta de los archivos cargados por codifo de formulario
      */
-    
+
     function do_getFilesPath($codeForm){
         $this->load->model("qm_form", "form", true);
         echo json_encode($this->form->get_files($codeForm));

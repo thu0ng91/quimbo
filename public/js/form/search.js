@@ -100,20 +100,30 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     .html("Imagen/PDF").addClass("btn btn-success");
                 $(objLAnchorU).attr("href", "index.php/form/done/" + arrRData.form)
                     .html("Terminar").addClass("btn btn-danger");
+                $(objLAnchorU).attr("target","_blank");
                 $(objLAnchorP).attr("target","_blank");
                 $(objLAnchorP).attr("href", "index.php/form/print_form/" + arrRData.form)
                     .html("Imprimir").addClass("btn btn-info");
+                $(objLAnchorP).attr("target","_blank");
                 $(objLAnchorPF).attr("target","_blank");
                 $(objLAnchorPF).attr("href", "index.php/form/print_full/" + arrRData.form)
                     .html("Ver Respuestas").addClass("btn btn-info");
+                $(objLAnchorPF).attr("target","_blank");
+                $(objLAnchorCRBD).attr("target","_blank");
+                $(objLAnchorCRBD).attr("href", "index.php/form/dbmatch?docId=" + arrRData.cc)
+                    .html("Ver Cruces DB").addClass("btn btn-warning");
+                $(objLAnchorCRBD).attr("target","_blank");
                 $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.form + "/full")
                     .html("Ver").addClass("btn btn-warning");
                 $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.form)
                     .html("Editar").addClass("btn btn-success");
                 $(objLAnchorUD).attr("href", "index.php/form/upload/" + arrRData.form)
                     .html("Subir Documentos").addClass("btn btn-default");
+                $(objLAnchorUD).attr("target","_blank");
                 $(objLAnchorCERT).attr("href", "index.php/certifications/admin?formCode=" + arrRData.form)
                     .html("Digitar Certificaciones").addClass("btn btn-success");
+                $(objLAnchorCERT).attr("target","_blank");
+                $(objLAnchorF).attr("target","_blank");
                 $(objLAnchorF).attr("href", "index.php/form/files?formCode=" + arrRData.form + "&docId=" + arrRData.cc)
                     .html("Ver Certificaciones").addClass("btn btn-success");
                 $(objLTableRow).appendTo(".table");
@@ -132,7 +142,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                     if (!arrRData.nombresapellidos) {
                         /*Switch RUser*/
                         switch(responseText.inRUserType) {
-                            
+
                             case "4":
                             $(objLTableData).clone().append(objLAnchorF).appendTo(objLTableRow);
                             break;
