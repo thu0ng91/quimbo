@@ -149,7 +149,9 @@
                 </tr>
                 <tr>
                   <th>Actividad económica principal</th>
-                  <td colspan="7" class='itemRespuesta'><?php echo $arrRChapterB[0]->actprinc; ?></td>
+                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterB[0]->actprinc; ?></td>
+                  <th>Cual</th>
+                  <td colspan="3"><?php echo $arrRChapterB[0]->actprinc_cual; ?></td>
                 </tr>
                 <tr>
                   <th>Zona desarrollo de actividad</th>
@@ -194,15 +196,17 @@
                 </tr>
                 <tr>
                   <th>Se encontraba trabajando?</th>
-                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterC[0]->trabajando; ?></td>
+                  <td class='itemRespuesta'><?php echo $arrRChapterC[0]->trabajando; ?></td>
                   <th>Actividad económica principal</th>
-                  <td colspan="3" class='itemRespuesta'><?php echo $arrRChapterC[0]->actividadprin; ?></td>
+                  <td colspan="2" class='itemRespuesta'><?php echo $arrRChapterC[0]->actividadprin; ?></td>
+                  <th>Cual</th>
+                  <td colspan="2"><?php echo $arrRChapterC[0]->actividadprin_cual; ?></td>
                 </tr>
                 <tr>
                   <th>Zona desarrollo de actividad</th>
                   <th>Municipio</th>
                   <td></td>
-                  <th>Corregimiento</th>
+                  <th>Corregimiento</th>      
                   <td colspan="2"></td>
                   <th>Vereda</th>
                   <td></td>
