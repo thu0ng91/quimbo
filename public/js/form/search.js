@@ -93,6 +93,11 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 var objLAnchorUD = $(objLAnchorC).clone();
                 var objLAnchorCERT = $(objLAnchorC).clone();
                 var objLAnchorF = $(objLAnchorC).clone();
+				var objCedula= arrRData.a11NoDoc;
+
+                if (objCedula === undefined){
+                    objCedula = arrRData.a08AP08O02;
+                }
 
                 $(objLAnchorC).attr("href", "index.php/form/chapter/A/" + arrRData.a11Codigo)
                     .html("Completar").addClass("btn btn-warning");
