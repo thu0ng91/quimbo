@@ -109,10 +109,7 @@ function showResponseSearch(responseText, statusText, xhr, $form) {
                 $(objLAnchorPF).attr("href", "index.php/form/print_full/" + arrRData.form)
                     .html("Ver Respuestas").addClass("btn btn-info");
                 $(objLAnchorPF).attr("target","_blank");
-                $(objLAnchorCRBD).attr("target","_blank");
-                $(objLAnchorCRBD).attr("href", "index.php/form/dbmatch?docId=" + arrRData.cc)
-                    .html("Ver Cruces DB").addClass("btn btn-warning");
-                $(objLAnchorCRBD).attr("target","_blank");
+
                 $(objLAnchorA).attr("href", "index.php/form/print_form/" + arrRData.form + "/full")
                     .html("Ver").addClass("btn btn-warning");
                 $(objLAnchorE).attr("href", "index.php/form/chapter/A/" + arrRData.form)
