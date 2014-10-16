@@ -367,7 +367,7 @@ class QM_Form extends CI_Model {
             //     $arrLResults = array_merge($arrLResults, $SQLResult->result_array());
             // }
 
-            $SQLResult = $this->db->query("SELECT * FROM v01web_union_busqueda where cc = '$arrRFormData[TxtPersonIdentity]' ");
+            $SQLResult = $this->db->query("SELECT * FROM tmp_base where cc = '$arrRFormData[TxtPersonIdentity]' ");
             $SQLDT = $SQLResult->result();
 
             if (sizeof($SQLDT) > 0) {
